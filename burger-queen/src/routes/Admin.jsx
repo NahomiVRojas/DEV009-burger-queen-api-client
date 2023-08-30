@@ -1,4 +1,4 @@
-import CurrentDate from "../components/date"
+import CurrentDate from "../components/CurrentDate"
 
 export default function Admin() {
     return (
