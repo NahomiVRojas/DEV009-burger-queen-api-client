@@ -1,18 +1,51 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color: #F244A4;
-  background-color: #ffffff;
+  --main-font: 'Montserrat', sans-serif;
+  --color-pink: #F294C0;
+  --color-magenta: #F244A4;
+  --color-light-pink: #F26DB6;
+  --color-purple: #73395F;
+  --color-beige: #F2E4D8;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: var(--main-font);
 }
 
-h1 {
-  font-size: 2rem;
-  line-height: 1.5px;
+header {
+  margin: 20px;
+  height: 50px;
+  display: flex;
+}
+
+.logo {
+  height: 50px;
+  width: 120px;
+}
+
+nav {
+  position: absolute;
+  right: 2vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-info {
+  margin-right: 10vw;
+  color: var(--color-purple);
+  display: flex;
+}
+
+.icon {
+  margin-right: 10px;
+  width: 25px;
+}
+
+main {
+  margin-top: 100px
+}
+
+.title {
+  color: var(--color-magenta);
+  margin-left: 20px;
 }

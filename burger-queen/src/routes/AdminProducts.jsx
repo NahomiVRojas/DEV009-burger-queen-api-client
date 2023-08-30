@@ -1,7 +1,7 @@
 export default function AdminProducts(){
     return (
         <>
-        <p>Aqui va la lista de productos.</p>
+        <h2 className="title">Manage Products</h2>
         </>
     )
 }
