@@ -15,9 +15,3 @@ body {
 main {
   margin-top: 100px
 }
-
-.title {
-  color: var(--color-light-pink);
-  font-weight: 500;
-  margin-left: 25px;
-}

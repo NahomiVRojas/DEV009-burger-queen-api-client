@@ -1,5 +1,5 @@
 import style from "../ManageProductsTable/ManageProductsTable.module.css";
-import iconOptions from "../assets/icon-options.svg";
+import iconOptions from "../../assets/icon-options.svg";
 
 const fakeData = [
     { menu: "Breakfast", product: "Sandwich", price: "$5.00" },
@@ -14,6 +14,8 @@ const fakeData = [
 
 export default function ManageProductsTable(){
     return (
+        <>
+        <h2 className={style.title}>Manage Products</h2>
         <div className={`table-responsive ${style.responsive}`}>
             <table className="table">
                 <thead>
@@ -38,5 +40,6 @@ export default function ManageProductsTable(){
                 </tbody>
             </table>
         </div>
+        </>
     )
 }

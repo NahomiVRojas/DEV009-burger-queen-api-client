@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { StrictMode } from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
@@ -7,9 +6,11 @@ import {
 } from 'react-router-dom';
 import './index.css';
 import Login from './routes/Login';
-import Admin from './routes/Admin';
 import App from './routes/App';
-import AdminProducts from './routes/AdminProducts';
+import Dashboard from './routes/Admin/Dashboard';
+import Products from './routes/Admin/Products';
+import Users from './routes/Admin/Users';
+
 
 const router = createBrowserRouter([
     {
@@ -17,16 +18,20 @@ const router = createBrowserRouter([
         element: <Login />,
     },
     {
-        path: '/app',
+        path: '/main',
         element: <App />,
         children: [
           {
-            path: 'admin',
-            element: <Admin />,
+            path: 'dashboard',
+            element: <Dashboard />,
           },
           {
-            path: 'admin-products',
-            element: <AdminProducts />,
+            path: 'products',
+            element: <Products />,
+          },
+          {
+            path: 'users',
+            element: <Users />,
           },
         ]
     },
