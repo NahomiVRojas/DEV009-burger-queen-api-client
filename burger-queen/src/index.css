@@ -66,11 +66,22 @@ main {
 .title {
   color: var(--color-light-pink);
   font-weight: 500;
-  margin-left: 20px;
+  margin-left: 25px;
 }
 
 .date {
   text-align: center;
   color: var(--color-light-pink);
   margin-bottom: 50px;
+}
+
+.table-responsive {
+  border: #C0BABD 1px solid;
+  border-radius: 25px;
+  margin: 25px;
+  padding: 5px;
+}
+
+.icon-options {
+  width: 30px;
 }
