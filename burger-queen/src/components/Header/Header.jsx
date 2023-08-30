@@ -1,7 +1,7 @@
 import style from "../Header/Header.module.css"
-import logo from "../assets/burger-queen.png";
-import iconUser from "../assets/icon-user.svg";
-import iconSignOut from "../assets/sign-out.svg";
+import logo from "../../assets/burger-queen.png";
+import iconUser from "../../assets/icon-user.svg";
+import iconSignOut from "../../assets/sign-out.svg";
 
 export default function Header() {
     return (
