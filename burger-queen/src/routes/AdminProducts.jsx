@@ -1,5 +1,5 @@
-import ManageProductsTable from "../components/ManageProductsTable"
-import CurrentDate from "../components/CurrentDate"
+import ManageProductsTable from "../components/ManageProductsTable/ManageProductsTable"
+import CurrentDate from "../components/CurrentDate/CurrentDate"
 
 export default function AdminProducts(){
     return (

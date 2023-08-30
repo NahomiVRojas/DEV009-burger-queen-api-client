@@ -1,4 +1,5 @@
-import iconOptions from '../assets/icon-options.svg'
+import style from "../ManageProductsTable/ManageProductsTable.module.css";
+import iconOptions from "../assets/icon-options.svg";
 
 const fakeData = [
     { menu: "Breakfast", product: "Sandwich", price: "$5.00" },
@@ -9,12 +10,11 @@ const fakeData = [
     { menu: "Lunch/ Dinner", product: "Cheeseburger", price: "$7.00" },
     { menu: "Lunch/ Dinner", product: "Double Burger", price: "$8.00" },
     { menu: "Lunch/ Dinner", product: "Coke", price: "$2.00" },
-
 ]
 
 export default function ManageProductsTable(){
     return (
-        <div className="table-responsive">
+        <div className={`table-responsive ${style.responsive}`}>
             <table className="table">
                 <thead>
                     <tr>
@@ -31,7 +31,7 @@ export default function ManageProductsTable(){
                             <td>{val.menu}</td>
                             <td>{val.product}</td>
                             <td>{val.price}</td>
-                            <td><img src={iconOptions} className="icon-options" /></td>
+                            <td><img src={iconOptions} className={style.options} /></td>
                         </tr>
                     )
                 })}

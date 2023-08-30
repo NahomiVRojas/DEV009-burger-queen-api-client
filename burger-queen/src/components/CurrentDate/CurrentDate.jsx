@@ -1,4 +1,5 @@
 import { useState } from "react";
+import style from "../CurrentDate/CurrentDate.module.css";
 
 export default function CurrentDate() {
     const [currentDate] = useState(new Date());
@@ -21,7 +22,7 @@ export default function CurrentDate() {
     const formattedDate = `${month} ${day}, ${year}`;
 
     return (
-        <div className="date">  
+        <div className={style.date}>  
             <h2>{dayOfWeek}</h2>
             <p>{formattedDate}</p>
         </div>
