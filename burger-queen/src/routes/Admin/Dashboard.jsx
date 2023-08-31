@@ -1,11 +1,11 @@
 import CurrentDate from "../../components/CurrentDate/CurrentDate";
-import DashboardButtons from "../../components/DashboardButtons/DashboardButtons.jsx";
+import DashboardNavigation from "../../components/DashboardNavigation/DashboardNavigation.jsx";
 
 export default function Dashboard() {
     return (
         <>
         <CurrentDate />
-        <DashboardButtons />
+        <DashboardNavigation />
         </>
     )
 }
