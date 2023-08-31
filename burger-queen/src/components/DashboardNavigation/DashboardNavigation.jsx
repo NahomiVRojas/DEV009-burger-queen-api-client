@@ -1,4 +1,4 @@
-import style from '../DashboardButtons/DashboardButtons.module.css';
+import style from './DashboardNavigation.module.css';
 import Navigate from '../Navigate/Navigate';
 import users from '../../assets/hands.png';
 import burger from '../../assets/icon-burger.png';
@@ -10,7 +10,7 @@ const adminButtons = [
     { img: list, title: "All Orders", path: "/main/orders" },
 ];
 
-export default function DashboardButtons() {
+export default function DashboardNavigation() {
     return (
         <section className={style.main}>
             {adminButtons.map((val, key) => (

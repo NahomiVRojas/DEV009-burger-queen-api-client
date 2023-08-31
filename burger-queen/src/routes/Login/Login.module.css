@@ -1,0 +1,45 @@
+.main {
+    background-image: url('../../assets/background-login.png');
+    background-size: contain;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.section {
+    background-color: #fff;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 60%;
+    height: 65%;
+    margin-top: 25%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.logo {
+    width: 50vw;
+    height: 15vh;
+    margin: 60px;
+}
+
+.intro {
+    color: #73395F;
+    margin-bottom: 25px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.text {
+    margin-top: 25px;
+    font-size: 1rem;
+}
