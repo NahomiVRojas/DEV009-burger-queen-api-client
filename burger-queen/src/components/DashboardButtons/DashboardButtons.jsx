@@ -1,29 +1,27 @@
 import style from '../DashboardButtons/DashboardButtons.module.css';
+import Navigate from '../Navigate/Navigate';
 import users from '../../assets/hands.png';
 import burger from '../../assets/icon-burger.png';
 import list from '../../assets/list.png';
 
+const adminButtons = [
+    { img: users, title: "Manage Users", path: "/main/users" },
+    { img: burger, title: "Manage Products", path: "/main/products" },
+    { img: list, title: "All Orders", path: "/main/orders" },
+];
+
 export default function DashboardButtons() {
     return (
         <section className={style.main}>
-            <button className={style.users}>
-                <div>
-                    <img src={users} alt="Manage Users" className={style.images} />
-                    <h5>Manage Users</h5>
-                </div>
-            </button>
-            <button className={style.products}>
-                <div>
-                    <img src={burger} alt="Manage Products" className={style.images} />
-                    <h5>Manage Products</h5>
-                </div>
-            </button>
-            <button className={style.orders}>
-                <div>
-                    <img src={list} alt="All Orders" className={style.images} />
-                    <h5>All Orders</h5>
-                </div>
-            </button>
+            {adminButtons.map((val, key) => (
+                <Navigate key={key} path={val.path}>
+                    <div className={style.btn}>
+                        <img src={val.img} className={style.images} alt={val.title} />
+                        {val.title}
+                    </div>
+                </Navigate>
+            ))}
         </section>
-    )
+    );
 }
+
