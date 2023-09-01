@@ -1,5 +1,7 @@
 import style from "../ManageProductsTable/ManageProductsTable.module.css";
 import iconOptions from "../../assets/icon-options.svg";
+import returnButton from '../../assets/return-button.svg';
+import NavigateTo from "../Navigate/Navigate";
 
 const fakeData = [
     { menu: "Breakfast", product: "Sandwich", price: "$5.00" },
@@ -13,9 +15,15 @@ const fakeData = [
 ]
 
 export default function ManageProductsTable(){
+
+    const handleClick = NavigateTo("/main/dashboard");
+
     return (
         <>
-        <h2 className={style.title}>Manage Products</h2>
+        <div className={style.title_section}>
+            <img src={returnButton} onClick={handleClick} />
+            <h2>Manage Products</h2>
+        </div>
         <div className={`table-responsive ${style.responsive}`}>
             <table className="table">
                 <thead>

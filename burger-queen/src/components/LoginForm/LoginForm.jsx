@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { auth } from '../../Services/Request'
 import style from "./LoginForm.module.css";
 import { saveData } from "../../Services/LocalData";
+import { errorMessages } from "../../Services/ErrorMessages";
 
 export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const navigateTo = useNavigate();
 
@@ -16,6 +18,7 @@ export default function LoginForm() {
         .then((response) => {
             console.log('Server Response:', response);
             if (!response.ok) {
+              setError(errorMessages(response))
               throw new Error('Error en la solicitud de inicio de sesión');
             }
             return response.json();
@@ -26,7 +29,6 @@ export default function LoginForm() {
             return data.user;
           })
         .then((user) => {
-            console.log(user.role)
             if (user.role === 'admin') {
                 navigateTo("/main/dashboard")
             } else {
@@ -40,20 +42,24 @@ export default function LoginForm() {
 
     return (
         <div className={style.section}>
-        <input
-        type="text"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        />
-        <button onClick={userAuth} >Log In</button>
+          <form>
+            <input
+            type="email"
+            placeholder="Email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+            type="password"
+            placeholder="Password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            />
+            <button onClick={userAuth}>Log In</button>
+            {error && <span>{error}</span>}
+          </form>
         </div>
     )
 }

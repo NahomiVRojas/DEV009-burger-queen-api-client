@@ -1,5 +1,5 @@
 import style from './DashboardNavigation.module.css';
-import Navigate from '../Navigate/Navigate';
+import { useNavigate } from "react-router-dom";
 import users from '../../assets/hands.png';
 import burger from '../../assets/icon-burger.png';
 import list from '../../assets/list.png';
@@ -11,17 +11,20 @@ const adminButtons = [
 ];
 
 export default function DashboardNavigation() {
+    const navigateTo = useNavigate();
+
+    function handleClick(path) {
+      navigateTo(path);
+    }
+
     return (
         <section className={style.main}>
             {adminButtons.map((val, key) => (
-                <Navigate key={key} path={val.path}>
-                    <div className={style.btn}>
-                        <img src={val.img} className={style.images} alt={val.title} />
-                        {val.title}
-                    </div>
-                </Navigate>
+                <button className={style.btn} key={key} onClick={() => handleClick(val.path)}>
+                    <img src={val.img} className={style.images} alt={val.title} />
+                    {val.title}
+                </button>
             ))}
         </section>
     );
 }
-
