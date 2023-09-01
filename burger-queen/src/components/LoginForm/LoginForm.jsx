@@ -1,33 +1,28 @@
 import { useState } from "react";
+import { auth } from '../../Services/Request'
 import style from "./LoginForm.module.css";
 
 export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const userAuth = (email, password) => {
-        return fetch('http://localhost:8080/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
-        });
-    };
-
-    function userLogIn(e) {
+    function userAuth(e) {
         e.preventDefault();
-        userAuth(email, password)
-        .then(() => {
-            console.log('You are logged in.')
-        })
-        .catch(() => {
-            console.log('You are NOT logged in.')
-        })
-
+        auth(email, password)
+        .then((response) => {
+            console.log('Server Response:', response);
+            if (!response.ok) {
+              throw new Error('Error en la solicitud de inicio de sesión');
+            }
+            return response.json();
+          })
+        .then((data) => {
+            console.log('Response Data:', data);
+            return data.user;
+          })
+        .catch((error) => {
+            console.log(error)
+        });
     }
 
     return (
@@ -45,7 +40,7 @@ export default function LoginForm() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={userLogIn} >Log In</button>
+        <button onClick={userAuth} >Log In</button>
         </div>
     )
 }
