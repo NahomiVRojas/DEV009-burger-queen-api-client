@@ -9,9 +9,9 @@ import DropdownButton from "../DropDownButton/DropDownButton";
 export default function ManageProductsTable() {
 
     const [allProducts, setAllProducts] = useState([]);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        let token = localStorage.getItem('token')
         products(token)
         .then((response) => {
             console.log('Response getProducts:', response)
@@ -28,7 +28,7 @@ export default function ManageProductsTable() {
         .catch((error) => {
             console.log(error)
         });
-    }, []);
+    }, [token]);
 
     const handleClick = NavigateTo("/main/dashboard");
 
@@ -42,6 +42,7 @@ export default function ManageProductsTable() {
                 <table className="table">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Menu</th>
                             <th>Product</th>
                             <th>Price</th>
@@ -52,10 +53,11 @@ export default function ManageProductsTable() {
                         {allProducts.map((val, key) => {
                             return (
                                 <tr key={key}>
+                                    <td>{val.id}</td>
                                     <td>{val.type}</td>
                                     <td>{val.name}</td>
                                     <td>{val.price}</td>
-                                    <td><DropdownButton /></td>
+                                    <td><DropdownButton productId={val.id} token={token} /></td>
                                 </tr>
                             )
                         })}

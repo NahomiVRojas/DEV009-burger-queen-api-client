@@ -11,7 +11,7 @@ export const auth = (email, password) => {
     });
 };
 
-export const products = (token) =>{
+export const products = (token) => {
     return fetch('http://localhost:8080/products', {
         method: 'GET',
         headers: {
@@ -21,9 +21,19 @@ export const products = (token) =>{
     })
 }
 
-export const users = (token) =>{
+export const users = (token) => {
     return fetch('http://localhost:8080/users', {
         method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+}
+
+export const deleteProduct = (productId, token) => {
+    return fetch(`http://localhost:8080/products/${productId}`, {
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`

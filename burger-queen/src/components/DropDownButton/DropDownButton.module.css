@@ -5,17 +5,17 @@
 .dropdown {
     position: relative;
     display: inline-block;
-    margin: 0;
 }
 
 .content {
     position: absolute;
-    top: 35px;
+    top: 25px;
+    right: 0px;
     background-color: #fff;
     border: 1px solid #C0BABD;
     border-radius: 20px;
     width: 100px;
-    height: 80px;
+    height: 100px;
     overflow: auto;
     z-index: 1;
     display: flex;
