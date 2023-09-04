@@ -1,0 +1,27 @@
+.options {
+    width: 30px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+}
+
+.content {
+    position: absolute;
+    top: 35px;
+    background-color: #fff;
+    border: 1px solid #C0BABD;
+    border-radius: 20px;
+    width: 100px;
+    height: 80px;
+    overflow: auto;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    font-size: 16px;
+    color: #F244A4;
+}

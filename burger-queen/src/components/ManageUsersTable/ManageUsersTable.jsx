@@ -1,42 +1,64 @@
 import style from "../ManageProductsTable/ManageProductsTable.module.css";
 import iconOptions from "../../assets/icon-options.svg";
+import { users } from "../../Services/Request";
+import { useEffect, useState } from "react";
+import NavigateTo from "../Navigate/Navigate";
+import returnButton from '../../assets/return-button.svg';
 
-const fakeData = [
-    { user: "Mafe", position: "Waitress", email: "mafe@bq.com", password: "123456" },
-    { user: "Nahomi", position: "Chef", email: "naho@bq.com", password: "123456" },
-    { user: "Andressa", position: "Admin", email: "andre@bq.com", password: "123456" },
-]
+export default function ManageProductsTable() {
 
-export default function ManageProductsTable(){
+    const [dataUsers, setDataUsers] = useState([]);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        users(token)
+            .then((response) => {
+                console.log('Response Users:', response)
+                if (!response.ok) {
+                    throw new Error('Usuarios no existen');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data)
+                setDataUsers(data)
+            })
+    }, []);
+
+    const handleClick = NavigateTo("/main/dashboard");
+
     return (
         <>
-        <h2 className={style.title}>Manage Users</h2>
-        <div className={`table-responsive ${style.responsive}`}>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>User</th>
-                        <th>Position</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                {fakeData.map((val, key) => {
-                    return (
-                        <tr key={key}>
-                            <td>{val.user}</td>
-                            <td>{val.position}</td>
-                            <td>{val.email}</td>
-                            <td>{val.password}</td>
-                            <td><img src={iconOptions} className={style.options} /></td>
+            <div className={style.title_section}>
+                <img src={returnButton} onClick={handleClick} />
+                <h2>Manage Users</h2>
+            </div>
+            <div className={`table-responsive ${style.responsive}`}>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Position</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th></th>
                         </tr>
-                    )
-                })}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        {dataUsers.map((val, key) => {
+                            return (
+                                <tr key={key}>
+                                    <td>{val.id}</td>
+                                    <td>{val.role}</td>
+                                    <td>{val.email}</td>
+                                    <td>{val.password}</td>
+                                    <td><img src={iconOptions} className={style.options} /></td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
         </>
     )
 }
