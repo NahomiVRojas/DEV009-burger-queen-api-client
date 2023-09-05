@@ -25,7 +25,7 @@ export default function LoginForm() {
           })
         .then((data) => {
             console.log('Response Data:', data);
-            saveData(data.token, data.user.role);
+            saveData(data.accessToken, data.user.role);
             return data.user;
           })
         .then((user) => {
@@ -42,24 +42,20 @@ export default function LoginForm() {
 
     return (
         <div className={style.section}>
-          <form>
             <input
             type="email"
             placeholder="Email"
-            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             />
             <input
             type="password"
             placeholder="Password"
-            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             />
             <button onClick={userAuth}>Log In</button>
             {error && <span>{error}</span>}
-          </form>
         </div>
     )
 }
