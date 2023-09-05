@@ -2,9 +2,9 @@ import { deleteProduct } from "../../Services/Request";
 import { number, string } from "prop-types";
 import style from "../ModalDelete/ModalDelete.module.css"
 
-export default function ModalDelete({ productId, token, onClose }) {
+export default function ModalDelete({ id, token, onClose }) {
     function deleteProductById() {
-        deleteProduct(productId, token)
+        deleteProduct(id, token)
             .then((response) => {
                 if (response.status === 'OK') {
                     console.log('Deleted');
@@ -24,7 +24,7 @@ export default function ModalDelete({ productId, token, onClose }) {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={onClose}></button>
                         </div>
                         <div className={`modal-body ${style.modal_body}`}>
-                            <span>Do you want to delete this product?</span>
+                            <p>Do you want to delete this product?</p>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className={`btn btn-secondary ${style.btn_cancel}`} data-bs-dismiss="modal" onClick={onClose}>No</button>
@@ -38,7 +38,7 @@ export default function ModalDelete({ productId, token, onClose }) {
 }
 
 ModalDelete.propTypes = {
-    productId: number.isRequired,
+    id: number.isRequired,
     token: string.isRequired,
     onClose: Boolean.isRequired
 };

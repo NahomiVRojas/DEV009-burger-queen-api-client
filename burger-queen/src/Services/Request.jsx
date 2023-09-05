@@ -31,8 +31,8 @@ export const users = (token) => {
     })
 }
 
-export const deleteProduct = (productId, token) => {
-    return fetch(`http://localhost:8080/products/${productId}`, {
+export const deleteProduct = (id, token) => {
+    return fetch(`http://localhost:8080/products/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -40,3 +40,14 @@ export const deleteProduct = (productId, token) => {
         },
     })
 }
+
+export const editProduct = (id, updatedData, token) => {
+    return fetch(`http://localhost:8080/products/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(updatedData)
+    });
+};

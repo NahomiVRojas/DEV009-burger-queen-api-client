@@ -57,7 +57,7 @@ export default function ManageProductsTable() {
                                     <td>{val.type}</td>
                                     <td>{val.name}</td>
                                     <td>{val.price}</td>
-                                    <td><DropdownButton productId={val.id} token={token} /></td>
+                                    <td><DropdownButton id={val.id} type={val.type} name={val.name} price={val.price} token={token} /></td>
                                 </tr>
                             )
                         })}

@@ -1,22 +1,32 @@
 .modal {
     display: block;
     color: #F244A4;
-    text-align: center;
+    text-align: justify;
 }
 
 .modal_body {
-    margin-top: 15px;
-    color: black;
+    padding-left: 60px;
 }
 
-.btn_delete {
+.inputs {
+    margin: 8px 0;
+    width: 90%;
+    height: 38px;
+    border: 1px solid #F294C0;
+    border-radius: 25px;
+    background-color: #fff;
+    text-indent: 10px;
+    text-align: center;
+}
+
+.btn_save {
     background-color: #F244A4;
     border: #F244A4 solid 1px;
     display: flex;
     padding-bottom: 35px;
 }
 
-.btn_delete:hover {
+.btn_save:hover {
     background-color: #fff;
     border: #F244A4 solid 1px;
     color: #F244A4;
