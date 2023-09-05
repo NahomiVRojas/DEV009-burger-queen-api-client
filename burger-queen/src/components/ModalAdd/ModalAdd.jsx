@@ -1,7 +1,38 @@
+import { useState } from "react";
 import style from "../ModalAdd/ModalAdd.module.css";
-import { func } from "prop-types";
+import { func, string } from "prop-types";
+import { addProduct } from "../../Services/Request";
 
-export default function ModalAdd({ onClose }) {
+export default function ModalAdd({ onClose, token }) {
+    const [addId, setAddId] = useState('');
+    const [addName, setAddName] = useState('');
+    const [addType, setAddType] = useState('');
+    const [addPrice, setAddPrice] = useState('');
+
+    const data = {
+        id: addId,
+        name: addName,
+        type: addType,
+        price: addPrice
+    }
+
+    function addNewProduct() {
+        addProduct(data, token)
+            .then((response) => {
+                if (response.ok) {
+                    console.log("Producto agregado con éxito");
+                    onClose();
+                }
+            })
+            .then((product) => {
+                console.log(product)
+                return product
+            })
+            .catch((error) => {
+                console.error("Error al realizar la solicitud de edición", error);
+            })
+    }
+
     return (
         <div className={`modal ${style.modal}`} tabIndex="-1">
             <div className="modal-dialog">
@@ -13,22 +44,37 @@ export default function ModalAdd({ onClose }) {
                     <div className={`modal-body ${style.modal_body}`}>
                         <form>
                             <label>ID</label><br />
-                            <input type="text" /><br />
+                            <input
+                                type="number"
+                                value={addId}
+                                onChange={(e) => setAddId(e.target.value)}
+                            /><br />
                             <label>Product</label><br />
-                            <input type="text" /><br />
+                            <input
+                                type="text"
+                                value={addName}
+                                onChange={(e) => setAddName(e.target.value)}
+                            /><br />
                             <label>Menu</label><br />
-                            <select>
+                            <select
+                                value={addType}
+                                onChange={(e) => setAddType(e.target.value)}
+                            >
                                 <option>--</option>
-                                <option>Breakfast</option>
-                                <option>Lunch/Dinner</option>
+                                <option value="Breakfast">Breakfast</option>
+                                <option value="Lunch/Dinner">Lunch/Dinner</option>
                             </select><br />
                             <label>Price</label><br />
-                            <input type="text" /><br />
+                            <input
+                                type="text"
+                                value={addPrice}
+                                onChange={(e) => setAddPrice(e.target.value)}
+                            /><br />
                         </form>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className={`btn btn-secondary ${style.btn_cancel}`} data-bs-dismiss="modal" onClick={onClose}>Cancel</button>
-                        <button type="button" className={`btn btn-primary ${style.btn_add}`}>Add</button>
+                        <button type="button" className={`btn btn-primary ${style.btn_add}`} onClick={addNewProduct}>Add</button>
                     </div>
                 </div>
             </div>
@@ -38,4 +84,5 @@ export default function ModalAdd({ onClose }) {
 
 ModalAdd.propTypes = {
     onClose: func.isRequired,
+    token: string.isRequired
 };

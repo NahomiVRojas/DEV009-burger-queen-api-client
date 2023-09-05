@@ -53,7 +53,7 @@ export default function ModalEdit({ id, name, type, price, onClose, token, onEdi
                 <input
                   className={style.inputs}
                   value={id}
-                  type="text"
+                  type="number"
                   readOnly
                 />
                 <br />

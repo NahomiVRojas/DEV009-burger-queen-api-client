@@ -51,3 +51,14 @@ export const editProduct = (id, updatedData, token) => {
         body: JSON.stringify(updatedData)
     });
 };
+
+export const addProduct = (data, token) => {
+    return fetch(`http://localhost:8080/products`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+    });
+};
