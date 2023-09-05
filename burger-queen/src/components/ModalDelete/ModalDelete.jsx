@@ -6,8 +6,9 @@ export default function ModalDelete({ id, token, onClose }) {
     function deleteProductById() {
         deleteProduct(id, token)
             .then((response) => {
-                if (response.status === 'OK') {
+                if (response.ok) {
                     console.log('Deleted');
+                    onClose();
                 } else {
                     console.error(response.status);
                 }

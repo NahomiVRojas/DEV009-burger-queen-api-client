@@ -58,7 +58,7 @@ export default function ManageProductsTable() {
                     <h2>Manage Products</h2>
                 </div>
                 <img src={iconAddProduct} onClick={handleAdd}></img>
-                {showModalAdd && <ModalAdd onClose={handleCloseModal}/>}
+                {showModalAdd && <ModalAdd onClose={handleCloseModal} token={token} />}
             </div>
             <div className={`table-responsive ${style.responsive}`}>
                 <table className="table">
