@@ -44,7 +44,7 @@ export default function DropdownButton({ id, name, type, price, token, onEditSuc
                     id={id}
                     name={name}
                     type={type}
-                    price={parseFloat(price)}
+                    price={price}
                     token={token}
                     onClose={handleCloseModal}
                     onEditSuccess={onEditSuccess} 

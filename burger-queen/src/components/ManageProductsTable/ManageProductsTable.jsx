@@ -66,13 +66,13 @@ export default function ManageProductsTable() {
                                 <td>{val.id}</td>
                                 <td>{val.type}</td>
                                 <td>{val.name}</td>
-                                <td>{parseFloat(val.price)}</td>
+                                <td>{Number(val.price)}</td>
                                 <td>
                                     <DropdownButton
                                         id={val.id}
                                         type={val.type}
                                         name={val.name}
-                                        price={parseFloat(val.price)}
+                                        price={Number(val.price)}
                                         token={token}
                                         onEditSuccess={updateProduct}
                                     />

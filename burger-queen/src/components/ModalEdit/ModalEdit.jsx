@@ -8,14 +8,14 @@ export default function ModalEdit({ id, name, type, price, onClose, token, onEdi
   const [editedType, setEditedType] = useState(type);
   const [editedPrice, setEditedPrice] = useState(price);
 
-  const handleSaveChanges = () => {
-    const updatedData = {
-      id,
-      type: editedType,
-      name: editedName,
-      price: editedPrice,
-    };
+  const updatedData = {
+    id,
+    type: editedType,
+    name: editedName,
+    price: editedPrice,
+  };
 
+  function editProductById() {
     editProduct(id, updatedData, token)
     .then((response) => {
         if (response.ok) {
@@ -80,7 +80,7 @@ export default function ModalEdit({ id, name, type, price, onClose, token, onEdi
                 <input
                   className={style.inputs}
                   value={editedPrice}
-                  type="number"
+                  type="text"
                   onChange={(e) => setEditedPrice(e.target.value)}
                 />
               </form>
@@ -97,7 +97,7 @@ export default function ModalEdit({ id, name, type, price, onClose, token, onEdi
               <button
                 type="button"
                 className={`btn btn-primary ${style.btn_save}`}
-                onClick={handleSaveChanges}
+                onClick={editProductById}
               >
                 Save changes
               </button>
