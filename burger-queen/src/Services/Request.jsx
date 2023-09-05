@@ -59,6 +59,11 @@ export const addProduct = (data, token) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+            name: data.name,
+            type: data.type,
+            price: data.price,
+            id: data.id,
+        })
     });
 };

@@ -16,6 +16,11 @@ export default function ManageProductsTable() {
         setShowModalAdd(true);
     };
 
+    const addNewProduct = (newProductData) => {
+        setAllProducts((prevProducts) => [...prevProducts, newProductData]);
+        setShowModalAdd(false); 
+    };    
+
     const handleCloseModal = () => {
         setShowModalAdd(false);
     };
@@ -27,6 +32,10 @@ export default function ManageProductsTable() {
             product.id === updatedProductData.id ? updatedProductData : product
           )
         );
+    };
+
+    const handleDeleteSuccess = (productId) => {
+        setAllProducts((prevProducts) => prevProducts.filter((product) => product.id !== productId));
     };
 
     useEffect(() => {
@@ -58,7 +67,7 @@ export default function ManageProductsTable() {
                     <h2>Manage Products</h2>
                 </div>
                 <img src={iconAddProduct} onClick={handleAdd}></img>
-                {showModalAdd && <ModalAdd onClose={handleCloseModal} token={token} />}
+                {showModalAdd && <ModalAdd onClose={handleCloseModal} token={token} onAddSuccess={addNewProduct} />}
             </div>
             <div className={`table-responsive ${style.responsive}`}>
                 <table className="table">
@@ -86,6 +95,7 @@ export default function ManageProductsTable() {
                                         price={Number(val.price)}
                                         token={token}
                                         onEditSuccess={updateProduct}
+                                        onDeleteSuccess={handleDeleteSuccess}
                                     />
                                 </td>
                             </tr>

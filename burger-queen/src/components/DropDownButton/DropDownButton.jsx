@@ -5,7 +5,7 @@ import ModalEdit from "../ModalEdit/ModalEdit";
 import { useState } from "react";
 import { number, string, func } from "prop-types";
 
-export default function DropdownButton({ id, name, type, price, token, onEditSuccess }) {
+export default function DropdownButton({ id, name, type, price, token, onEditSuccess, onDeleteSuccess }) {
     const [isOpen, setIsOpen] = useState(false);
     const [showModalDelete, setShowModalDelete] = useState(false);
     const [showModalEdit, setShowModalEdit] = useState(false);
@@ -38,7 +38,14 @@ export default function DropdownButton({ id, name, type, price, token, onEditSuc
                     <span className={style.btn_options} onClick={handleDelete}>Delete</span>
                 </div>
             )}
-            {showModalDelete && <ModalDelete id={id} token={token} onClose={handleCloseModal} />}
+            {showModalDelete && (
+                <ModalDelete
+                    id= {id} 
+                    token={token} 
+                    onClose={handleCloseModal}
+                    onDeleteSuccess={onDeleteSuccess}
+                />
+              )}
             {showModalEdit && (
                 <ModalEdit
                     id={id}
@@ -55,10 +62,11 @@ export default function DropdownButton({ id, name, type, price, token, onEditSuc
 }
 
 DropdownButton.propTypes = {
-    id: number.isRequired,
+    id: string.isRequired,
     type: string.isRequired,
     name: string.isRequired,
     price: number.isRequired,
     token: string.isRequired,
     onEditSuccess: func.isRequired,
+    onDeleteSuccess: func.isRequired,
 };

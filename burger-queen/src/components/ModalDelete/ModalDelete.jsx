@@ -1,14 +1,15 @@
 import { deleteProduct } from "../../Services/Request";
-import { func, number, string } from "prop-types";
+import { func, string } from "prop-types";
 import style from "../ModalDelete/ModalDelete.module.css"
 
-export default function ModalDelete({ id, token, onClose }) {
+export default function ModalDelete({ id, token, onClose,  onDeleteSuccess }) {
     function deleteProductById() {
         deleteProduct(id, token)
             .then((response) => {
                 if (response.ok) {
                     console.log('Deleted');
                     onClose();
+                    onDeleteSuccess(id);
                 } else {
                     console.error(response.status);
                 }
@@ -39,7 +40,8 @@ export default function ModalDelete({ id, token, onClose }) {
 }
 
 ModalDelete.propTypes = {
-    id: number.isRequired,
+    id: string.isRequired,
     token: string.isRequired,
-    onClose: func.isRequired
+    onClose: func.isRequired,
+    onDeleteSuccess: func.isRequired
 };

@@ -3,7 +3,7 @@ import style from "../ModalAdd/ModalAdd.module.css";
 import { func, string } from "prop-types";
 import { addProduct } from "../../Services/Request";
 
-export default function ModalAdd({ onClose, token }) {
+export default function ModalAdd({ onClose, token, onAddSuccess }) {
     const [addId, setAddId] = useState('');
     const [addName, setAddName] = useState('');
     const [addType, setAddType] = useState('');
@@ -12,8 +12,8 @@ export default function ModalAdd({ onClose, token }) {
     const data = {
         id: addId,
         name: addName,
+        price: addPrice,
         type: addType,
-        price: addPrice
     }
 
     function addNewProduct() {
@@ -21,11 +21,13 @@ export default function ModalAdd({ onClose, token }) {
             .then((response) => {
                 if (response.ok) {
                     console.log("Producto agregado con éxito");
-                    onClose();
                 }
+                return response.json();
             })
             .then((product) => {
                 console.log(product)
+                onAddSuccess(product);
+                onClose();
                 return product
             })
             .catch((error) => {
@@ -45,7 +47,7 @@ export default function ModalAdd({ onClose, token }) {
                         <form>
                             <label>ID</label><br />
                             <input
-                                type="number"
+                                type="text"
                                 value={addId}
                                 onChange={(e) => setAddId(e.target.value)}
                             /><br />
@@ -84,5 +86,6 @@ export default function ModalAdd({ onClose, token }) {
 
 ModalAdd.propTypes = {
     onClose: func.isRequired,
-    token: string.isRequired
+    token: string.isRequired,
+    onAddSuccess: func.isRequired,
 };
