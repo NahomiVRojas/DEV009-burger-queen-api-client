@@ -1,5 +1,6 @@
 import style from "../ManageProductsTable/ManageProductsTable.module.css";
 import returnButton from '../../assets/return-button.svg';
+import iconAddProduct from '../../assets/icon-add-product.svg';
 import NavigateTo from "../Navigate/Navigate";
 import { products } from "../../Services/Request";
 import { useEffect } from 'react';
@@ -13,21 +14,21 @@ export default function ManageProductsTable() {
 
     useEffect(() => {
         products(token)
-        .then((response) => {
-            console.log('Response getProducts:', response)
-            if(!response.ok){
-                throw new Error('No existe productos')
-            }
-            return response.json();
-        })
-        .then((data)=>{
-            console.log('Data getProducts:', data);
-            setAllProducts(data)
-            return data
-        })
-        .catch((error) => {
-            console.log(error)
-        });
+            .then((response) => {
+                console.log('Response getProducts:', response)
+                if (!response.ok) {
+                    throw new Error('No existe productos')
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log('Data getProducts:', data);
+                setAllProducts(data)
+                return data
+            })
+            .catch((error) => {
+                console.log(error)
+            });
     }, [token]);
 
     const handleClick = NavigateTo("/main/dashboard");
@@ -35,8 +36,11 @@ export default function ManageProductsTable() {
     return (
         <>
             <div className={style.title_section}>
-                <img src={returnButton} onClick={handleClick} />
-                <h2>Manage Products</h2>
+                <div className={style.title}>
+                    <img src={returnButton} onClick={handleClick} />
+                    <h2>Manage Products</h2>
+                </div>
+                <img src={iconAddProduct}></img>
             </div>
             <div className={`table-responsive ${style.responsive}`}>
                 <table className="table">
