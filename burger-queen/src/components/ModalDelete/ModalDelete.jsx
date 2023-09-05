@@ -1,5 +1,5 @@
 import { deleteProduct } from "../../Services/Request";
-import { number, string } from "prop-types";
+import { func, number, string } from "prop-types";
 import style from "../ModalDelete/ModalDelete.module.css"
 
 export default function ModalDelete({ id, token, onClose }) {
@@ -40,5 +40,5 @@ export default function ModalDelete({ id, token, onClose }) {
 ModalDelete.propTypes = {
     id: number.isRequired,
     token: string.isRequired,
-    onClose: Boolean.isRequired
+    onClose: func.isRequired
 };

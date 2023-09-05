@@ -1,34 +1,34 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { number, string, func } from "prop-types";
 import style from "../ModalEdit/ModalEdit.module.css";
 import { editProduct } from "../../Services/Request";
 
-export default function ModalEdit({ id, name, type, price, onClose, token }) {
+export default function ModalEdit({ id, name, type, price, onClose, token, onEditSuccess }) {
   const [editedName, setEditedName] = useState(name);
   const [editedType, setEditedType] = useState(type);
   const [editedPrice, setEditedPrice] = useState(price);
 
   const handleSaveChanges = () => {
     const updatedData = {
-      name: editedName,
+      id,
       type: editedType,
+      name: editedName,
       price: editedPrice,
     };
-    
-    useEffect(() => {
-        editProduct(id, updatedData, token)
-        .then((response) => {
-            if (response.ok) {
-                console.log("Producto editado con éxito");
-                onClose();
-            } else {
-                console.error("Error al editar el producto")
-            }
-        })
-        .catch((error) => {
-            console.error("Error al realizar la solicitud de edición", error);
-        });
-    },[]);
+
+    editProduct(id, updatedData, token)
+    .then((response) => {
+        if (response.ok) {
+            console.log("Producto editado con éxito");
+            onClose();
+            onEditSuccess(updatedData);
+        } else {
+            console.error("Error al editar el producto")
+        }
+    })
+    .catch((error) => {
+        console.error("Error al realizar la solicitud de edición", error);
+    });
 }
 
   return (
@@ -115,4 +115,5 @@ ModalEdit.propTypes = {
   price: number.isRequired,
   onClose: func.isRequired,
   token: string.isRequired,
+  onEditSuccess: func.isRequired
 };

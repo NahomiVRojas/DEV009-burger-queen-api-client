@@ -3,14 +3,21 @@ import returnButton from '../../assets/return-button.svg';
 import iconAddProduct from '../../assets/icon-add-product.svg';
 import NavigateTo from "../Navigate/Navigate";
 import { products } from "../../Services/Request";
-import { useEffect } from 'react';
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 import DropdownButton from "../DropDownButton/DropDownButton";
 
 export default function ManageProductsTable() {
-
     const [allProducts, setAllProducts] = useState([]);
     const token = localStorage.getItem('token');
+
+    const updateProduct = (updatedProductData) => {
+        console.log("Actualizando producto:", updatedProductData);
+        setAllProducts((prevProducts) =>
+          prevProducts.map((product) =>
+            product.id === updatedProductData.id ? updatedProductData : product
+          )
+        );
+    };
 
     useEffect(() => {
         products(token)
@@ -54,17 +61,24 @@ export default function ManageProductsTable() {
                         </tr>
                     </thead>
                     <tbody>
-                        {allProducts.map((val, key) => {
-                            return (
-                                <tr key={key}>
-                                    <td>{val.id}</td>
-                                    <td>{val.type}</td>
-                                    <td>{val.name}</td>
-                                    <td>{val.price}</td>
-                                    <td><DropdownButton id={val.id} type={val.type} name={val.name} price={val.price} token={token} /></td>
-                                </tr>
-                            )
-                        })}
+                        {allProducts.map((val, key) => (
+                            <tr key={key}>
+                                <td>{val.id}</td>
+                                <td>{val.type}</td>
+                                <td>{val.name}</td>
+                                <td>{parseFloat(val.price)}</td>
+                                <td>
+                                    <DropdownButton
+                                        id={val.id}
+                                        type={val.type}
+                                        name={val.name}
+                                        price={parseFloat(val.price)}
+                                        token={token}
+                                        onEditSuccess={updateProduct}
+                                    />
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
