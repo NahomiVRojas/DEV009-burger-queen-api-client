@@ -108,6 +108,7 @@ export default function ModalEdit({ id, name, type, price, onClose, token, onEdi
     </>
   );
 }
+
 ModalEdit.propTypes = {
   id: number.isRequired,
   type: string.isRequired,

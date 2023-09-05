@@ -5,15 +5,25 @@ import NavigateTo from "../Navigate/Navigate";
 import { products } from "../../Services/Request";
 import { useEffect, useState } from 'react';
 import DropdownButton from "../DropDownButton/DropDownButton";
+import ModalAdd from "../ModalAdd/ModalAdd";
 
 export default function ManageProductsTable() {
     const [allProducts, setAllProducts] = useState([]);
     const token = localStorage.getItem('token');
+    const [showModalAdd, setShowModalAdd] = useState(false);
+
+    const handleAdd = () => {
+        setShowModalAdd(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModalAdd(false);
+    };
 
     const updateProduct = (updatedProductData) => {
         console.log("Actualizando producto:", updatedProductData);
-        setAllProducts((prevProducts) =>
-          prevProducts.map((product) =>
+        setAllProducts((data) =>
+          data.map((product) =>
             product.id === updatedProductData.id ? updatedProductData : product
           )
         );
@@ -47,7 +57,8 @@ export default function ManageProductsTable() {
                     <img src={returnButton} onClick={handleClick} />
                     <h2>Manage Products</h2>
                 </div>
-                <img src={iconAddProduct}></img>
+                <img src={iconAddProduct} onClick={handleAdd}></img>
+                {showModalAdd && <ModalAdd onClose={handleCloseModal}/>}
             </div>
             <div className={`table-responsive ${style.responsive}`}>
                 <table className="table">
