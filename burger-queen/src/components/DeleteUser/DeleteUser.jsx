@@ -1,5 +1,5 @@
 import { deleteUser } from "../../Services/Request";
-import { func, number, string } from "prop-types";
+import { func, string } from "prop-types";
 import Modal from "../Modal/Modal";
 
 export default function DeleteUser({ id, token, onClose, onDelete }) {
@@ -31,7 +31,7 @@ export default function DeleteUser({ id, token, onClose, onDelete }) {
 }
 
 DeleteUser.propTypes = {
-  id: number.isRequired,
+  id: string.isRequired,
   token: string.isRequired,
   onClose: func.isRequired,
   onDelete: func.isRequired,
