@@ -1,6 +1,6 @@
 import style from "../DropDownButton/DropDownButton.module.css";
 import iconOptions from "../../assets/icon-options.svg";
-import ModalDelete from "../DeleteProduct/DeleteProduct";
+import DeleteProduct from "../DeleteProduct/DeleteProduct";
 import ModalEdit from "../EditProduct/EditProduct";
 import { useState } from "react";
 import { number, string, func } from "prop-types";
@@ -39,7 +39,7 @@ export default function DropdownButton({ id, name, type, price, token, onEditSuc
                 </div>
             )}
             {showModalDelete && (
-                <ModalDelete
+                <DeleteProduct
                     id= {id} 
                     token={token} 
                     onClose={handleCloseModal}
