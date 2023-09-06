@@ -1,7 +1,7 @@
 import style from "../DropDownButton/DropDownButton.module.css";
 import iconOptions from "../../assets/icon-options.svg";
-import ModalDelete from "../ModalDelete/ModalDelete";
-import ModalEdit from "../ModalEdit/ModalEdit";
+import ModalDelete from "../DeleteProduct/DeleteProduct";
+import ModalEdit from "../EditProduct/EditProduct";
 import { useState } from "react";
 import { number, string, func } from "prop-types";
 
