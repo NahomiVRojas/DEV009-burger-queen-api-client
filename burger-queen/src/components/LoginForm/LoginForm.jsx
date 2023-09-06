@@ -29,7 +29,7 @@ export default function LoginForm() {
             return data.user;
           })
         .then((user) => {
-            if (user.role === 'admin') {
+            if (user.role === 'admin' || user.role === 'Admin') {
                 navigateTo("/main/dashboard")
             } else {
                 navigateTo("/main")

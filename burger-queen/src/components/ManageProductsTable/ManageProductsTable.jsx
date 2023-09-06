@@ -8,22 +8,22 @@ import DropdownButton from "../DropDownButton/DropDownButton";
 import AddProduct from "../AddProduct/AddProduct";
 
 export default function ManageProductsTable() {
-    const [allProducts, setAllProducts] = useState([]);
     const token = localStorage.getItem('token');
+    const [allProducts, setAllProducts] = useState([]);
     const [showModalAdd, setShowModalAdd] = useState(false);
 
-    const handleAdd = () => {
+    const handleOpenModal = () => {
         setShowModalAdd(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModalAdd(false);
     };
 
     const addNewProduct = (newProductData) => {
         setAllProducts((prevProducts) => [...prevProducts, newProductData]);
         setShowModalAdd(false); 
     };    
-
-    const handleCloseModal = () => {
-        setShowModalAdd(false);
-    };
 
     const updateProduct = (updatedProductData) => {
         console.log("Actualizando producto:", updatedProductData);
@@ -66,8 +66,8 @@ export default function ManageProductsTable() {
                     <img src={returnButton} onClick={handleClick} />
                     <h2>Manage Products</h2>
                 </div>
-                <img src={iconAddProduct} onClick={handleAdd}></img>
-                {showModalAdd && <AddProduct onClose={handleCloseModal} token={token} onAddSuccess={addNewProduct} />}
+                <img src={iconAddProduct} onClick={handleOpenModal}></img>
+                {showModalAdd && <AddProduct onClose={handleCloseModal} token={token} onAdd={addNewProduct} />}
             </div>
             <div className={`table-responsive ${style.responsive}`}>
                 <table className="table">
