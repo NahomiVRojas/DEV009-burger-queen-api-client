@@ -105,3 +105,13 @@ export const editUser = (id, updatedData, token) => {
         body: JSON.stringify(updatedData)
     });
 };
+
+export const allOrders = (token) => {
+    return fetch('http://localhost:8080/orders', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+};
