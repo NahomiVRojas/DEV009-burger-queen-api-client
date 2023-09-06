@@ -5,7 +5,7 @@ import NavigateTo from "../Navigate/Navigate";
 import { products } from "../../Services/Request";
 import { useEffect, useState } from 'react';
 import DropdownButton from "../DropDownButton/DropDownButton";
-import ModalAdd from "../ModalAdd/ModalAdd";
+import AddProduct from "../AddProduct/AddProduct";
 
 export default function ManageProductsTable() {
     const [allProducts, setAllProducts] = useState([]);
@@ -67,7 +67,7 @@ export default function ManageProductsTable() {
                     <h2>Manage Products</h2>
                 </div>
                 <img src={iconAddProduct} onClick={handleAdd}></img>
-                {showModalAdd && <ModalAdd onClose={handleCloseModal} token={token} onAddSuccess={addNewProduct} />}
+                {showModalAdd && <AddProduct onClose={handleCloseModal} token={token} onAddSuccess={addNewProduct} />}
             </div>
             <div className={`table-responsive ${style.responsive}`}>
                 <table className="table">

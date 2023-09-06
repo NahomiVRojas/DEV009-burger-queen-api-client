@@ -67,3 +67,14 @@ export const addProduct = (data, token) => {
         })
     });
 };
+
+export const addUsers = (dataUsers, token) => {
+    return fetch(`http://localhost:8080/users`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(dataUsers)
+    });
+};
