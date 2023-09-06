@@ -27,7 +27,7 @@ export default function AddUser({ onClose, token, onAdd }) {
         return response.json();
       })
       .then((newUserData) => {
-        console.log(newUserData);
+        console.log("New user data:", newUserData);
         onAdd(newUserData);
         onClose();
         return newUserData;

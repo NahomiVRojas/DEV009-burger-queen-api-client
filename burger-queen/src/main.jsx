@@ -10,6 +10,7 @@ import App from './routes/App';
 import Dashboard from './routes/Admin/Dashboard';
 import Products from './routes/Admin/Products';
 import Users from './routes/Admin/Users';
+import AllOrders from './routes/Admin/AllOrders';
 
 
 const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
           {
             path: 'users',
             element: <Users />,
+          },
+          {
+            path: 'orders',
+            element: <AllOrders />,
           },
         ]
     },
