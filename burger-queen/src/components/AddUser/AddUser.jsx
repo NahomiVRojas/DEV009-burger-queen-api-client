@@ -22,15 +22,15 @@ export default function AddUser({ onClose, token, onAdd }) {
     addUsers(data, token)
       .then((response) => {
         if (response.ok) {
-          console.log("Usuario agregado con éxito");
+          console.log("Usuario agregado con éxito", data);
         }
         return response.json();
       })
       .then((newUserData) => {
-        console.log("New user data:", newUserData);
-        onAdd(newUserData);
+        console.log("New user data:", newUserData.user);
+        onAdd(newUserData.user);
         onClose();
-        return newUserData;
+        return newUserData.user;
       })
       .catch((error) => {
         console.error("Error al realizar la solicitud de edición", error);
