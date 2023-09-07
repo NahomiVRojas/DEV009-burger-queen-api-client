@@ -25,7 +25,7 @@ export default function LoginForm() {
           })
         .then((data) => {
             console.log('Response Data:', data);
-            saveData(data.accessToken, data.user.role);
+            saveData(data.accessToken, data.user.role, data.user.name);
             return data.user;
           })
         .then((user) => {
@@ -34,6 +34,7 @@ export default function LoginForm() {
             } else {
                 navigateTo("/main")
             }
+
         })
         .catch((error) => {
             console.log(error)

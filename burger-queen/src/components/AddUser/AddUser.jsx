@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { string, func } from "prop-types";
 import { addUsers } from "../../Services/Request";
-import Modal from "../Modal/Modal.jsx"
+import Modal from "../Modal/Modal.jsx";
 
 export default function AddUser({ onClose, token, onAdd }) {
   const [addId, setAddId] = useState("");
