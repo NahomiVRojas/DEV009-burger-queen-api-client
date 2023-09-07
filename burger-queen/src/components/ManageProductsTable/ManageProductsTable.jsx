@@ -85,7 +85,7 @@ const handleCloseEdit = (id) => {
       });
   }, [token]);
 
-  const handleClick = NavigateTo("/main/dashboard");
+  const handleClick = NavigateTo("/admin/dashboard");
 
   return (
     <>
