@@ -63,12 +63,14 @@ export default function EditProduct({
         <br />
         <label>Menu</label>
         <br />
-        <input
-          className={style.inputs}
+        <select
           value={editedType}
-          type="text"
           onChange={(e) => setEditedType(e.target.value)}
-        />
+        >
+          <option>--</option>
+          <option value="Breakfast">Breakfast</option>
+          <option value="Lunch/Dinner">Lunch/Dinner</option>
+        </select>
         <br />
         <label>Price</label>
         <br />

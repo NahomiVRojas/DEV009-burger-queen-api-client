@@ -68,13 +68,50 @@ export const addProduct = (data, token) => {
     });
 };
 
-export const addUsers = (dataUsers, token) => {
+export const addUsers = (data, token) => {
     return fetch(`http://localhost:8080/users`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(dataUsers)
+        body: JSON.stringify({
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            role: data.role,
+            id: data.id,
+        })
     });
+};
+
+export const deleteUser = (id, token) => {
+    return fetch(`http://localhost:8080/users/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+}
+
+export const editUser = (id, updatedData, token) => {
+    return fetch(`http://localhost:8080/users/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(updatedData)
+    });
+};
+
+export const allOrders = (token) => {
+    return fetch('http://localhost:8080/orders', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
 };

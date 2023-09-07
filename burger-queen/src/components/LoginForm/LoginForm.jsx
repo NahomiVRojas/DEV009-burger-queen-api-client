@@ -25,15 +25,16 @@ export default function LoginForm() {
           })
         .then((data) => {
             console.log('Response Data:', data);
-            saveData(data.accessToken, data.user.role);
+            saveData(data.accessToken, data.user.role, data.user.name);
             return data.user;
           })
         .then((user) => {
-            if (user.role === 'admin') {
+            if (user.role === 'admin' || user.role === 'Admin') {
                 navigateTo("/main/dashboard")
             } else {
                 navigateTo("/main")
             }
+
         })
         .catch((error) => {
             console.log(error)

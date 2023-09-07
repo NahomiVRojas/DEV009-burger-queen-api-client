@@ -3,7 +3,7 @@ import { string, func } from "prop-types";
 import { addProduct } from "../../Services/Request";
 import Modal from "../Modal/Modal.jsx"
 
-export default function AddProduct({ onClose, token, onAddSuccess }) {
+export default function AddProduct({ onClose, token, onAdd }) {
   const [addId, setAddId] = useState("");
   const [addName, setAddName] = useState("");
   const [addType, setAddType] = useState("");
@@ -26,7 +26,7 @@ export default function AddProduct({ onClose, token, onAddSuccess }) {
       })
       .then((product) => {
         console.log(product);
-        onAddSuccess(product);
+        onAdd(product);
         onClose();
         return product;
       })
@@ -79,5 +79,5 @@ export default function AddProduct({ onClose, token, onAddSuccess }) {
 AddProduct.propTypes = {
   onClose: func.isRequired,
   token: string.isRequired,
-  onAddSuccess: func.isRequired,
+  onAdd: func.isRequired,
 };
