@@ -43,7 +43,7 @@ export default function EditUser({ name, email, password, role, id, token, onEdi
         <>
             <Modal
                 onClose={onClose}
-                title="Edit Product"
+                title="Edit User"
                 action={editUserById}
                 nameAction="Save Changes"
             >

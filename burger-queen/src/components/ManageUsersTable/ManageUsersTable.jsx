@@ -52,7 +52,7 @@ export default function ManageUsersTable() {
     };
 
     const handleUpdateUser = (newUserData) => {
-        console.log("Actualizando producto:", newUserData);
+        console.log("Actualizando usuario:", newUserData);
         setAllUsers((data) =>
             data.map((user) => (user.id === newUserData.id ? newUserData : user))
         );
@@ -105,7 +105,6 @@ export default function ManageUsersTable() {
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Password</th>
                             <th>Role</th>
                             <th></th>
                         </tr>
@@ -117,7 +116,6 @@ export default function ManageUsersTable() {
                                     <td>{val.id}</td>
                                     <td>{val.name}</td>
                                     <td>{val.email}</td>
-                                    <td>{val.password}</td>
                                     <td>{val.role}</td>
                                     <td>
                                         <DropdownButton
