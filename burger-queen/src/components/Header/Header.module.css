@@ -28,6 +28,7 @@ header {
     color: var(--color-purple);
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
   
 .icon {

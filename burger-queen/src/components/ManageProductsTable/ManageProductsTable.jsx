@@ -14,7 +14,7 @@ export default function ManageProductsTable() {
   const [allProducts, setAllProducts] = useState([]);
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
-  const [showModalEdit, setShowModalEdit] = useState(false);
+  const [showModals, setShowModals] = useState({});
 
   const handleOpenModal = () => {
     setShowModalAdd(true);
@@ -32,13 +32,19 @@ export default function ManageProductsTable() {
     setShowModalDelete(false);
   };
 
-  const handleOpenEdit = () => {
-    setShowModalEdit(true);
-  };
+  const handleOpenEdit = (id) => {
+    setShowModals((prevModals) => ({
+        ...prevModals,
+        [id]: true, // Set the modal for the specified user to true
+    }));
+};
 
-  const handleCloseEdit = () => {
-    setShowModalEdit(false);
-  };
+const handleCloseEdit = (id) => {
+    setShowModals((prevModals) => ({
+        ...prevModals,
+        [id]: false, // Set the modal for the specified user to false
+    }));
+};
 
   const addNewProduct = (newProductData) => {
     setAllProducts((prevProducts) => [...prevProducts, newProductData]);
@@ -117,7 +123,7 @@ export default function ManageProductsTable() {
                 <td>{Number(val.price)}</td>
                 <td>
                   <DropdownButton
-                    optionEdit={handleOpenEdit} // Abre el modal de edición con el ID del usuario
+                    optionEdit={() => handleOpenEdit(val.id)} // Abre el modal de edición con el ID del usuario
                     optionDelete={handleOpenDelete} // Abre el modal de eliminación con el ID del usuario
                   />
                   {showModalDelete && (
@@ -128,14 +134,14 @@ export default function ManageProductsTable() {
                       onDeleteSuccess={handleDeleteSuccess}
                     />
                   )}
-                  {showModalEdit && (
+                  {showModals[val.id] && (
                     <EditProduct
                       id={val.id}
                       name={val.name}
                       type={val.type}
                       price={Number(val.price)}
                       token={token}
-                      onClose={handleCloseEdit}
+                      onClose={() => handleCloseEdit(val.id)}
                       onEditSuccess={updateProduct}
                     />
                   )}
