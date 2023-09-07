@@ -80,7 +80,7 @@ export default function ManageUsersTable() {
             });
     }, [token]);
 
-    const handleClick = NavigateTo("/main/dashboard");
+    const handleClick = NavigateTo("/admin/dashboard");
 
     return (
         <>

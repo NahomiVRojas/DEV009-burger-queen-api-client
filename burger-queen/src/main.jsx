@@ -14,36 +14,46 @@ import AllOrders from './routes/Admin/AllOrders';
 
 
 const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Login />,
-    },
-    {
-        path: '/main',
-        element: <App />,
-        children: [
-          {
-            path: 'dashboard',
-            element: <Dashboard />,
-          },
-          {
-            path: 'products',
-            element: <Products />,
-          },
-          {
-            path: 'users',
-            element: <Users />,
-          },
-          {
-            path: 'orders',
-            element: <AllOrders />,
-          },
-        ]
-    },
+  {
+    path: '/',
+    element: <Login />,
+  },
+  {
+    path: '/admin',
+    element: <App />,
+    children: [
+      {
+        path: 'dashboard',
+        element: <Dashboard />,
+      },
+      {
+        path: 'products',
+        element: <Products />,
+      },
+      {
+        path: 'users',
+        element: <Users />,
+      },
+      {
+        path: 'orders',
+        element: <AllOrders />,
+      },
+    ]
+  },
+  {
+    path: '/waiter',
+    element: <App />,
+    children: [
+      {
+        path: 'dashboard',
+        element: <Dashboard />,
+      },
+    ]
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <StrictMode>
-        <RouterProvider router={router}/>
-    </StrictMode>
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>
 );

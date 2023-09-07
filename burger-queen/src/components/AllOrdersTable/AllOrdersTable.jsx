@@ -6,7 +6,7 @@ import { allOrders } from "../../Services/Request";
 
 export default function AllOrders() {
   const token = localStorage.getItem("token");
-  const handleClick = NavigateTo("/main/dashboard");
+  const handleClick = NavigateTo("/admin/dashboard");
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
