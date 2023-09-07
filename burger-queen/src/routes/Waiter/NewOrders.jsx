@@ -1,7 +1,9 @@
+import NewOrderTable from "../../components/NewOrderTable/NewOrderTable"
+
 export default function NewOrders() {
     return (
         <>
-            <h1>New Orders</h1>
+            <NewOrderTable />
         </>
     )
 }
