@@ -33,6 +33,8 @@ export default function LoginForm() {
                     navigateTo("/admin/dashboard")
                 } else if (user.role === 'Waiter/Waitress') {
                     navigateTo("/waiter/dashboard")
+                } else {
+                    navigateTo("/chef/dashboard")
                 }
             })
             .catch((error) => {
