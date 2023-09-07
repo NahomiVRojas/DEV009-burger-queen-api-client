@@ -1,26 +1,47 @@
 import style from "../DropDownButton/DropDownButton.module.css";
 import iconOptions from "../../assets/icon-options.svg";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { func } from "prop-types";
 
 export default function DropdownButton({ optionEdit, optionDelete }) {
   const [isOpen, setIsOpen] = useState(false);
+  const dropDownRef = useRef("");
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const toggleModalEdit = () =>{
+  const toggleModalEdit = () => {
     optionEdit();
-    setIsOpen(!isOpen);
-  }
-  const toggleModalDelete = () =>{
+    setIsOpen(false);
+  };
+
+  const toggleModalDelete = () => {
     optionDelete();
-    setIsOpen(!isOpen);
-  }
+    setIsOpen(false);
+  };
+
+  // Agregar un efecto para detectar clics en cualquier lugar de la página
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    // Agregar el controlador de eventos al documento cuando el menú está abierto
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    // Limpiar el controlador de eventos cuando el componente se desmonte
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   return (
-    <div className={style.dropdown}>
+    <div ref={dropDownRef} className={style.dropdown}>
       <img
         src={iconOptions}
         className={style.options}
