@@ -10,6 +10,15 @@ export default function DropdownButton({ optionEdit, optionDelete }) {
     setIsOpen(!isOpen);
   };
 
+  const toggleModalEdit = () =>{
+    optionEdit();
+    setIsOpen(!isOpen);
+  }
+  const toggleModalDelete = () =>{
+    optionDelete();
+    setIsOpen(!isOpen);
+  }
+
   return (
     <div className={style.dropdown}>
       <img
@@ -19,10 +28,10 @@ export default function DropdownButton({ optionEdit, optionDelete }) {
       />
       {isOpen && (
         <div className={style.content}>
-          <span className={style.btn_options} onClick={optionEdit}>
+          <span className={style.btn_options} onClick={toggleModalEdit}>
             Edit
           </span>
-          <span className={style.btn_options} onClick={optionDelete}>
+          <span className={style.btn_options} onClick={toggleModalDelete}>
             Delete
           </span>
         </div>
