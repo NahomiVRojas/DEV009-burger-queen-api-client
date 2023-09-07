@@ -19,9 +19,16 @@ export default function DashboardNavigation() {
         { img: list, title: "All Orders", path: "/waiter/orders" },
     ];
 
-    const dashboardButtons =
-        userRole === "Admin" || userRole === "admin" ? adminButtons : waiterButtons;
+    const chefButton = [
+        { img: burger, title: "All Orders", path: "/chef/orders" },
+    ];
 
+    const dashboardButtons =
+    userRole === "Admin" || userRole === "admin"
+      ? adminButtons
+      : userRole === "Chef" || userRole === "chef"
+      ? chefButton
+      : waiterButtons;
 
     const navigateTo = useNavigate();
 
