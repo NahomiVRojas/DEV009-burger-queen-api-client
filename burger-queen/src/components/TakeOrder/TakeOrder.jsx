@@ -1,8 +1,12 @@
 import style from "../TakeOrder/TakeOrder.module.css";
 import { useState } from "react";
-import { array } from "prop-types";
+import { array, func } from "prop-types";
 
-export default function TakeOrder({ selectedItems }) {
+export default function TakeOrder({
+  selectedItems,
+  handleAddToSelectedItems,
+  handleRemoveSelectedItems,
+}) {
   const [tableNumber, setTableNumber] = useState("Table");
 
   const tables = ["Table", "1", "2", "3", "4", "5", "TA"];
@@ -10,7 +14,7 @@ export default function TakeOrder({ selectedItems }) {
 
   const calculateTotal = () => {
     return selectedItems.reduce(
-      (total, item) => total + parseFloat(item.price),
+      (total, item) => total + parseFloat(item.price) * item.qty,
       0
     );
   };
@@ -38,9 +42,19 @@ export default function TakeOrder({ selectedItems }) {
                 <br />${item.price}
               </div>
               <div className={style.container}>
-                <button className={style.add_item}>+</button>
+                <button
+                  className={style.add_item}
+                  onClick={() => handleAddToSelectedItems(item)}
+                >
+                  +
+                </button>
                 <span className={style.qty}>{item.qty}</span>
-                <button className={style.reduce_item}>-</button>
+                <button
+                  className={style.reduce_item}
+                  onClick={() => handleRemoveSelectedItems(item)}
+                >
+                  -
+                </button>
               </div>
             </div>
           ))
@@ -60,4 +74,6 @@ export default function TakeOrder({ selectedItems }) {
 
 TakeOrder.propTypes = {
   selectedItems: array.isRequired,
+  handleAddToSelectedItems: func.isRequired,
+  handleRemoveSelectedItems: func.isRequired,
 };
