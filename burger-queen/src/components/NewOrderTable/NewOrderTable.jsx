@@ -30,16 +30,23 @@ export default function NewOrderTable() {
     const existingItem = selectedItems.find(
       (selectedItem) => selectedItem.id === item.id
     );
+  
     if (existingItem) {
-      const updatedItems = selectedItems.map((selectedItem) => {
-        if (selectedItem.id === item.id && item.qty > 0) {
-          console.log(selectedItem)
-          return { ...selectedItem, qty: selectedItem.qty - 1 };
-        }
-        return selectedItem;
-      });
-      console.log(updatedItems)
-      setSelectedItems(updatedItems);
+      if (item.qty > 1) {
+        const updatedItems = selectedItems.map((selectedItem) => {
+          if (selectedItem.id === item.id) {
+            return { ...selectedItem, qty: selectedItem.qty - 1 };
+          }
+          return selectedItem;
+        });
+        console.log(updatedItems)
+        setSelectedItems(updatedItems);
+      } else if (item.qty <= 1){
+        const updatedItems = selectedItems.filter(
+          (selectedItem) => selectedItem.id !== item.id
+        );
+          setSelectedItems(updatedItems);
+      }
     }
   };
 
