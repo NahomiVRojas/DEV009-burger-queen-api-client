@@ -26,22 +26,22 @@ export default function NewOrderTable() {
     }
   };
 
-/*   const handleRemoveSelectedItems = (item) => {
+  const handleRemoveSelectedItems = (item) => {
     const existingItem = selectedItems.find(
       (selectedItem) => selectedItem.id === item.id
     );
     if (existingItem) {
       const updatedItems = selectedItems.map((selectedItem) => {
         if (selectedItem.id === item.id && item.qty > 0) {
-            console.log(selectedItem)
+          console.log(selectedItem)
           return { ...selectedItem, qty: selectedItem.qty - 1 };
         }
         return selectedItem;
       });
+      console.log(updatedItems)
       setSelectedItems(updatedItems);
-    } 
+    }
   };
-  */
 
   const handleClick = NavigateTo("/waiter/orders");
   const handleReturn = NavigateTo("/waiter/dashboard");
@@ -70,7 +70,7 @@ export default function NewOrderTable() {
       <TakeOrder
         selectedItems={selectedItems}
         handleAddToSelectedItems={handleAddToSelectedItems}
-        // handleRemoveSelectedItems={handleRemoveSelectedItems}
+        handleRemoveSelectedItems={handleRemoveSelectedItems}
       />
     </main>
   );
