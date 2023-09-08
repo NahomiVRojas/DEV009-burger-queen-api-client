@@ -1,28 +1,38 @@
-main {
-    display: flex;
-    width: 100vw;
-    margin-top: 3.5vh;
+.new_order {
+  display: flex;
+  width: 100vw;
+  margin-top: 3.5vh;
 }
 
 .menu {
-    width: 50vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 50vw;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .component {
-    border: 2px solid pink;
-    width: 40vw;
-    height: 65vh;
-}
-
-.order {
-    width: 50vw;
-    border: 0.3px solid #D9D9D9;
-    border-radius: 30px;
+  width: 40vw;
 }
 
 .client {
-    width: 40vw;
+  width: 36vw;
+  border: 0.3px solid #d9d9d9;
+  border-radius: 30px;
+}
+
+.see_all_orders {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 50px;
+  color: #f244a4;
+}
+
+.see_all_orders span {
+  margin-left: 10px;
+}
+
+.return_button {
+    margin-right: 5px;
 }

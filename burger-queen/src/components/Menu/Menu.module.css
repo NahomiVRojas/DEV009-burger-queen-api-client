@@ -1,0 +1,26 @@
+.button {
+    height: 7vh;
+    width: 20vw;
+    background-color: white;
+    color: #F244A4;
+    border-color: #F244A4;
+    margin: 5px;
+    margin-bottom: 15px;
+}
+
+.table {
+    width: 40vw;
+    height: 70vh;
+    border: 0.3px solid #D9D9D9;
+    border-radius: 30px;
+    padding: 9px;
+}
+
+.active {
+    background-color: #F244A4;;
+    color: white;
+}
+
+.items:hover {
+    cursor: pointer;
+}
