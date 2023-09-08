@@ -10,8 +10,38 @@ export default function NewOrderTable() {
   const [selectedItems, setSelectedItems] = useState([]);
 
   const handleAddToSelectedItems = (item) => {
-    setSelectedItems([...selectedItems, item]);
+    const existingItem = selectedItems.find(
+      (selectedItem) => selectedItem.id === item.id
+    );
+    if (existingItem) {
+      const updatedItems = selectedItems.map((selectedItem) => {
+        if (selectedItem.id === item.id) {
+          return { ...selectedItem, qty: selectedItem.qty + 1 };
+        }
+        return selectedItem;
+      });
+      setSelectedItems(updatedItems);
+    } else {
+      setSelectedItems([...selectedItems, { ...item, qty: 1 }]);
+    }
   };
+
+/*   const handleRemoveSelectedItems = (item) => {
+    const existingItem = selectedItems.find(
+      (selectedItem) => selectedItem.id === item.id
+    );
+    if (existingItem) {
+      const updatedItems = selectedItems.map((selectedItem) => {
+        if (selectedItem.id === item.id && item.qty > 0) {
+            console.log(selectedItem)
+          return { ...selectedItem, qty: selectedItem.qty - 1 };
+        }
+        return selectedItem;
+      });
+      setSelectedItems(updatedItems);
+    } 
+  };
+  */
 
   const handleClick = NavigateTo("/waiter/orders");
   const handleReturn = NavigateTo("/waiter/dashboard");
@@ -20,22 +50,28 @@ export default function NewOrderTable() {
     <main className={style.new_order}>
       <section className={style.menu}>
         <div>
-          <img src={returnButton} className={style.return_button} onClick={handleReturn} />
+          <img
+            src={returnButton}
+            className={style.return_button}
+            onClick={handleReturn}
+          />
           <input
             type="text"
             placeholder="Client Name"
             className={style.client}
           />
         </div>
-        <Menu
-          handleAddToSelectedItems={handleAddToSelectedItems}
-        />
+        <Menu handleAddToSelectedItems={handleAddToSelectedItems} />
         <div className={style.see_all_orders} onClick={handleClick}>
           <img src={iconSeeOrders} />
           <span>See All Orders</span>
         </div>
       </section>
-      <TakeOrder selectedItems={selectedItems} />
+      <TakeOrder
+        selectedItems={selectedItems}
+        handleAddToSelectedItems={handleAddToSelectedItems}
+        // handleRemoveSelectedItems={handleRemoveSelectedItems}
+      />
     </main>
   );
 }
