@@ -18,3 +18,13 @@
   margin-left: 13px;
 }
 
+img {
+  cursor: pointer;
+}
+
+.responsive {
+  border: #c0babd 1px solid;
+  border-radius: 25px;
+  margin: 25px;
+  padding: 5px;
+}
