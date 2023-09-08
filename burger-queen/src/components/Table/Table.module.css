@@ -1,0 +1,30 @@
+.title_section {
+  color: var(--color-light-pink);
+  font-weight: 500;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  margin: 0 3vw;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title_section h2 {
+  margin-bottom: 0px;
+  margin-left: 13px;
+}
+
+img {
+  cursor: pointer;
+}
+
+.responsive {
+  border: #c0babd 1px solid;
+  border-radius: 25px;
+  margin: 25px;
+  padding: 5px;
+}

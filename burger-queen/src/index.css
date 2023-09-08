@@ -1,0 +1,17 @@
+:root {
+  --main-font: 'Montserrat', sans-serif;
+  --color-pink: #F294C0;
+  --color-magenta: #F244A4;
+  --color-light-pink: #F26DB6;
+  --color-purple: #73395F;
+  --color-beige: #F2E4D8;
+}
+
+body {
+  margin: 0;
+  font-family: var(--main-font);
+}
+
+main {
+  margin-top: 100px
+}
