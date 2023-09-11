@@ -6,6 +6,7 @@ export default function TakeOrder({
   selectedItems,
   handleAddToSelectedItems,
   handleRemoveSelectedItems,
+  handleAddOrder,
 }) {
   const [tableNumber, setTableNumber] = useState("Table");
 
@@ -14,9 +15,7 @@ export default function TakeOrder({
 
   const calculateTotal = () => {
     return selectedItems.reduce(
-      (total, item) => total + parseFloat(item.price) * item.qty,
-      0
-    );
+      (total, item) => total + parseFloat(item.price) * item.qty, 0);
   };
 
   return (
@@ -39,7 +38,8 @@ export default function TakeOrder({
             <div key={index} className={style.item}>
               <div>
                 {item.name}
-                <br />${item.price}
+                <br />
+                ${item.price}
               </div>
               <div className={style.container}>
                 <button
@@ -65,7 +65,7 @@ export default function TakeOrder({
           <span>Total</span>
           <span className={style.total}>${calculateTotal()}</span>
         </div>
-        <button className={style.button}>Send</button>
+        <button className={style.button} onClick={() => handleAddOrder(tableNumber)}>Send</button>
         <button className={style.button}>Check Out</button>
       </div>
     </section>
@@ -76,4 +76,5 @@ TakeOrder.propTypes = {
   selectedItems: array.isRequired,
   handleAddToSelectedItems: func.isRequired,
   handleRemoveSelectedItems: func.isRequired,
+  handleAddOrder: func.isRequired,
 };
