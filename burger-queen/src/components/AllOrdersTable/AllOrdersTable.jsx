@@ -39,7 +39,7 @@ export default function AllOrders() {
         <table className="table">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Table</th>
               <th>Client</th>
               <th>Products</th>
               <th>Received At</th>
@@ -50,13 +50,13 @@ export default function AllOrders() {
           <tbody>
             {orders.map((order) => (
               <tr key={order.id}>
-                <td>{order.id}</td>
+                <td>{order.table}</td>
                 <td>{order.client}</td>
                 <td>
                   <ul>
                     {order.products.map((product) => (
-                      <li key={product.product.id}>
-                        {product.qty}x {product.product.name}
+                      <li key={product.id}>
+                        {product.qty}x {product.name}
                       </li>
                     ))}
                   </ul>

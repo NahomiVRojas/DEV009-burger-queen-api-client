@@ -115,3 +115,14 @@ export const allOrders = (token) => {
         },
     })
 };
+
+export const postOrder = (data, token) => {
+    return fetch(`http://localhost:8080/orders`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data),
+    });
+};
