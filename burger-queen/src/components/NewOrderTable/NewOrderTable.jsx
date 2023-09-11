@@ -26,22 +26,29 @@ export default function NewOrderTable() {
     }
   };
 
-/*   const handleRemoveSelectedItems = (item) => {
+  const handleRemoveSelectedItems = (item) => {
     const existingItem = selectedItems.find(
       (selectedItem) => selectedItem.id === item.id
     );
+  
     if (existingItem) {
-      const updatedItems = selectedItems.map((selectedItem) => {
-        if (selectedItem.id === item.id && item.qty > 0) {
-            console.log(selectedItem)
-          return { ...selectedItem, qty: selectedItem.qty - 1 };
-        }
-        return selectedItem;
-      });
-      setSelectedItems(updatedItems);
-    } 
+      if (item.qty > 1) {
+        const updatedItems = selectedItems.map((selectedItem) => {
+          if (selectedItem.id === item.id) {
+            return { ...selectedItem, qty: selectedItem.qty - 1 };
+          }
+          return selectedItem;
+        });
+        console.log(updatedItems)
+        setSelectedItems(updatedItems);
+      } else if (item.qty <= 1){
+        const updatedItems = selectedItems.filter(
+          (selectedItem) => selectedItem.id !== item.id
+        );
+          setSelectedItems(updatedItems);
+      }
+    }
   };
-  */
 
   const handleClick = NavigateTo("/waiter/orders");
   const handleReturn = NavigateTo("/waiter/dashboard");
@@ -70,7 +77,7 @@ export default function NewOrderTable() {
       <TakeOrder
         selectedItems={selectedItems}
         handleAddToSelectedItems={handleAddToSelectedItems}
-        // handleRemoveSelectedItems={handleRemoveSelectedItems}
+        handleRemoveSelectedItems={handleRemoveSelectedItems}
       />
     </main>
   );
