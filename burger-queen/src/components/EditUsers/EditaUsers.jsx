@@ -4,16 +4,14 @@ import style from "../EditProduct/EditProduct.module.css";
 import { editUser } from "../../Services/Request";
 import { string, func } from "prop-types";
 
-export default function EditUser({ name, email, password, role, id, token, onEdit, onClose}) {
+export default function EditUser({ name, email, role, id, token, onEdit, onClose}) {
 
     const [editedName, setEditedName] = useState(name);
     const [editedEmail, setEditedEmail] = useState(email);
-    const [editedPassword, setEditedPassword] = useState(password);
     const [editedRole, setEditedRole] = useState(role);
 
     const data = {
         email: editedEmail,
-        password: editedPassword,
         name: editedName,
         role: editedRole,
         id,
@@ -69,15 +67,6 @@ export default function EditUser({ name, email, password, role, id, token, onEdi
                     onChange={(e) => setEditedEmail(e.target.value)}
                 />
                 <br />
-                <label>Password</label>
-                <br />
-                <input
-                    className={style.inputs}
-                    value={editedPassword}
-                    type="text"
-                    onChange={(e) => setEditedPassword(e.target.value)}
-                />
-                <br />
                 <label>Role</label>
                 <br />
                 <select
@@ -98,7 +87,6 @@ export default function EditUser({ name, email, password, role, id, token, onEdi
 EditUser.propTypes = {
     name: string.isRequired,
     email: string.isRequired,
-    password: string.isRequired,
     role: string.isRequired,
     id: string.isRequired,
     onClose: func.isRequired,
