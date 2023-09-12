@@ -126,3 +126,24 @@ export const postOrder = (data, token) => {
         body: JSON.stringify(data),
     });
 };
+
+export const userOrder = (id, token) => {
+    return fetch(`http://localhost:8080/orders/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+};
+
+export const pathOrder = (id, updatedData, token) => {
+    return fetch(`http://localhost:8080/orders/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(updatedData)
+    });
+};
