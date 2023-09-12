@@ -1,56 +1,23 @@
 import style from "../TakeOrder/TakeOrder.module.css";
 import { useState } from "react";
-import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { array, func } from "prop-types";
 
 export default function TakeOrder({
   selectedItems,
   handleAddToSelectedItems,
   handleRemoveSelectedItems,
   handleAddOrder,
-  handleEditOrder,
-  orderInfo,
 }) {
   const [tableNumber, setTableNumber] = useState("Table");
-
-  useEffect(() => {
-    if (orderInfo && orderInfo.table) {
-      setTableNumber(orderInfo.table);
-    }
-  }, [orderInfo]);
 
   const tables = ["Table", "1", "2", "3", "4", "5", "TA"];
   const options = tables.map((item) => <option key={item}>{item}</option>);
 
   const calculateTotal = () => {
-    const selectedItemsTotal = selectedItems.reduce(
+    return selectedItems.reduce(
       (total, item) => total + parseFloat(item.price) * item.qty,
       0
     );
-
-    const orderInfoTotal =
-      orderInfo &&
-      Array.isArray(orderInfo.products) &&
-      orderInfo.products.reduce(
-        (total, item) => total + parseFloat(item.price) * item.qty,
-        0
-      );
-
-    return selectedItemsTotal + (orderInfoTotal || 0);
-  };
-
-  const handleButtonClick = () => {
-    if (orderInfo) {
-      const updatedOrderInfo = { ...orderInfo };
-
-      updatedOrderInfo.products = [
-        ...updatedOrderInfo.products,
-        ...selectedItems,
-      ];
-      handleEditOrder(updatedOrderInfo);
-    } else {
-      handleAddOrder(tableNumber);
-    }
   };
 
   return (
@@ -66,38 +33,7 @@ export default function TakeOrder({
         </select>
       </div>
       <div className={style.items}>
-        {orderInfo && orderInfo.length === 0 ? (
-          <div className={style.emptyBasket}>Loading</div>
-        ) : (
-          orderInfo &&
-          Array.isArray(orderInfo.products) &&
-          orderInfo.products.map((item, index) => (
-            <div key={index} className={style.item}>
-              <div>
-                {item.name}
-                <br />${item.price}
-              </div>
-              <div className={style.container}>
-                <button
-                  className={style.add_item}
-                  onClick={() => handleAddToSelectedItems(item)}
-                >
-                  +
-                </button>
-                <span className={style.qty}>{item.qty}</span>
-                <button
-                  className={style.reduce_item}
-                  onClick={() => handleRemoveSelectedItems(item)}
-                >
-                  -
-                </button>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
-      <div className={style.items}>
-        {selectedItems.length === 0 && !orderInfo ? (
+        {selectedItems.length === 0 ? (
           <div className={style.emptyBasket}>No items selected</div>
         ) : (
           selectedItems.map((item, index) => (
@@ -130,9 +66,7 @@ export default function TakeOrder({
           <span>Total</span>
           <span className={style.total}>${calculateTotal()}</span>
         </div>
-        <button className={style.button_send} onClick={handleButtonClick}>
-          {orderInfo ? "Update Order" : "Send"}
-        </button>
+        <button className={style.button_send} onClick={() => handleAddOrder(tableNumber)}>Send</button>
         <button className={style.button}>Check Out</button>
       </div>
     </section>
@@ -140,10 +74,8 @@ export default function TakeOrder({
 }
 
 TakeOrder.propTypes = {
-  selectedItems: PropTypes.array.isRequired,
-  handleAddToSelectedItems: PropTypes.func.isRequired,
-  handleRemoveSelectedItems: PropTypes.func.isRequired,
-  handleAddOrder: PropTypes.func.isRequired,
-  handleEditOrder: PropTypes.func.isRequired,
-  orderInfo: PropTypes.object.isRequired,
+  selectedItems: array.isRequired,
+  handleAddToSelectedItems: func.isRequired,
+  handleRemoveSelectedItems: func.isRequired,
+  handleAddOrder: func.isRequired,
 };
