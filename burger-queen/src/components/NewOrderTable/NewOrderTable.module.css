@@ -1,7 +1,7 @@
 .new_order {
   display: flex;
   width: 100vw;
-  margin-top: 3.5vh;
+  margin-top: 12vh;
 }
 
 .menu {
@@ -25,7 +25,7 @@
 .see_all_orders {
   position: absolute;
   bottom: 0;
-  margin-bottom: 50px;
+  margin-bottom: 8vh;
   color: #f244a4;
 }
 

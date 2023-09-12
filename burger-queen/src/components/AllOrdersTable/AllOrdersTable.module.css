@@ -40,3 +40,16 @@ img {
     padding: 0.5rem;
     display: block;
 }
+
+.delete{
+    width: 5rem;
+    height: auto;
+    background-color:white;
+    border-radius: 15px;
+    color: #73395F;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.5rem;
+    display: block;
+    border: solid #73395F 0.9px;
+}

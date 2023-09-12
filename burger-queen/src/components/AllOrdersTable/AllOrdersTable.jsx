@@ -2,11 +2,13 @@ import style from "./AllOrdersTable.module.css";
 import returnButton from "../../assets/return-button.svg";
 import NavigateTo from "../Navigate/Navigate";
 import { useState, useEffect } from "react";
-import { allOrders } from "../../Services/Request";
+import { allOrders, deleteOrder } from "../../Services/Request";
 import { Link } from "react-router-dom";
+
 
 export default function AllOrders() {
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
   const handleClick = NavigateTo("/admin/dashboard");
   const [orders, setOrders] = useState([]);
 
@@ -27,6 +29,17 @@ export default function AllOrders() {
         console.log(error);
       });
   }, [token]);
+
+  function deleteOrderById(id) {
+    deleteOrder(id, token)
+      .then((response) => {
+        if (response.ok) {
+          console.log('Deleted');
+        } else {
+          console.error(response.status);
+        }
+      })
+  }
 
   return (
     <>
@@ -67,7 +80,14 @@ export default function AllOrders() {
                 <td>{order.status}</td>
                 <td>{order.dateProcessed || "-"}</td>
                 <td>
-                  <Link to={`/waiter/editOrder/${order.id}`} className={style.button}>Update</Link>
+                  {order.status !== "Closed" ? (
+                    <Link to={`/waiter/editOrder/${order.id}`} className={style.button}>
+                      Update
+                    </Link>
+                  ) : null}
+                  {role === "Admin" || role === "admin" ? (
+                    <button onClick={() => deleteOrderById(order.id)} className={style.delete}>Delete</button>
+                  ) : null}
                 </td>
               </tr>
             ))}
