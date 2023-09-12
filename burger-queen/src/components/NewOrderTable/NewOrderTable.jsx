@@ -8,7 +8,7 @@ import returnButton from "../../assets/return-button.svg";
 import { postOrder } from "../../Services/Request";
 
 export default function NewOrderTable() {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem("token");
   const [selectedItems, setSelectedItems] = useState([]);
 
   const handleAddToSelectedItems = (item) => {
@@ -40,7 +40,7 @@ export default function NewOrderTable() {
           }
           return selectedItem;
         });
-        console.log(updatedItems)
+        console.log(updatedItems);
         setSelectedItems(updatedItems);
       } else if (item.qty <= 1) {
         const updatedItems = selectedItems.filter(
@@ -61,7 +61,6 @@ export default function NewOrderTable() {
   const [status] = useState("Pending");
 
   function handleAddOrder(tableNumber) {
-
     const data = {
       table: tableNumber,
       client: client,
@@ -78,14 +77,14 @@ export default function NewOrderTable() {
         return response.json();
       })
       .then((data) => {
-        console.log("New order data:", data.order);
-        return data.order;
+        console.log("New order data:", data);
+        return data;
       })
       .catch((error) => {
         console.error("Error al realizar la solicitud", error);
       });
   }
-  
+
   return (
     <main className={style.new_order}>
       <section className={style.menu}>

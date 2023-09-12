@@ -33,6 +33,14 @@
     height: 50px;
 }
 
+.button_send {
+    width: 40vw;
+    height: 50px;
+    background-color:white;
+    color: #F294C0;
+    border: 1px solid #F294C0;
+}
+
 .price {
     display: flex;
     justify-content: space-between;

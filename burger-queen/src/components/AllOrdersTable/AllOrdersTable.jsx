@@ -3,6 +3,7 @@ import returnButton from "../../assets/return-button.svg";
 import NavigateTo from "../Navigate/Navigate";
 import { useState, useEffect } from "react";
 import { allOrders } from "../../Services/Request";
+import { Link } from "react-router-dom";
 
 export default function AllOrders() {
   const token = localStorage.getItem("token");
@@ -48,14 +49,14 @@ export default function AllOrders() {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
-              <tr key={order.id}>
+            {orders.map((order, index) => (
+              <tr key={index}>
                 <td>{order.table}</td>
                 <td>{order.client}</td>
                 <td>
                   <ul>
-                    {order.products.map((product) => (
-                      <li key={product.id}>
+                    {order.products.map((product, productIndex) => (
+                      <li key={productIndex}>
                         {product.qty}x {product.name}
                       </li>
                     ))}
@@ -63,7 +64,10 @@ export default function AllOrders() {
                 </td>
                 <td>{order.dataEntry}</td>
                 <td>{order.status}</td>
-                <td>{order.dateProcessed || '-'}</td>
+                <td>{order.dateProcessed || "-"}</td>
+                <td>
+                  <Link to={`/waiter/editOrder/${order.id}`}>Add or Check Out</Link>
+                </td>
               </tr>
             ))}
           </tbody>
