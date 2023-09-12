@@ -147,3 +147,13 @@ export const patchOrder = (id, updatedData, token) => {
         body: JSON.stringify(updatedData)
     });
 };
+
+export const deleteOrder = (id, token) => {
+    return fetch(`http://localhost:8080/orders/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+}
