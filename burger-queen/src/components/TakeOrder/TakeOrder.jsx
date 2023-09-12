@@ -67,7 +67,6 @@ export default function TakeOrder({
           <span className={style.total}>${calculateTotal()}</span>
         </div>
         <button className={style.button_send} onClick={() => handleAddOrder(tableNumber)}>Send</button>
-        <button className={style.button}>Check Out</button>
       </div>
     </section>
   );

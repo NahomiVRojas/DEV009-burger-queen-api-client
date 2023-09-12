@@ -3,6 +3,12 @@ header {
     height: 50px;
     display: flex;
     align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    background-color: white;
+    margin-top: 0;
+    padding: 5vh 0;
 }
   
 .brand {

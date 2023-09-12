@@ -2,6 +2,7 @@ import style from "../TakeOrder/TakeOrder.module.css";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
+import CheckOut from "../CheckOut/CheckOut";
 
 export default function UpdateOrder({
     selectedItems,
@@ -11,6 +12,7 @@ export default function UpdateOrder({
     orderInfo,
 }) {
     const [tableNumber, setTableNumber] = useState("Table");
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         if (orderInfo && orderInfo.table) {
@@ -46,6 +48,15 @@ export default function UpdateOrder({
             ...selectedItems,
         ];
         handleEditOrder(updatedOrderInfo);
+    };
+
+
+    const handleOpenModal = () => {
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
     };
 
     return (
@@ -128,7 +139,13 @@ export default function UpdateOrder({
                 <button className={style.button_send} onClick={handleButtonClick}>
                     {orderInfo ? "Update Order" : "Send"}
                 </button>
-                <button className={style.button}>Check Out</button>
+                <button className={style.button} onClick={handleOpenModal}>Check Out</button>
+                {showModal && (
+                    <CheckOut
+                        onClose={handleCloseModal}
+                        id={orderInfo.id}
+                    />
+                )}
             </div>
         </section>
     );
