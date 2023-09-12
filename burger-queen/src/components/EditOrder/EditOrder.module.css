@@ -17,14 +17,14 @@
   }
 
   .container_client {
-    width: 36vw;
+    width: 40vw;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 10px;
   }
   
   .client {
-    font-size: 1.4rem;
+    font-size: 2.2rem;
     font-weight: 600;
     color: #f244a4;
   }
@@ -41,6 +41,7 @@
   }
   
   .return_button {
+    width: 30px;
       margin-right: 5px;
   }
   

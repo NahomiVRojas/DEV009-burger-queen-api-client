@@ -6,14 +6,18 @@ import NavigateTo from "../Navigate/Navigate";
 import returnButton from "../../assets/return-button.svg";
 import { userOrder } from "../../Services/Request";
 import { useParams } from "react-router-dom";
-import TakeOrder from "../TakeOrder/TakeOrder";
-import { pathOrder } from "../../Services/Request";
+import UpdateOrder from "../UpdateOrder/UpdateOrder";
+import { patchOrder } from "../../Services/Request";
 
 export default function EditOrder() {
   const token = localStorage.getItem("token");
   const [selectedItems, setSelectedItems] = useState([]);
-  const [orderInfo, setOrderInfo] = useState(null);
+  const [orderInfo, setOrderInfo] = useState({});
+
   const { orderId } = useParams();
+
+  const currentDateTime = new Date().toLocaleTimeString();
+  const [dataEntry] = useState(currentDateTime);
 
   useEffect(() => {
     userOrder(orderId, token)
@@ -66,8 +70,13 @@ export default function EditOrder() {
   };
 
   function handleEditOrder(updateData) {
+    
+    const updatedOrderData = {
+      ...updateData,
+      dataEntry: dataEntry,
+    };
 
-    pathOrder(orderId, updateData, token)
+    patchOrder(orderId, updatedOrderData, token)
       .then((response) => {
         if (response.ok) {
           console.log("orden editado con éxito")
@@ -77,7 +86,7 @@ export default function EditOrder() {
         return response.json();
       })
       .then((newData) => {
-        console.log(newData)
+        console.log(newData.dataEntry)
         return newData;
       })
       .catch((error) => {
@@ -105,7 +114,7 @@ export default function EditOrder() {
           <span>See All Orders</span>
         </div>
       </section>
-      <TakeOrder
+      <UpdateOrder
         selectedItems={selectedItems}
         handleAddToSelectedItems={handleAddToSelectedItems}
         handleRemoveSelectedItems={handleRemoveSelectedItems}

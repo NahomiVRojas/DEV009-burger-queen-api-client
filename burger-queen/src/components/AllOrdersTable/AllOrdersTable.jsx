@@ -43,9 +43,10 @@ export default function AllOrders() {
               <th>Table</th>
               <th>Client</th>
               <th>Products</th>
-              <th>Received At</th>
+              <th>Received</th>
               <th>Status</th>
-              <th>Delivered At</th>
+              <th>Delivered</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -66,7 +67,7 @@ export default function AllOrders() {
                 <td>{order.status}</td>
                 <td>{order.dateProcessed || "-"}</td>
                 <td>
-                  <Link to={`/waiter/editOrder/${order.id}`}>Add or Check Out</Link>
+                  <Link to={`/waiter/editOrder/${order.id}`} className={style.button}>Update</Link>
                 </td>
               </tr>
             ))}

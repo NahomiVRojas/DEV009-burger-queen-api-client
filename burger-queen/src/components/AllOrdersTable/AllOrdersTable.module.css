@@ -28,3 +28,15 @@ img {
     margin: 25px;
     padding: 5px;
 }
+
+.button {
+    width: 5rem;
+    height: auto;
+    background-color:#F294C0;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.5rem;
+    display: block;
+}
