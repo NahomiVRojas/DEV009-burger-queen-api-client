@@ -137,7 +137,7 @@ export const userOrder = (id, token) => {
     })
 };
 
-export const pathOrder = (id, updatedData, token) => {
+export const patchOrder = (id, updatedData, token) => {
     return fetch(`http://localhost:8080/orders/${id}`, {
         method: 'PATCH',
         headers: {
