@@ -66,7 +66,7 @@ export default function TakeOrder({
           <span>Total</span>
           <span className={style.total}>${calculateTotal()}</span>
         </div>
-        <button className={style.button_send} onClick={() => handleAddOrder(tableNumber)}>Send</button>
+        <button className={style.button_send} onClick={() =>{selectedItems.length !== 0 ? handleAddOrder(tableNumber): alert("You cannot send empty orders.")}}>Send</button>
       </div>
     </section>
   );

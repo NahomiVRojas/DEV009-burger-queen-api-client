@@ -1,5 +1,6 @@
 import { patchOrder } from "../../Services/Request";
 import Modal from "../Modal/Modal";
+import { func, number } from "prop-types";
 
 export default function CheckOut({ onClose, id }) {
     const token = localStorage.getItem("token");
@@ -41,4 +42,9 @@ export default function CheckOut({ onClose, id }) {
             </Modal>
         </>
     )
+}
+
+CheckOut.propTypes ={
+    onClose: func.isRequired,
+    id: number.isRequired,
 }

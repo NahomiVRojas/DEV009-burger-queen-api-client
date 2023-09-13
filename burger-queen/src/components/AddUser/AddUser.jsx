@@ -38,51 +38,57 @@ export default function AddUser({ onClose, token, onAdd }) {
   }
 
   return (
-    <Modal onClose={onClose} title="Add User" action={handleAddNewUser} nameAction="Add">
-        <label>ID</label>
-        <br />
-        <input
-          type="text"
-          value={addId}
-          onChange={(e) => setAddId(e.target.value)}
-        />
-        <br />
-        <label>Name</label>
-        <br />
-        <input
-          type="text"
-          value={addName}
-          onChange={(e) => setAddName(e.target.value)}
-        />
-        <br />
-        <label>Email</label>
-        <br />
-        <input
-          type="text"
-          value={addEmail}
-          onChange={(e) => setAddEmail(e.target.value)}
-        />
-        <br />
-        <label>Password</label>
-        <br />
-        <input
-          type="text"
-          value={addPassword}
-          onChange={(e) => setAddPassword(e.target.value)}
-        />
-        <br />
+    <Modal
+      onClose={onClose}
+      title="Add User"
+      action={handleAddNewUser}
+      nameAction="Add"
+    >
+      <div>
+        <div>
+          <label>ID</label>
+          <input
+            type="text"
+            value={addId}
+            onChange={(e) => setAddId(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Name</label>
+          <input
+            type="text"
+            value={addName}
+            onChange={(e) => setAddName(e.target.value)}
+          />
+        </div>
+      </div>
+      <div>
+        <div>
+          <label>Email</label>
+          <input
+            type="text"
+            value={addEmail}
+            onChange={(e) => setAddEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Password</label>
+          <input
+            type="text"
+            value={addPassword}
+            onChange={(e) => setAddPassword(e.target.value)}
+          />
+        </div>
+      </div>
+      <div>
         <label>Role</label>
-        <br />
-        <select
-          value={addRole}
-          onChange={(e) => setAddRole(e.target.value)}
-        >
+        <select value={addRole} onChange={(e) => setAddRole(e.target.value)}>
           <option>--</option>
           <option value="Admin">Admin</option>
           <option value="Chef">Chef</option>
           <option value="Waiter/Waitress">Waiter/Waitress</option>
         </select>
-        <br />
+      </div>
     </Modal>
   );
 }
