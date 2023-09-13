@@ -1,0 +1,72 @@
+.title_section {
+    color: var(--color-light-pink);
+    font-weight: 500;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    margin: 0 3vw;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title_section h2 {
+    margin-bottom: 0px;
+    margin-left: 13px;
+}
+
+img {
+    cursor: pointer;
+}
+
+.responsive {
+    border: #C0BABD 1px solid;
+    border-radius: 25px;
+    margin: 25px;
+    padding: 5px;
+}
+
+.button {
+    width: 5rem;
+    height: auto;
+    background-color: white;
+    border: 1px solid var(--color-magenta);
+    border-radius: 15px;
+    color: var(--color-magenta);
+    text-align: center;
+    text-decoration: none;
+    padding: 0.5rem;
+    display: block;
+}
+
+.expanded_info {
+    width: 100vw;
+}
+
+.expanded_list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.label {
+    margin-left: 10px;
+}
+
+.checkbox {
+    appearance: var(--color-magenta);
+    width: 25px;
+    height: 25px;
+    transition: 0.2s all linear;
+    position: relative;
+}
+
+.checkbox:checked {
+    background-image: url("/src/assets/checkbox.svg");
+    background-position: center;
+    background-color: none;
+    border: 1px solid var(--color-magenta);
+  }
