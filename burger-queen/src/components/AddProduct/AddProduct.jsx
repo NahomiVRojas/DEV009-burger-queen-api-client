@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { string, func } from "prop-types";
 import { addProduct } from "../../Services/Request";
-import Modal from "../Modal/Modal.jsx"
+import Modal from "../Modal/Modal.jsx";
 
 export default function AddProduct({ onClose, token, onAdd }) {
   const [addId, setAddId] = useState("");
@@ -36,42 +36,44 @@ export default function AddProduct({ onClose, token, onAdd }) {
   }
 
   return (
-    <Modal onClose={onClose} title="New Product" action={addNewProduct} nameAction="Add">
+    <Modal
+      onClose={onClose}
+      title="New Product"
+      action={addNewProduct}
+      nameAction="Add"
+    >
+      <div>
         <label>ID</label>
-        <br />
         <input
           type="text"
           value={addId}
           onChange={(e) => setAddId(e.target.value)}
         />
-        <br />
+      </div>
+      <div>
         <label>Product</label>
-        <br />
         <input
           type="text"
           value={addName}
           onChange={(e) => setAddName(e.target.value)}
         />
-        <br />
+      </div>
+      <div>
         <label>Menu</label>
-        <br />
-        <select
-          value={addType}
-          onChange={(e) => setAddType(e.target.value)}
-        >
+        <select value={addType} onChange={(e) => setAddType(e.target.value)}>
           <option>--</option>
           <option value="Breakfast">Breakfast</option>
           <option value="Lunch/Dinner">Lunch/Dinner</option>
         </select>
-        <br />
+      </div>
+      <div>
         <label>Price</label>
-        <br />
         <input
           type="text"
           value={addPrice}
           onChange={(e) => setAddPrice(e.target.value)}
         />
-        <br />
+      </div>
     </Modal>
   );
 }

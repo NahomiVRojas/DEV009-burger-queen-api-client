@@ -48,38 +48,39 @@ export default function EditProduct({
         action={editProductById}
         nameAction="Save Changes"
       >
-        <label>ID</label>
-        <br />
-        <input className={style.inputs} value={id} type="number" readOnly />
-        <br />
-        <label>Product</label>
-        <br />
-        <input
-          className={style.inputs}
-          value={editedName}
-          type="text"
-          onChange={(e) => setEditedName(e.target.value)}
-        />
-        <br />
-        <label>Menu</label>
-        <br />
-        <select
-          value={editedType}
-          onChange={(e) => setEditedType(e.target.value)}
-        >
-          <option>--</option>
-          <option value="Breakfast">Breakfast</option>
-          <option value="Lunch/Dinner">Lunch/Dinner</option>
-        </select>
-        <br />
-        <label>Price</label>
-        <br />
-        <input
-          className={style.inputs}
-          value={editedPrice}
-          type="text"
-          onChange={(e) => setEditedPrice(e.target.value)}
-        />
+        <div>
+          <label>ID</label>
+          <input className={style.inputs} value={id} type="number" readOnly />
+        </div>
+        <div>
+          <label>Product</label>
+          <input
+            className={style.inputs}
+            value={editedName}
+            type="text"
+            onChange={(e) => setEditedName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Menu</label>
+          <select
+            value={editedType}
+            onChange={(e) => setEditedType(e.target.value)}
+          >
+            <option>--</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch/Dinner">Lunch/Dinner</option>
+          </select>
+        </div>
+        <div>
+          <label>Price</label>
+          <input
+            className={style.inputs}
+            value={editedPrice}
+            type="text"
+            onChange={(e) => setEditedPrice(e.target.value)}
+          />
+        </div>
       </Modal>
     </>
   );
