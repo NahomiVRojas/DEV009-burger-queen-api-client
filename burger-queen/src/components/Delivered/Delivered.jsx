@@ -1,6 +1,7 @@
 import { patchOrder } from "../../Services/Request";
 import { useState } from "react";
 import style from "../../components/Delivered/Delivered.module.css"
+import { number } from "prop-types";
 
 export default function Delivered({id}) {
     const token = localStorage.getItem("token");
@@ -10,7 +11,7 @@ export default function Delivered({id}) {
     function markOrderAsDelivered(orderId) {
         const updatedOrderData = {
             status: "Delivered",
-            dateProcessed:dateProcessed,
+            dateProcessed: dateProcessed,
         };
 
         patchOrder(orderId, updatedOrderData, token)
@@ -33,4 +34,8 @@ export default function Delivered({id}) {
     return (
         <button className={style.button} onClick={() => markOrderAsDelivered(id)}>Done</button>
     );
+}
+
+Delivered.propTypes = {
+    id: number.isRequired,
 }
