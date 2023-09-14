@@ -11,8 +11,12 @@ export default function ChefOrders() {
   const handleClick = NavigateTo("/admin/dashboard");
   const [orders, setOrders] = useState([]);
   const [expandedOrder, setExpandedOrder] = useState(null);
+  const [checkedItems, setCheckedItems] = useState({});
 
   useEffect(() => {
+    const storedCheckedItems = JSON.parse(localStorage.getItem("checkedItems")) || {};
+    setCheckedItems(storedCheckedItems);
+
     allOrders(token)
       .then((response) => {
         console.log("Response allOrders:", response);
@@ -58,6 +62,18 @@ export default function ChefOrders() {
       })
     );
   };
+
+  function handleCheckboxChange(productIndex, orderId) {
+    setCheckedItems((prevCheckedItems) => ({
+      ...prevCheckedItems,
+      [orderId]: {
+        ...prevCheckedItems[orderId],
+        [productIndex]: !prevCheckedItems[orderId]?.[productIndex],
+      },
+    }));
+    
+    localStorage.setItem("checkedItems", JSON.stringify(checkedItems));
+  }
 
   return (
     <>
@@ -137,6 +153,8 @@ export default function ChefOrders() {
                               <input
                                 className={style.checkbox}
                                 type="checkbox"
+                                checked={checkedItems[order.id]?.[productIndex] || false}
+                                onChange={() => handleCheckboxChange(productIndex, order.id)}
                               />
                               <label className={style.label}>
                                 {product.name}
