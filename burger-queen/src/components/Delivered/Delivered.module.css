@@ -1,0 +1,12 @@
+.button {
+    width: 5rem;
+    height: auto;
+    background-color: white;
+    border: 1px solid var(--color-magenta);
+    border-radius: 15px;
+    color: var(--color-magenta);
+    text-align: center;
+    text-decoration: none;
+    padding: 0.5rem;
+    display: block;
+}

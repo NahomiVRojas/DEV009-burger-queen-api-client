@@ -54,7 +54,7 @@ export default function NewOrderTable() {
   const handleClick = NavigateTo("/waiter/orders");
   const handleReturn = NavigateTo("/waiter/dashboard");
 
-  const currentDateTime = new Date().toLocaleTimeString();
+  const currentDateTime = new Date().toLocaleTimeString([], { hour12: false });
 
   const [client, setClient] = useState("");
   const [dataEntry] = useState(currentDateTime);
