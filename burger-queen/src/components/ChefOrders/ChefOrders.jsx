@@ -4,13 +4,13 @@ import NavigateTo from "../Navigate/Navigate";
 import React, { useState, useEffect } from "react";
 import { allOrders } from "../../Services/Request";
 import iconShowInfo from "../../assets/icon-show-info.svg";
+import Delivered from "../Delivered/Delivered";
 
 export default function ChefOrders() {
     const token = localStorage.getItem("token");
     const handleClick = NavigateTo("/admin/dashboard");
     const [orders, setOrders] = useState([]);
     const [expandedOrder, setExpandedOrder] = useState(null);
-    const [duration, setDuration] = useState([]);
 
     useEffect(() => {
         allOrders(token)
@@ -28,18 +28,30 @@ export default function ChefOrders() {
             .catch((error) => {
                 console.log(error);
             });
-    }, [token]);
-    const toggleExpand = (orderId) => {
+    }, [token, orders]);
+
+    function toggleExpand(orderId) {
         setExpandedOrder((prevExpandedOrder) =>
             prevExpandedOrder === orderId ? null : orderId
         );
-    };
+    }
+    
+    function handleInfoClick(event, orderId) {
+        if (event.target.tagName === "IMG") { 
+            toggleExpand(orderId);
+        }
+    }
+
 
     return (
         <>
             <div className={style.title_section}>
                 <div className={style.title}>
-                    <img src={returnButton} onClick={handleClick} alt="Return" />
+                    <img
+                        src={returnButton}
+                        onClick={handleClick}
+                        alt="Return"
+                    />
                     <h2>Active Orders</h2>
                 </div>
             </div>
@@ -58,21 +70,28 @@ export default function ChefOrders() {
                     </thead>
                     <tbody>
                         {orders.map((order, index) => {
-                            const isExpanded = expandedOrder === order.id;
+                            const timeString1 = order.dataEntry;
+                            const timeString2 = order.dateProcessed;
+                            const receivedTime = new Date(`1970-01-01T${timeString1}`);
+                            const deliveredTime = new Date(`1970-01-01T${timeString2}`);
+                            const duration = Math.floor((deliveredTime - receivedTime) / 60000);
+                            const isExpanded =
+                                expandedOrder === order.id;
                             return (
                                 <React.Fragment key={index}>
-                                    <tr onClick={() => toggleExpand(order.id)}>
+                                    <tr onClick={(event) => handleInfoClick(event, order.id)}>
                                         <td>
-                                            <img src={iconShowInfo} />
+                                            <img
+                                                src={iconShowInfo}
+                                                alt="Info"
+                                            />
                                         </td>
                                         <td>{order.table}</td>
                                         <td>{order.dataEntry}</td>
                                         <td>{order.status}</td>
                                         <td>{order.dateProcessed}</td>
                                         <td>{duration}</td>
-                                        <td>
-                                            <button className={style.button}>Start</button>
-                                        </td>
+                                        <td>{order.status !== "Closed" && <Delivered id={order.id}/>}</td>
                                     </tr>
                                     {isExpanded && (
                                         <tr

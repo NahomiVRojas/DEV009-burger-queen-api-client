@@ -16,7 +16,7 @@ export default function EditOrder() {
 
   const { orderId } = useParams();
 
-  const currentDateTime = new Date().toLocaleTimeString();
+  const currentDateTime = new Date().toLocaleTimeString([], { hour12: false });
   const [dataEntry] = useState(currentDateTime);
 
   useEffect(() => {
