@@ -28,7 +28,7 @@ export default function ChefOrders() {
             .catch((error) => {
                 console.log(error);
             });
-    }, [token, orders]);
+    }, [token]);
 
     function toggleExpand(orderId) {
         setExpandedOrder((prevExpandedOrder) =>
@@ -41,7 +41,6 @@ export default function ChefOrders() {
             toggleExpand(orderId);
         }
     }
-
 
     return (
         <>
@@ -70,11 +69,24 @@ export default function ChefOrders() {
                     </thead>
                     <tbody>
                         {orders.map((order, index) => {
-                            const timeString1 = order.dataEntry;
-                            const timeString2 = order.dateProcessed;
-                            const receivedTime = new Date(`1970-01-01T${timeString1}`);
-                            const deliveredTime = new Date(`1970-01-01T${timeString2}`);
-                            const duration = Math.floor((deliveredTime - receivedTime) / 60000);
+                            
+                            function calculateDuration() {
+                                let total;
+
+                                const timeString1 = order.dataEntry;
+                                const timeString2 = order.dateProcessed;
+                                const receivedTime = new Date(`1970-01-01T${timeString1}`);
+                                const deliveredTime = new Date(`1970-01-01T${timeString2}`);
+                                const duration = Math.floor((deliveredTime - receivedTime) / 60000);
+
+                                if (isNaN(duration)) {
+                                    total = "--"
+                                } else {
+                                    total = `${duration} minutes`
+                                } 
+                                return total
+                            }
+
                             const isExpanded =
                                 expandedOrder === order.id;
                             return (
@@ -89,9 +101,9 @@ export default function ChefOrders() {
                                         <td>{order.table}</td>
                                         <td>{order.dataEntry}</td>
                                         <td>{order.status}</td>
-                                        <td>{order.dateProcessed}</td>
-                                        <td>{duration}</td>
-                                        <td>{order.status !== "Closed" && <Delivered id={order.id}/>}</td>
+                                        <td>{order.dateProcessed || "--"}</td>
+                                        <td>{calculateDuration()}</td>
+                                        <td>{order.status !== "Delivered" && <Delivered id={order.id}/>}</td>
                                     </tr>
                                     {isExpanded && (
                                         <tr
