@@ -1,22 +1,24 @@
 import { patchOrder } from "../../Services/Request";
 import { useState } from "react";
-import style from "../../components/Delivered/Delivered.module.css"
-import { number } from "prop-types";
+import style from "../../components/Delivered/Delivered.module.css";
+import { func, object} from "prop-types";
 
-export default function Delivered({id}) {
+export default function Delivered({order, onEditSuccess }) {
     const token = localStorage.getItem("token");
     const currentDateTime = new Date().toLocaleTimeString([], { hour12: false });
     const [dateProcessed] = useState(currentDateTime);
 
-    function markOrderAsDelivered(orderId) {
+    function markOrderAsDelivered(order) {
         const updatedOrderData = {
+            id:order.id,
             status: "Delivered",
-            dateProcessed: dateProcessed,
+            dateProcessed:dateProcessed,
         };
 
-        patchOrder(orderId, updatedOrderData, token)
+        patchOrder(order.id, updatedOrderData, token)
             .then((response) => {
                 if (response.ok) {
+                    onEditSuccess(updatedOrderData)
                     console.log("Orden marcada como entregada");
                 } else {
                     console.error("Error al marcar la orden como entregada");
@@ -30,12 +32,13 @@ export default function Delivered({id}) {
                 );
             });
     }
-    
+
     return (
-        <button className={style.button} onClick={() => markOrderAsDelivered(id)}>Done</button>
+        <button className={style.button} onClick={() => markOrderAsDelivered(order)}>Done</button>
     );
 }
 
 Delivered.propTypes = {
-    id: number.isRequired,
+ order: object.isRequired,
+ onEditSuccess:func.isRequired
 }
