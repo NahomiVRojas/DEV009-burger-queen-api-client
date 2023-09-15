@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { allOrders } from "../../Services/Request";
 import DeleteOrder from "../DeleteOrder/DeleteOrder";
 import { Link } from "react-router-dom";
+import iconRefresh from "../../assets/icon-refresh.svg";
 
 export default function AllOrders() {
   const token = localStorage.getItem("token");
@@ -13,7 +14,7 @@ export default function AllOrders() {
   const [orders, setOrders] = useState([]);
   const [showModalDelete, setShowModalDelete] = useState(false);
 
-  useEffect(() => {
+  function getAllOrders(token) {
     allOrders(token)
       .then((response) => {
         console.log("Response allOrders:", response);
@@ -29,6 +30,10 @@ export default function AllOrders() {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  useEffect(() => {
+    getAllOrders(token)
   }, [token]);
 
   const handleOpenDelete = () => {
@@ -51,8 +56,9 @@ export default function AllOrders() {
           <h2>All Orders</h2>
         </div>
         {role === "Waiter/Waitress" ? (
-          <div>
-          <Link to="/waiter/new" className={style.add_new_order}>New Order</Link>
+        <div className={style.options}>
+          <Link to="/waiter/new" className={style.new_order}>New Order</Link>
+          <img src={iconRefresh} alt="Refresh" className= {style.icon_refresh} onClick={() => getAllOrders(token)} />
           </div>
           ) : null}
       </div>
@@ -66,7 +72,6 @@ export default function AllOrders() {
               <th>Received</th>
               <th>Status</th>
               <th>Delivered</th>
-              <th>Duration</th>
               <th></th>
             </tr>
           </thead>
@@ -86,8 +91,7 @@ export default function AllOrders() {
                 </td>
                 <td>{order.dataEntry}</td>
                 <td>{order.status}</td>
-                <td>{order.dateProcessed || "-"}</td>
-                <td>{order.duration}</td>
+                <td>{order.dateProcessed || "--"}</td>
                 <td>
                   {order.status !== "Closed" ? (
                     <Link
