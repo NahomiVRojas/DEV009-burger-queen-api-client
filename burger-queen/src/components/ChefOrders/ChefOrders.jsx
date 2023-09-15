@@ -32,7 +32,7 @@ export default function ChefOrders() {
       .catch((error) => {
         console.log(error);
       });
-  }, [token]);
+  },[token]);
 
   function toggleExpand(orderId) {
     setExpandedOrder((prevExpandedOrder) =>
@@ -64,15 +64,23 @@ export default function ChefOrders() {
   };
 
   function handleCheckboxChange(productIndex, orderId) {
-    setCheckedItems((prevCheckedItems) => ({
-      ...prevCheckedItems,
-      [orderId]: {
-        ...prevCheckedItems[orderId],
-        [productIndex]: !prevCheckedItems[orderId]?.[productIndex],
-      },
-    }));
-    
-    localStorage.setItem("checkedItems", JSON.stringify(checkedItems));
+    setCheckedItems((prevCheckedItems) => {
+      const updatedOrder = prevCheckedItems[orderId] || {};
+      const currentStatus = updatedOrder[productIndex] || false;
+      const newStatus = !currentStatus;
+  
+      const newCheckedItems = {
+        ...prevCheckedItems,
+        [orderId]: {
+          ...updatedOrder,
+          [productIndex]: newStatus,
+        },
+      };
+  
+      localStorage.setItem("checkedItems", JSON.stringify(newCheckedItems));
+  
+      return newCheckedItems;
+    });
   }
 
   return (
@@ -157,7 +165,7 @@ export default function ChefOrders() {
                                 onChange={() => handleCheckboxChange(productIndex, order.id)}
                               />
                               <label className={style.label}>
-                                {product.name}
+                                {product.qty}x {product.name}
                               </label>
                             </li>
                           ))}

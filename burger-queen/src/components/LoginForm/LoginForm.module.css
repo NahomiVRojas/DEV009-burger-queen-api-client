@@ -5,6 +5,7 @@
     align-content: center;
     justify-content: center;
 }
+
 input, button {
     margin: 8px 0;
     height: 38px;
@@ -13,9 +14,25 @@ input, button {
     background-color: #fff;
     text-indent: 10px;
 }
+
 button {
     background-color: #F294C0;
     border: 1px solid #fff;
     color: #fff;
     text-indent: 0;
+}
+
+.error {
+    color: red;
+    font-size: 15px;
+    margin-left: 5px;
+}
+
+.error_message {
+    display: flex;
+    justify-content: center;
+}
+
+.icon {
+    width: 17px;
 }

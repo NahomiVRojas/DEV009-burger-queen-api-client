@@ -19,6 +19,9 @@ export default function EditOrder() {
   const currentDateTime = new Date().toLocaleTimeString([], { hour12: false });
   const [dataEntry] = useState(currentDateTime);
 
+  const handleClick = NavigateTo("/waiter/orders");
+  const handleReturn = NavigateTo("/waiter/orders");
+
   useEffect(() => {
     userOrder(orderId, token)
       .then((response) => {
@@ -74,12 +77,16 @@ export default function EditOrder() {
     const updatedOrderData = {
       ...updateData,
       dataEntry: dataEntry,
+      dateProcessed: null,
+      status: "Pending"
     };
 
     patchOrder(orderId, updatedOrderData, token)
       .then((response) => {
         if (response.ok) {
-          console.log("orden editado con éxito")
+          console.log("orden editado con éxito");
+          alert("Order sent succefully.");
+          handleClick();
         } else {
           console.error("Error al editar la orden");
         }
@@ -93,9 +100,6 @@ export default function EditOrder() {
         console.error("Error al realizar la solicitud de edición", error);
       });
   }
-
-  const handleClick = NavigateTo("/waiter/orders");
-  const handleReturn = NavigateTo("/waiter/orders");
 
   return (
     <main className={style.new_order}>
