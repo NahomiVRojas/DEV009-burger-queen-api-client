@@ -53,3 +53,9 @@ img {
     display: block;
     border: solid #73395F 0.9px;
 }
+
+.add_new_order {
+    text-decoration: none;
+    color: #F294C0;
+    font-size: 25px;
+}

@@ -49,8 +49,12 @@ export default function AllOrders() {
         <div className={style.title}>
           <img src={returnButton} onClick={handleClick} alt="Return" />
           <h2>All Orders</h2>
-          <Link to="/waiter/new" className={style.add_new_order}>New Order</Link>
         </div>
+        {role === "Waiter/Waitress" ? (
+          <div>
+          <Link to="/waiter/new" className={style.add_new_order}>New Order</Link>
+          </div>
+          ) : null}
       </div>
       <div className={`table-responsive ${style.responsive}`}>
         <table className="table">
@@ -62,6 +66,7 @@ export default function AllOrders() {
               <th>Received</th>
               <th>Status</th>
               <th>Delivered</th>
+              <th>Duration</th>
               <th></th>
             </tr>
           </thead>
@@ -82,6 +87,7 @@ export default function AllOrders() {
                 <td>{order.dataEntry}</td>
                 <td>{order.status}</td>
                 <td>{order.dateProcessed || "-"}</td>
+                <td>{order.duration}</td>
                 <td>
                   {order.status !== "Closed" ? (
                     <Link
