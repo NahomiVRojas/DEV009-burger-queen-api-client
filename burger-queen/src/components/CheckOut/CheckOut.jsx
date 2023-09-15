@@ -1,9 +1,12 @@
 import { patchOrder } from "../../Services/Request";
 import Modal from "../Modal/Modal";
 import { func, number } from "prop-types";
+import NavigateTo from "../Navigate/Navigate";
 
 export default function CheckOut({ onClose, id }) {
     const token = localStorage.getItem("token");
+
+    const navigateToOrders = NavigateTo("/waiter/orders");
 
     function checkOutOrder() {
 
@@ -14,7 +17,8 @@ export default function CheckOut({ onClose, id }) {
         patchOrder(id, updatedOrderData, token)
             .then((response) => {
                 if (response.ok) {
-                    console.log("orden cerrada")
+                    console.log("orden cerrada");
+                    navigateToOrders();
                 } else {
                     console.error("Error al cerrar la orden");
                 }
@@ -44,7 +48,7 @@ export default function CheckOut({ onClose, id }) {
     )
 }
 
-CheckOut.propTypes ={
+CheckOut.propTypes = {
     onClose: func.isRequired,
     id: number.isRequired,
 }
