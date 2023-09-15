@@ -61,6 +61,7 @@ export default function NewOrderTable() {
   const [status] = useState("Pending");
 
   function handleAddOrder(tableNumber) {
+
     const data = {
       table: tableNumber,
       client: client,
@@ -69,10 +70,16 @@ export default function NewOrderTable() {
       dataEntry: dataEntry,
     };
 
+    if (data.client.length === 0) {
+      return alert("Please, enter the client's name")
+    } 
+
     postOrder(data, token)
       .then((response) => {
         if (response.ok) {
           console.log("Orden agregada con éxito", data);
+          alert("Order sent succefully.");
+          handleClick();
         }
         return response.json();
       })

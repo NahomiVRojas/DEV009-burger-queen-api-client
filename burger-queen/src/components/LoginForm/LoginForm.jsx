@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from '../../Services/Request'
 import style from "./LoginForm.module.css";
 import { saveData } from "../../Services/LocalData";
-import { errorMessages } from "../../Services/ErrorMessages";
+import exclamationIcon from "../../assets/exclamation-icon.svg";
 
 export default function LoginForm() {
     const [email, setEmail] = useState('');
@@ -18,7 +18,7 @@ export default function LoginForm() {
             .then((response) => {
                 console.log('Server Response:', response);
                 if (!response.ok) {
-                    setError(errorMessages(response))
+                    setError("Invalid credentials.")
                     throw new Error('Error en la solicitud de inicio de sesión');
                 }
                 return response.json();
@@ -57,7 +57,11 @@ export default function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
             />
             <button onClick={userAuth}>Log In</button>
-            {error && <span>{error}</span>}
+            {error && 
+            <div className={style.error_message}>
+            <img src={exclamationIcon} className={style.icon} />
+            <span className={style.error}>{error}</span>
+            </div>}
         </div>
     )
 }

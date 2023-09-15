@@ -1,4 +1,4 @@
-import { func, object, string } from "prop-types";
+import { array, func } from "prop-types";
 import style from "../Table/Table.module.css";
 import DropdownButton from "../DropDownButton/DropDownButton";
 
@@ -35,8 +35,8 @@ export default function Table({ data, columns, onEdit, onDelete }) {
 }
 
 Table.propTypes = {
-  data: object.isRequired,
-  columns: string.isRequired,
+  data: array.isRequired,
+  columns: array.isRequired,
   onEdit: func.isRequired,
   onDelete: func.isRequired,
 };

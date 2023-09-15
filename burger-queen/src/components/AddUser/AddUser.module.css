@@ -1,0 +1,17 @@
+.error_message {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-left: 5px;
+}
+
+.icon {
+    margin: 0;
+}
