@@ -67,11 +67,23 @@ export default function TakeOrder({
           <span className={style.total}>${calculateTotal()}</span>
         </div>
         <button
-        className={style.button_send}
-        onClick={() =>{selectedItems.length !== 0 
-        ? handleAddOrder(tableNumber)
-        : alert("You cannot send empty orders.")}}
-        >Send</button>
+          className={style.button_send}
+          onClick={() => {
+            if (selectedItems.length === 0) {
+              alert(
+                "Please, select an item."
+              );
+            } else if (tableNumber === "Table"){
+              alert(
+                "Please, select a table or the Take Away (TA) option."
+              );
+            } else {
+              handleAddOrder(tableNumber);
+            }
+          }}
+        >
+          Send
+        </button>
       </div>
     </section>
   );

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { string, func } from "prop-types";
 import { addUsers } from "../../Services/Request";
 import Modal from "../Modal/Modal.jsx";
+import style from "../AddUser/AddUser.module.css";
+import exclamationIcon from "../../assets/exclamation-icon.svg";
 
 export default function AddUser({ onClose, token, onAdd }) {
   const [addId, setAddId] = useState("");
@@ -9,6 +11,7 @@ export default function AddUser({ onClose, token, onAdd }) {
   const [addEmail, setAddEmail] = useState("");
   const [addPassword, setAddPassword] = useState("");
   const [addRole, setAddRole] = useState("");
+  const [error, setError] = useState("");
 
   const data = {
     email: addEmail,
@@ -23,6 +26,10 @@ export default function AddUser({ onClose, token, onAdd }) {
       .then((response) => {
         if (response.ok) {
           console.log("Usuario agregado con éxito", data);
+        } else if (response.status === 500) {
+          return setError("ID already in use.");
+        } else if (response.status === 400) {
+          return setError("This email is already in use, or it's invalid.");
         }
         return response.json();
       })
@@ -66,7 +73,7 @@ export default function AddUser({ onClose, token, onAdd }) {
         <div>
           <label>Email</label>
           <input
-            type="text"
+            type="email"
             value={addEmail}
             onChange={(e) => setAddEmail(e.target.value)}
           />
@@ -89,6 +96,11 @@ export default function AddUser({ onClose, token, onAdd }) {
           <option value="Waiter/Waitress">Waiter/Waitress</option>
         </select>
       </div>
+      {error && 
+          <div className={style.error_message}>
+          <img src={exclamationIcon} className={style.icon} />
+          <span className={style.error}>{error}</span>
+          </div>}
     </Modal>
   );
 }

@@ -49,6 +49,7 @@ export default function AllOrders() {
         <div className={style.title}>
           <img src={returnButton} onClick={handleClick} alt="Return" />
           <h2>All Orders</h2>
+          <Link to="/waiter/new" className={style.add_new_order}>New Order</Link>
         </div>
       </div>
       <div className={`table-responsive ${style.responsive}`}>

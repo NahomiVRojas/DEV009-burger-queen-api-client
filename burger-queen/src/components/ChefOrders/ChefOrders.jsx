@@ -165,7 +165,7 @@ export default function ChefOrders() {
                                 onChange={() => handleCheckboxChange(productIndex, order.id)}
                               />
                               <label className={style.label}>
-                                {product.name}
+                                {product.qty}x {product.name}
                               </label>
                             </li>
                           ))}
