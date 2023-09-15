@@ -74,6 +74,8 @@ export default function EditOrder() {
     const updatedOrderData = {
       ...updateData,
       dataEntry: dataEntry,
+      dateProcessed: null,
+      status: "Pending"
     };
 
     patchOrder(orderId, updatedOrderData, token)

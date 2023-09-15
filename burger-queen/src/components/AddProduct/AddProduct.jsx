@@ -2,12 +2,15 @@ import { useState } from "react";
 import { string, func } from "prop-types";
 import { addProduct } from "../../Services/Request";
 import Modal from "../Modal/Modal.jsx";
+import style from "../AddProduct/AddProduct.module.css";
+import exclamationIcon from "../../assets/exclamation-icon.svg";
 
 export default function AddProduct({ onClose, token, onAdd }) {
   const [addId, setAddId] = useState("");
   const [addName, setAddName] = useState("");
   const [addType, setAddType] = useState("");
   const [addPrice, setAddPrice] = useState("");
+  const [error, setError] = useState('');
 
   const data = {
     id: addId,
@@ -21,6 +24,8 @@ export default function AddProduct({ onClose, token, onAdd }) {
       .then((response) => {
         if (response.ok) {
           console.log("Producto agregado con éxito");
+        } else if (response.status === 500) {
+          setError("ID already in use");
         }
         return response.json();
       })
@@ -49,6 +54,11 @@ export default function AddProduct({ onClose, token, onAdd }) {
           value={addId}
           onChange={(e) => setAddId(e.target.value)}
         />
+          {error && 
+          <div className={style.error_message}>
+          <img src={exclamationIcon} className={style.icon} />
+          <span className={style.error}>{error}</span>
+          </div>}
       </div>
       <div>
         <label>Product</label>
