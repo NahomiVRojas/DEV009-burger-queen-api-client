@@ -7,7 +7,7 @@ export default function DeleteOrder({ id, token, onClose, onDelete }) {
     deleteOrder(id, token).then((response) => {
       if (response.ok) {
         console.log("Deleted");
-        onClose()
+        onClose();
         onDelete(id);
       } else {
         console.error(response.status);
