@@ -14,25 +14,30 @@ export default function ChefOrders() {
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [checkedItems, setCheckedItems] = useState({});
 
+  function getAllOrders(token) {
+    allOrders(token)
+    .then((response) => {
+      console.log("Response allOrders:", response);
+      if (!response.ok) {
+        throw new Error("No orders available.");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Data getProducts:", data);
+      setOrders(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
   useEffect(() => {
     const storedCheckedItems = JSON.parse(localStorage.getItem("checkedItems")) || {};
     setCheckedItems(storedCheckedItems);
 
-    allOrders(token)
-      .then((response) => {
-        console.log("Response allOrders:", response);
-        if (!response.ok) {
-          throw new Error("No orders available.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Data getProducts:", data);
-        setOrders(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    getAllOrders(token);
+
   },[token]);
 
   function toggleExpand(orderId) {
@@ -93,7 +98,7 @@ export default function ChefOrders() {
           <h2>Active Orders</h2>
         </div>
         <div>
-        <img src={iconRefresh} className={style.refresh} alt="Refresh"/>
+        <img src={iconRefresh} className={style.refresh} alt="Refresh" onClick={() => getAllOrders(token)}/>
         </div>
       </div>
       <div className={`table-responsive ${style.responsive}`}>

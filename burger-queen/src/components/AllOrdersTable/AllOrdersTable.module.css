@@ -54,8 +54,30 @@ img {
     border: solid #73395F 0.9px;
 }
 
-.add_new_order {
+.options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 15vw;
+}
+
+.new_order {
+    border: #F294C0 1px solid;
+    border-radius: 15px;
+    padding: 0.8vw;
+    font-size: 15px;
     text-decoration: none;
     color: #F294C0;
-    font-size: 25px;
 }
+
+.new_order:hover {
+    background-color: #F294C0;
+    color: white;
+    border: white 1px solid;
+}
+
+.icon_refresh {
+    width: 35px;
+    height: 35px;
+}
+
