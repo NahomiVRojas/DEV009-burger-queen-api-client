@@ -2,6 +2,8 @@
   display: block;
   color: #f244a4;
   text-align: center;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .modal_body {

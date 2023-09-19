@@ -46,6 +46,7 @@ export default function AllOrders() {
 
   const handleDelete = (id) => {
     setOrders((prevOrders) => prevOrders.filter((order) => order.id !== id));
+    handleCloseDelete(); 
   };
 
   return (
@@ -102,11 +103,11 @@ export default function AllOrders() {
                     </Link>
                   ) : null}
                   {role === "Admin" || role === "admin" ? (
-                    <button onClick={handleOpenDelete} className={style.delete}>
+                    <button  onClick={() => handleOpenDelete(order.id)} className={style.delete}>
                       Delete
                     </button>
                   ) : null}
-                  {showModalDelete && (
+                  {showModalDelete[order.id] && (
                     <DeleteOrder
                       id={order.id}
                       token={token}

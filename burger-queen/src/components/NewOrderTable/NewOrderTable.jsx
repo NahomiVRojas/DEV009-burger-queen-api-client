@@ -6,10 +6,21 @@ import { useState } from "react";
 import NavigateTo from "../Navigate/Navigate";
 import returnButton from "../../assets/return-button.svg";
 import { postOrder } from "../../Services/Request";
+import Alert from "../Alert/Alert";
 
 export default function NewOrderTable() {
   const token = localStorage.getItem("token");
   const [selectedItems, setSelectedItems] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleShowAlert = () => {
+    console.log("modal abierto");
+    setShowAlert(true);
+  };
+
+  const handleCloseAlert = () => {
+    setShowAlert(false);
+  };
 
   const handleAddToSelectedItems = (item) => {
     const existingItem = selectedItems.find(
@@ -61,7 +72,6 @@ export default function NewOrderTable() {
   const [status] = useState("Pending");
 
   function handleAddOrder(tableNumber) {
-
     const data = {
       table: tableNumber,
       client: client,
@@ -71,8 +81,9 @@ export default function NewOrderTable() {
     };
 
     if (data.client.length === 0) {
-      return alert("Please, enter the client's name")
-    } 
+      handleShowAlert();
+      return;
+    }
 
     postOrder(data, token)
       .then((response) => {
@@ -107,6 +118,14 @@ export default function NewOrderTable() {
             className={style.client}
             onChange={(e) => setClient(e.target.value)}
           />
+          {showAlert && (
+            <Alert
+              title="Oops..."
+              message="Please, enter the client's name"
+              option="Try again"
+              onClose={handleCloseAlert}
+            />
+          )}
         </div>
         <Menu handleAddToSelectedItems={handleAddToSelectedItems} />
         <div className={style.see_all_orders} onClick={handleClick}>

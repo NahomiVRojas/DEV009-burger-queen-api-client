@@ -58,7 +58,6 @@ img {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 15vw;
 }
 
 .new_order {
@@ -68,6 +67,7 @@ img {
     font-size: 15px;
     text-decoration: none;
     color: #F294C0;
+    margin-right:1vw;
 }
 
 .new_order:hover {

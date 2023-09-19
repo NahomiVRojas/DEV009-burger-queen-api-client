@@ -1,6 +1,7 @@
 import style from "../TakeOrder/TakeOrder.module.css";
 import { useState } from "react";
 import { array, func } from "prop-types";
+import Alert from "../Alert/Alert";
 
 export default function TakeOrder({
   selectedItems,
@@ -9,6 +10,8 @@ export default function TakeOrder({
   handleAddOrder,
 }) {
   const [tableNumber, setTableNumber] = useState("Table");
+  const [showAlert, setShowAlert] = useState(false);
+  const [showAlertTable, setShowAlertTable] = useState(false);
 
   const tables = ["Table", "1", "2", "3", "4", "5", "TA"];
   const options = tables.map((item) => <option key={item}>{item}</option>);
@@ -19,6 +22,23 @@ export default function TakeOrder({
       0
     );
   };
+
+  const handleShowAlert = () => {
+    console.log("modal abierto");
+    setShowAlert(true);
+  };
+
+  const handleCloseAlert = () => {
+    setShowAlert(false);
+  };
+
+  const handleShowAlertTable = () => {
+    setShowAlertTable(true)
+  }
+
+  const handleCloseAlertTable = () => {
+    setShowAlertTable(false)
+  }
 
   return (
     <section className={style.order}>
@@ -70,13 +90,9 @@ export default function TakeOrder({
           className={style.button_send}
           onClick={() => {
             if (selectedItems.length === 0) {
-              alert(
-                "Please, select an item."
-              );
-            } else if (tableNumber === "Table"){
-              alert(
-                "Please, select a table or the Take Away (TA) option."
-              );
+              handleShowAlert();
+            } else if (tableNumber === "Table") {
+              handleShowAlertTable();
             } else {
               handleAddOrder(tableNumber);
             }
@@ -84,6 +100,22 @@ export default function TakeOrder({
         >
           Send
         </button>
+        {showAlert && (
+          <Alert
+            title="Oops..."
+            message="Please, select an item."
+            option="Try again"
+            onClose={handleCloseAlert}
+          />
+        )}
+         {showAlertTable && (
+          <Alert
+            title="Oops..."
+            message="Please, select a table or the Take Away (TA) option."
+            option="Try again"
+            onClose={handleCloseAlertTable}
+          />
+        )}
       </div>
     </section>
   );
