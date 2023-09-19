@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { allOrders } from "../../Services/Request";
 import DeleteOrder from "../DeleteOrder/DeleteOrder";
 import { Link } from "react-router-dom";
+import iconRefresh from "../../assets/icon-refresh.svg";
 
 export default function AllOrders() {
   const token = localStorage.getItem("token");
@@ -13,7 +14,7 @@ export default function AllOrders() {
   const [orders, setOrders] = useState([]);
   const [showModalDelete, setShowModalDelete] = useState(false);
 
-  useEffect(() => {
+  function getAllOrders(token) {
     allOrders(token)
       .then((response) => {
         console.log("Response allOrders:", response);
@@ -29,6 +30,10 @@ export default function AllOrders() {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  useEffect(() => {
+    getAllOrders(token)
   }, [token]);
 
   const handleOpenDelete = () => {
@@ -41,6 +46,7 @@ export default function AllOrders() {
 
   const handleDelete = (id) => {
     setOrders((prevOrders) => prevOrders.filter((order) => order.id !== id));
+    handleCloseDelete(); 
   };
 
   return (
@@ -49,8 +55,13 @@ export default function AllOrders() {
         <div className={style.title}>
           <img src={returnButton} onClick={handleClick} alt="Return" />
           <h2>All Orders</h2>
-          <Link to="/waiter/new" className={style.add_new_order}>New Order</Link>
         </div>
+        {role === "Waiter/Waitress" ? (
+        <div className={style.options}>
+          <Link to="/waiter/new" className={style.new_order}>New Order</Link>
+          <img src={iconRefresh} alt="Refresh" className= {style.icon_refresh} onClick={() => getAllOrders(token)} />
+          </div>
+          ) : null}
       </div>
       <div className={`table-responsive ${style.responsive}`}>
         <table className="table">
@@ -81,7 +92,7 @@ export default function AllOrders() {
                 </td>
                 <td>{order.dataEntry}</td>
                 <td>{order.status}</td>
-                <td>{order.dateProcessed || "-"}</td>
+                <td>{order.dateProcessed || "--"}</td>
                 <td>
                   {order.status !== "Closed" ? (
                     <Link
@@ -92,11 +103,11 @@ export default function AllOrders() {
                     </Link>
                   ) : null}
                   {role === "Admin" || role === "admin" ? (
-                    <button onClick={handleOpenDelete} className={style.delete}>
+                    <button  onClick={() => handleOpenDelete(order.id)} className={style.delete}>
                       Delete
                     </button>
                   ) : null}
-                  {showModalDelete && (
+                  {showModalDelete[order.id] && (
                     <DeleteOrder
                       id={order.id}
                       token={token}

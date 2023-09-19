@@ -1,0 +1,36 @@
+.alert {
+  display: block;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.header {
+  border: none;
+}
+
+.alert_body {
+  width: 40vw;
+}
+
+.title {
+  color: #db323b;
+  font-weight: bold;
+  margin-bottom: 3vh;
+}
+
+.error {
+  width: 15vw;
+  margin-bottom: 2vh;
+}
+
+.close {
+  background-color: #db323b;
+  width: 20vw;
+}
+
+.footer {
+  margin: 0 auto;
+  margin-bottom: 2vh;
+  border: none;
+}

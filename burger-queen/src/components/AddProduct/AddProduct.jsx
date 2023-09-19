@@ -25,6 +25,7 @@ export default function AddProduct({ onClose, token, onAdd }) {
         if (response.ok) {
           console.log("Producto agregado con éxito");
         } else if (response.status === 500) {
+
           setError("ID already in use");
         }
         return response.json();

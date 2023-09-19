@@ -5,33 +5,39 @@ import React, { useState, useEffect } from "react";
 import { allOrders } from "../../Services/Request";
 import iconShowInfo from "../../assets/icon-show-info.svg";
 import Delivered from "../Delivered/Delivered";
+import iconRefresh from "../../assets/icon-refresh.svg";
 
 export default function ChefOrders() {
   const token = localStorage.getItem("token");
-  const handleClick = NavigateTo("/admin/dashboard");
+  const handleClick = NavigateTo("/chef/dashboard");
   const [orders, setOrders] = useState([]);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [checkedItems, setCheckedItems] = useState({});
+
+  function getAllOrders(token) {
+    allOrders(token)
+    .then((response) => {
+      console.log("Response allOrders:", response);
+      if (!response.ok) {
+        throw new Error("No orders available.");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Data getProducts:", data);
+      setOrders(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
 
   useEffect(() => {
     const storedCheckedItems = JSON.parse(localStorage.getItem("checkedItems")) || {};
     setCheckedItems(storedCheckedItems);
 
-    allOrders(token)
-      .then((response) => {
-        console.log("Response allOrders:", response);
-        if (!response.ok) {
-          throw new Error("No orders available.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Data getProducts:", data);
-        setOrders(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    getAllOrders(token);
+
   },[token]);
 
   function toggleExpand(orderId) {
@@ -55,6 +61,7 @@ export default function ChefOrders() {
             ...order,
             status: updateOrder.status,
             dateProcessed: updateOrder.dateProcessed,
+            duration: updateOrder.duration,
           };
         } else {
           return order;
@@ -90,6 +97,9 @@ export default function ChefOrders() {
           <img src={returnButton} onClick={handleClick} alt="Return" />
           <h2>Active Orders</h2>
         </div>
+        <div>
+        <img src={iconRefresh} className={style.refresh} alt="Refresh" onClick={() => getAllOrders(token)}/>
+        </div>
       </div>
       <div className={`table-responsive ${style.responsive}`}>
         <table className="table">
@@ -106,24 +116,6 @@ export default function ChefOrders() {
           </thead>
           <tbody>
             {orders.map((order, index) => {
-
-              function calculateDuration() {
-                let total;
-                const timeString1 = order.dataEntry;
-                const timeString2 = order.dateProcessed;
-                const receivedTime = new Date(`1970-01-01T${timeString1}`);
-                const deliveredTime = new Date(`1970-01-01T${timeString2}`);
-                const duration = Math.floor(
-                  (deliveredTime - receivedTime) / 60000
-                );
-                if (isNaN(duration)) {
-                  total = "--";
-                } else {
-                  total = `${duration} minutes`;
-                }
-                return total;
-              }
-
               const isExpanded = expandedOrder === order.id;
 
               return (
@@ -136,9 +128,9 @@ export default function ChefOrders() {
                     <td>{order.dataEntry}</td>
                     <td>{order.status}</td>
                     <td>{order.dateProcessed}</td>
-                    <td>{calculateDuration()}</td>
+                    <td>{order.duration}</td>
                     <td>
-                      {order.status !== "Delivered" && (
+                      {order.status === "Pending" && (
                         <Delivered
                           order={order}
                           onEditSuccess={updatedOrderData}
