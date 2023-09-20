@@ -12,6 +12,9 @@ export default function NewOrderTable() {
   const token = localStorage.getItem("token");
   const [selectedItems, setSelectedItems] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const handleClick = NavigateTo("/waiter/orders");
+  const handleReturn = NavigateTo("/waiter/dashboard");
 
   const handleShowAlert = () => {
     console.log("modal abierto");
@@ -21,6 +24,15 @@ export default function NewOrderTable() {
   const handleCloseAlert = () => {
     setShowAlert(false);
   };
+
+  const handleSuccessAlert = () => {
+    setShowSuccess(true);
+  }
+
+  const handleCloseSuccessAlert = () => {
+    setShowAlert(false);
+    handleClick();
+  }
 
   const handleAddToSelectedItems = (item) => {
     const existingItem = selectedItems.find(
@@ -62,9 +74,6 @@ export default function NewOrderTable() {
     }
   };
 
-  const handleClick = NavigateTo("/waiter/orders");
-  const handleReturn = NavigateTo("/waiter/dashboard");
-
   const currentDateTime = new Date().toLocaleTimeString([], { hour12: false });
 
   const [client, setClient] = useState("");
@@ -80,7 +89,9 @@ export default function NewOrderTable() {
       dataEntry: dataEntry,
     };
 
-    if (data.client.length === 0) {
+    if (data.client.length !== 0) {
+      handleSuccessAlert();
+    } else if (data.client.length === 0) {
       handleShowAlert();
       return;
     }
@@ -89,8 +100,7 @@ export default function NewOrderTable() {
       .then((response) => {
         if (response.ok) {
           console.log("Orden agregada con éxito", data);
-          alert("Order sent succefully.");
-          handleClick();
+          setShowSuccess(true);
         }
         return response.json();
       })
@@ -120,10 +130,18 @@ export default function NewOrderTable() {
           />
           {showAlert && (
             <Alert
-              title="Oops..."
-              message="Please, enter the client's name"
+              type="error"
+              message="Please, enter the client's name."
               option="Try again"
               onClose={handleCloseAlert}
+            />
+          )}
+          {showSuccess && (
+            <Alert
+              type= "success"
+              message="Order successfully sent."
+              option="Close"
+              onClose={handleCloseSuccessAlert}
             />
           )}
         </div>

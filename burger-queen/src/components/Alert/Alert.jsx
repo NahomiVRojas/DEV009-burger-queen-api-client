@@ -1,8 +1,12 @@
 import { string, func } from "prop-types";
 import style from "../Alert/Alert.module.css";
-import burgerError from "../../assets/burger-error.svg";
+import successIcon from "../../assets/check-circle.svg";
+import errorIcon from "../../assets/exclamation-icon.svg";
 
-export default function Alert({ title, message, option, onClose }) {
+export default function Alert({ type, message, option, onClose }) {
+
+  const alertStyle = type === "success" ? style.success : style.error;
+
   return (
     <>
       <div className={`modal ${style.alert}`} tabIndex="-1">
@@ -19,9 +23,11 @@ export default function Alert({ title, message, option, onClose }) {
                 onClick={onClose}
               ></button>
             </div>
-            <div className="modal-body">
-              <h3 className={style.title}>{title}</h3>
-              <img src={burgerError} className={style.error} />
+            <div className={`modal-body ${alertStyle}`}>
+              {alertStyle === style.success ?
+              <img src={successIcon} className={style.success_icon} /> :
+              <img src={errorIcon} className={style.error_icon} />
+              }
               <br />
               <span>{message}</span>
             </div>
@@ -43,6 +49,7 @@ export default function Alert({ title, message, option, onClose }) {
 }
 
 Alert.propTypes = {
+  type: string.isRequired,
   title: string.isRequired,
   message: string.isRequired,
   option: string.isRequired,

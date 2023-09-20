@@ -11,7 +11,6 @@ import AllOrders from "./routes/Admin/AllOrders";
 import NewOrders from "./routes/Waiter/NewOrders";
 import OrdersList from "./routes/Waiter/OrdersList";
 import ActiveOrders from "./routes/Chef/ActiveOrders";
-import PastOrders from "./routes/Chef/PastOrders";
 import EditOrders from "./components/EditOrder/EditOrder";
 
 const router = createBrowserRouter([
@@ -74,11 +73,7 @@ const router = createBrowserRouter([
       {
         path: "orders",
         element: <ActiveOrders />,
-      },
-      {
-        path: "past-orders",
-        element: <PastOrders />,
-      },
+      }
     ],
   },
 ]);
