@@ -8,6 +8,7 @@ import { userOrder } from "../../Services/Request";
 import { useParams } from "react-router-dom";
 import UpdateOrder from "../UpdateOrder/UpdateOrder";
 import { patchOrder } from "../../Services/Request";
+import Alert from "../Alert/Alert";
 
 export default function EditOrder() {
   const token = localStorage.getItem("token");
@@ -21,6 +22,17 @@ export default function EditOrder() {
 
   const handleClick = NavigateTo("/waiter/orders");
   const handleReturn = NavigateTo("/waiter/orders");
+
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleSuccessAlert = () => {
+    setShowSuccess(true);
+  }
+
+  const handleCloseSuccessAlert = () => {
+    setShowSuccess(false);
+    handleClick();
+  }
 
   useEffect(() => {
     userOrder(orderId, token)
@@ -73,7 +85,7 @@ export default function EditOrder() {
   };
 
   function handleEditOrder(updateData) {
-    
+
     const updatedOrderData = {
       ...updateData,
       dataEntry: dataEntry,
@@ -85,8 +97,7 @@ export default function EditOrder() {
       .then((response) => {
         if (response.ok) {
           console.log("orden editado con éxito");
-          alert("Order sent succefully.");
-          handleClick();
+          handleSuccessAlert();
         } else {
           console.error("Error al editar la orden");
         }
@@ -125,6 +136,14 @@ export default function EditOrder() {
         handleEditOrder={handleEditOrder}
         orderInfo={orderInfo}
       />
+      {showSuccess && (
+        <Alert
+          type="success"
+          message="Order successfully sent."
+          option="Close"
+          onClose={handleCloseSuccessAlert}
+        />
+      )}
     </main>
   );
 }

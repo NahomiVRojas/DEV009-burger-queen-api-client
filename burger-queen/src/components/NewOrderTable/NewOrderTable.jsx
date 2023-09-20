@@ -131,7 +131,7 @@ export default function NewOrderTable() {
           {showAlert && (
             <Alert
               type="error"
-              message="Please, enter the client's name"
+              message="Please, enter the client's name."
               option="Try again"
               onClose={handleCloseAlert}
             />
@@ -139,7 +139,7 @@ export default function NewOrderTable() {
           {showSuccess && (
             <Alert
               type= "success"
-              message="Your order has been sent."
+              message="Order successfully sent."
               option="Close"
               onClose={handleCloseSuccessAlert}
             />
