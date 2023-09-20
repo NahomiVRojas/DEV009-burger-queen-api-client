@@ -107,12 +107,12 @@ export default function AllOrders() {
                       Delete
                     </button>
                   ) : null}
-                  {showModalDelete[order.id] && (
+                  {showModalDelete && (
                     <DeleteOrder
                       id={order.id}
                       token={token}
                       onClose={handleCloseDelete}
-                      onDelete={handleDelete}
+                      onDelete={() => handleDelete(order.id)}
                     />
                   )}
                 </td>

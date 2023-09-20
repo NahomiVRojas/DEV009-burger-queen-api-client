@@ -14,19 +14,32 @@
 }
 
 .title {
-  color: #db323b;
-  font-weight: bold;
-  margin-bottom: 3vh;
+  color: #C0BABD;
 }
 
-.error {
-  width: 15vw;
+.error, .success {
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: 0.8vh;
+}
+
+.error_icon, .success_icon {
+  color: black;
+  width: 8vw;
   margin-bottom: 2vh;
 }
 
 .close {
-  background-color: #db323b;
+  background-color: #fff;
+  color: #8C8B8B;
+  border: 1px solid #8C8B8B;
+  border-radius: 15px;
   width: 20vw;
+}
+
+.close:hover {
+  background-color: #8C8B8B;
+  color: #fff;
 }
 
 .footer {
@@ -34,3 +47,4 @@
   margin-bottom: 2vh;
   border: none;
 }
+
