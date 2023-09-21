@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1695334983033" clover="3.2.0">
-  <project timestamp="1695334983033" name="All files">
+<coverage generated="1695336033826" clover="3.2.0">
+  <project timestamp="1695336033826" name="All files">
     <metrics statements="109" coveredstatements="105" conditionals="26" coveredconditionals="21" methods="37" coveredmethods="33" elements="172" coveredelements="159" complexity="0" loc="109" ncloc="109" packages="6" files="6" classes="6"/>
     <package name="Services">
       <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <file name="LocalData.jsx" path="/Users/lukasarias/Documents/Laboratoria/Proyecto 5/DEV009-burger-queen-api-client/burger-queen/src/Services/LocalData.jsx">
+      <file name="LocalData.jsx" path="C:\Users\deehr\Documents\GitHub\DEV009-burger-queen-api-client\burger-queen\src\Services\LocalData.jsx">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="4" type="stmt"/>
         <line num="2" count="4" type="stmt"/>
@@ -18,7 +18,7 @@
     </package>
     <package name="components.AddProduct">
       <metrics statements="26" coveredstatements="25" conditionals="2" coveredconditionals="2" methods="9" coveredmethods="8"/>
-      <file name="AddProduct.jsx" path="/Users/lukasarias/Documents/Laboratoria/Proyecto 5/DEV009-burger-queen-api-client/burger-queen/src/components/AddProduct/AddProduct.jsx">
+      <file name="AddProduct.jsx" path="C:\Users\deehr\Documents\GitHub\DEV009-burger-queen-api-client\burger-queen\src\components\AddProduct\AddProduct.jsx">
         <metrics statements="26" coveredstatements="25" conditionals="2" coveredconditionals="2" methods="9" coveredmethods="8"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -50,7 +50,7 @@
     </package>
     <package name="components.AddUser">
       <metrics statements="31" coveredstatements="28" conditionals="6" coveredconditionals="3" methods="10" coveredmethods="10"/>
-      <file name="AddUser.jsx" path="/Users/lukasarias/Documents/Laboratoria/Proyecto 5/DEV009-burger-queen-api-client/burger-queen/src/components/AddUser/AddUser.jsx">
+      <file name="AddUser.jsx" path="C:\Users\deehr\Documents\GitHub\DEV009-burger-queen-api-client\burger-queen\src\components\AddUser\AddUser.jsx">
         <metrics statements="31" coveredstatements="28" conditionals="6" coveredconditionals="3" methods="10" coveredmethods="10"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -87,7 +87,7 @@
     </package>
     <package name="components.Header">
       <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <file name="Header.jsx" path="/Users/lukasarias/Documents/Laboratoria/Proyecto 5/DEV009-burger-queen-api-client/burger-queen/src/components/Header/Header.jsx">
+      <file name="Header.jsx" path="C:\Users\deehr\Documents\GitHub\DEV009-burger-queen-api-client\burger-queen\src\components\Header\Header.jsx">
         <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -105,7 +105,7 @@
     </package>
     <package name="components.LoginForm">
       <metrics statements="28" coveredstatements="28" conditionals="10" coveredconditionals="10" methods="13" coveredmethods="10"/>
-      <file name="LoginForm.jsx" path="/Users/lukasarias/Documents/Laboratoria/Proyecto 5/DEV009-burger-queen-api-client/burger-queen/src/components/LoginForm/LoginForm.jsx">
+      <file name="LoginForm.jsx" path="C:\Users\deehr\Documents\GitHub\DEV009-burger-queen-api-client\burger-queen\src\components\LoginForm\LoginForm.jsx">
         <metrics statements="28" coveredstatements="28" conditionals="10" coveredconditionals="10" methods="13" coveredmethods="10"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -139,7 +139,7 @@
     </package>
     <package name="components.Modal">
       <metrics statements="4" coveredstatements="4" conditionals="8" coveredconditionals="6" methods="1" coveredmethods="1"/>
-      <file name="Modal.jsx" path="/Users/lukasarias/Documents/Laboratoria/Proyecto 5/DEV009-burger-queen-api-client/burger-queen/src/components/Modal/Modal.jsx">
+      <file name="Modal.jsx" path="C:\Users\deehr\Documents\GitHub\DEV009-burger-queen-api-client\burger-queen\src\components\Modal\Modal.jsx">
         <metrics statements="4" coveredstatements="4" conditionals="8" coveredconditionals="6" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
