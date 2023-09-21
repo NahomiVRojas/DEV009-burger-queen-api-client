@@ -16,7 +16,6 @@ export default function LoginForm() {
         e.preventDefault();
         auth(email, password)
             .then((response) => {
-                console.log('Server Response:', response);
                 if (!response.ok) {
                     setError("Invalid credentials.")
                     throw new Error('Error en la solicitud de inicio de sesión');
@@ -24,7 +23,6 @@ export default function LoginForm() {
                 return response.json();
             })
             .then((data) => {
-                console.log('Response Data:', data);
                 saveData(data.accessToken, data.user.role, data.user.name);
                 return data.user;
             })
@@ -62,7 +60,7 @@ export default function LoginForm() {
             {error && 
             <div className={style.error_message}>
             <img src={exclamationIcon} className={style.icon} />
-            <span className={style.error}>{error}</span>
+            <span className={style.error} data-testid="error_login">{error}</span>
             </div>}
         </form>
     )
