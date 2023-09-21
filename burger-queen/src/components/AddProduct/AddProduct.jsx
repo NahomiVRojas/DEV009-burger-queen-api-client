@@ -10,7 +10,7 @@ export default function AddProduct({ onClose, token, onAdd }) {
   const [addName, setAddName] = useState("");
   const [addType, setAddType] = useState("");
   const [addPrice, setAddPrice] = useState("");
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const data = {
     id: addId,
@@ -22,21 +22,18 @@ export default function AddProduct({ onClose, token, onAdd }) {
   function addNewProduct() {
     addProduct(data, token)
       .then((response) => {
-        if (response.ok) {
-          console.log("Producto agregado con éxito");
-        } else if (response.status === 500) {
+        if (response.status === 500) {
           setError("ID already in use");
         }
         return response.json();
       })
       .then((product) => {
-        console.log(product);
         onAdd(product);
         onClose();
         return product;
       })
       .catch((error) => {
-        console.error("Error al realizar la solicitud de edición", error);
+        throw new Error(error);
       });
   }
 
@@ -52,25 +49,34 @@ export default function AddProduct({ onClose, token, onAdd }) {
         <input
           type="text"
           value={addId}
+          data-testid="id_product"
           onChange={(e) => setAddId(e.target.value)}
         />
-          {error && 
+        {error && (
           <div className={style.error_message}>
-          <img src={exclamationIcon} className={style.icon} />
-          <span className={style.error}>{error}</span>
-          </div>}
+            <img src={exclamationIcon} className={style.icon} />
+            <span className={style.error} data-testid="error_message">
+              {error}
+            </span>
+          </div>
+        )}
       </div>
       <div>
         <label>Product</label>
         <input
           type="text"
           value={addName}
+          data-testid="name_product"
           onChange={(e) => setAddName(e.target.value)}
         />
       </div>
       <div>
         <label>Menu</label>
-        <select value={addType} onChange={(e) => setAddType(e.target.value)}>
+        <select
+          value={addType}
+          data-testid="menu_product"
+          onChange={(e) => setAddType(e.target.value)}
+        >
           <option>--</option>
           <option value="Breakfast">Breakfast</option>
           <option value="Lunch/Dinner">Lunch/Dinner</option>
@@ -81,6 +87,7 @@ export default function AddProduct({ onClose, token, onAdd }) {
         <input
           type="text"
           value={addPrice}
+          data-testid="price_product"
           onChange={(e) => setAddPrice(e.target.value)}
         />
       </div>

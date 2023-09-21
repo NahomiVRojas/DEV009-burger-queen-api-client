@@ -46,6 +46,7 @@ export default function Modal({
             <button
               type="button"
               className={`btn btn-primary ${style.btn_add}`}
+              data-testid="btn_modal"
               onClick={action}
             >
               {nameAction}
