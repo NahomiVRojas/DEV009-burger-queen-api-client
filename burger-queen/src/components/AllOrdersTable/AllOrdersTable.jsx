@@ -24,7 +24,6 @@ export default function AllOrders() {
         return response.json();
       })
       .then((data) => {
-        console.log("Data getProducts:", data);
         setOrders(data);
       })
       .catch((error) => {
@@ -33,7 +32,7 @@ export default function AllOrders() {
   }
 
   useEffect(() => {
-    getAllOrders(token)
+    getAllOrders(token);
   }, [token]);
 
   const handleOpenDelete = () => {
@@ -46,7 +45,7 @@ export default function AllOrders() {
 
   const handleDelete = (id) => {
     setOrders((prevOrders) => prevOrders.filter((order) => order.id !== id));
-    handleCloseDelete(); 
+    handleCloseDelete();
   };
 
   return (
@@ -57,11 +56,18 @@ export default function AllOrders() {
           <h2>All Orders</h2>
         </div>
         {role === "Waiter/Waitress" ? (
-        <div className={style.options}>
-          <Link to="/waiter/new" className={style.new_order}>New Order</Link>
-          <img src={iconRefresh} alt="Refresh" className= {style.icon_refresh} onClick={() => getAllOrders(token)} />
+          <div className={style.options}>
+            <Link to="/waiter/new" className={style.new_order}>
+              New Order
+            </Link>
+            <img
+              src={iconRefresh}
+              alt="Refresh"
+              className={style.icon_refresh}
+              onClick={() => getAllOrders(token)}
+            />
           </div>
-          ) : null}
+        ) : null}
       </div>
       <div className={`table-responsive ${style.responsive}`}>
         <table className="table">
@@ -103,7 +109,10 @@ export default function AllOrders() {
                     </Link>
                   ) : null}
                   {role === "Admin" || role === "admin" ? (
-                    <button  onClick={() => handleOpenDelete(order.id)} className={style.delete}>
+                    <button
+                      onClick={() => handleOpenDelete(order.id)}
+                      className={style.delete}
+                    >
                       Delete
                     </button>
                   ) : null}
