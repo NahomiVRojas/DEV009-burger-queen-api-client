@@ -7,6 +7,13 @@ jest.mock("../../Services/Request", () => ({
   auth: jest.fn(),
 }));
 
+const navigateMock = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => navigateMock,
+}));
+
 describe("LoginForm", () => {
   let emailElement, passwordElement, buttonElement;
 
@@ -40,6 +47,7 @@ describe("LoginForm", () => {
 
     await waitFor(() => {
       expect(auth).toHaveBeenCalledWith("admin@bq.com", "123456");
+      expect(navigateMock).toHaveBeenCalledWith("/admin/dashboard");
     });
   });
 
@@ -81,6 +89,7 @@ describe("LoginForm", () => {
 
     await waitFor(() => {
       expect(auth).toHaveBeenCalledWith("waiter@example.com", "password123");
+      expect(navigateMock).toHaveBeenCalledWith("/waiter/dashboard");
     });
   });
 
@@ -102,6 +111,7 @@ describe("LoginForm", () => {
 
     await waitFor(() => {
       expect(auth).toHaveBeenCalledWith("chef@example.com", "password456");
+      expect(navigateMock).toHaveBeenCalledWith("/chef/dashboard");
     });
   });
 });

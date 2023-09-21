@@ -9,11 +9,11 @@ export default function Header() {
     const userName = localStorage.getItem("name");
     const navigate = useNavigate();
 
-    function signOut(token, role, name) {
-        localStorage.removeItem('token', token);
-        localStorage.removeItem('role', role);
-        localStorage.removeItem('name', name);
-        navigate('/')
+    function signOut() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('role');
+        localStorage.removeItem('name');
+        navigate('/', { replace: true });
     }
 
     return (
@@ -25,7 +25,7 @@ export default function Header() {
                         <img src={iconUser} alt="Icon for logged in user" className={style.icon} />
                         <span>{userName}</span>
                     </div>
-                    <div className={style.signout} onClick={signOut}>
+                    <div className={style.signout} onClick={signOut} data-testid="signout">
                         <span>Sign Out</span>
                         <img src={iconSignOut} alt="Icon for sign out button" className={style.icon} />
                     </div>

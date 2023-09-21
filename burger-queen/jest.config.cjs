@@ -11,6 +11,6 @@ module.exports = {
     ],
     moduleNameMapper: {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      '\\.(svg)$': path.resolve(__dirname, 'src', '__mocks__', 'fileMock.js')
+      '\\.(svg|png)$': path.resolve(__dirname, 'src', '__mocks__', 'fileMock.js')
     },
   };
