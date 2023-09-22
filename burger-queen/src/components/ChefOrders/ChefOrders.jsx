@@ -17,14 +17,12 @@ export default function ChefOrders() {
   function getAllOrders(token) {
     allOrders(token)
     .then((response) => {
-      console.log("Response allOrders:", response);
       if (!response.ok) {
         throw new Error("No orders available.");
       }
       return response.json();
     })
     .then((data) => {
-      console.log("Data getProducts:", data);
       setOrders(data);
     })
     .catch((error) => {
@@ -53,7 +51,6 @@ export default function ChefOrders() {
   }
 
   const updatedOrderData = (updateOrder) => {
-    console.log(updateOrder);
     setOrders((orders) =>
       orders.map((order) => {
         if (order.id === updateOrder.id) {
@@ -94,11 +91,11 @@ export default function ChefOrders() {
     <>
       <div className={style.title_section}>
         <div className={style.title}>
-          <img src={returnButton} onClick={handleClick} alt="Return" />
-          <h2>Active Orders</h2>
+          <img src={returnButton} onClick={handleClick} alt="Return" className={style.icon_return} />
+          <h1>Active Orders</h1>
         </div>
         <div>
-        <img src={iconRefresh} className={style.refresh} alt="Refresh" onClick={() => getAllOrders(token)}/>
+        <img src={iconRefresh} className={style.icon_refresh} alt="Refresh" onClick={() => getAllOrders(token)}/>
         </div>
       </div>
       <div className={`table-responsive ${style.responsive}`}>
@@ -122,7 +119,7 @@ export default function ChefOrders() {
                 <React.Fragment key={index}>
                   <tr onClick={(event) => handleInfoClick(event, order.id)}>
                     <td>
-                      <img src={iconShowInfo} alt="Info" />
+                      <img src={iconShowInfo} alt="Info" className={style.icon_info} />
                     </td>
                     <td>{order.table}</td>
                     <td>{order.dataEntry}</td>

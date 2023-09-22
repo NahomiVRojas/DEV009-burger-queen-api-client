@@ -36,3 +36,8 @@
 .return_button {
     margin-right: 1vw;
 }
+
+.return_button, .icon_orders {
+  width: auto;
+  height: auto;
+}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1695336033826" clover="3.2.0">
-  <project timestamp="1695336033826" name="All files">
-    <metrics statements="109" coveredstatements="105" conditionals="26" coveredconditionals="21" methods="37" coveredmethods="33" elements="172" coveredelements="159" complexity="0" loc="109" ncloc="109" packages="6" files="6" classes="6"/>
+<coverage generated="1695405535447" clover="3.2.0">
+  <project timestamp="1695405535448" name="All files">
+    <metrics statements="162" coveredstatements="154" conditionals="41" coveredconditionals="30" methods="56" coveredmethods="48" elements="259" coveredelements="232" complexity="0" loc="162" ncloc="162" packages="9" files="9" classes="9"/>
     <package name="Services">
       <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="LocalData.jsx" path="C:\Users\deehr\Documents\GitHub\DEV009-burger-queen-api-client\burger-queen\src\Services\LocalData.jsx">
@@ -49,9 +49,9 @@
       </file>
     </package>
     <package name="components.AddUser">
-      <metrics statements="31" coveredstatements="28" conditionals="6" coveredconditionals="3" methods="10" coveredmethods="10"/>
+      <metrics statements="30" coveredstatements="27" conditionals="6" coveredconditionals="3" methods="10" coveredmethods="10"/>
       <file name="AddUser.jsx" path="C:\Users\deehr\Documents\GitHub\DEV009-burger-queen-api-client\burger-queen\src\components\AddUser\AddUser.jsx">
-        <metrics statements="31" coveredstatements="28" conditionals="6" coveredconditionals="3" methods="10" coveredmethods="10"/>
+        <metrics statements="30" coveredstatements="27" conditionals="6" coveredconditionals="3" methods="10" coveredmethods="10"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -76,13 +76,73 @@
         <line num="34" count="0" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
         <line num="41" count="4" type="stmt"/>
-        <line num="42" count="4" type="stmt"/>
-        <line num="60" count="5" type="stmt"/>
-        <line num="69" count="5" type="stmt"/>
-        <line num="80" count="5" type="stmt"/>
-        <line num="89" count="5" type="stmt"/>
-        <line num="98" count="5" type="stmt"/>
-        <line num="118" count="1" type="stmt"/>
+        <line num="59" count="5" type="stmt"/>
+        <line num="68" count="5" type="stmt"/>
+        <line num="79" count="5" type="stmt"/>
+        <line num="88" count="5" type="stmt"/>
+        <line num="97" count="5" type="stmt"/>
+        <line num="117" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.AllOrdersTable">
+      <metrics statements="39" coveredstatements="37" conditionals="15" coveredconditionals="8" methods="19" coveredmethods="13"/>
+      <file name="AllOrdersTable.jsx" path="C:\Users\deehr\Documents\GitHub\DEV009-burger-queen-api-client\burger-queen\src\components\AllOrdersTable\AllOrdersTable.jsx">
+        <metrics statements="39" coveredstatements="37" conditionals="15" coveredconditionals="8" methods="19" coveredmethods="13"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="11" type="stmt"/>
+        <line num="12" count="11" type="stmt"/>
+        <line num="13" count="11" type="stmt"/>
+        <line num="14" count="10" type="stmt"/>
+        <line num="15" count="10" type="stmt"/>
+        <line num="16" count="10" type="stmt"/>
+        <line num="19" count="5" type="stmt"/>
+        <line num="21" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="22" count="5" type="stmt"/>
+        <line num="26" count="5" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="33" count="10" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="37" count="10" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="42" count="10" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="47" count="10" type="stmt"/>
+        <line num="48" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="95" count="5" type="stmt"/>
+        <line num="101" count="5" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
+        <line num="156" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+    </package>
+    <package name="components.DeleteOrder">
+      <metrics statements="10" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
+      <file name="DeleteOrder.jsx" path="C:\Users\deehr\Documents\GitHub\DEV009-burger-queen-api-client\burger-queen\src\components\DeleteOrder\DeleteOrder.jsx">
+        <metrics statements="10" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
       </file>
     </package>
     <package name="components.Header">
@@ -104,9 +164,9 @@
       </file>
     </package>
     <package name="components.LoginForm">
-      <metrics statements="28" coveredstatements="28" conditionals="10" coveredconditionals="10" methods="13" coveredmethods="10"/>
+      <metrics statements="27" coveredstatements="27" conditionals="8" coveredconditionals="8" methods="8" coveredmethods="8"/>
       <file name="LoginForm.jsx" path="C:\Users\deehr\Documents\GitHub\DEV009-burger-queen-api-client\burger-queen\src\components\LoginForm\LoginForm.jsx">
-        <metrics statements="28" coveredstatements="28" conditionals="10" coveredconditionals="10" methods="13" coveredmethods="10"/>
+        <metrics statements="27" coveredstatements="27" conditionals="8" coveredconditionals="8" methods="8" coveredmethods="8"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -134,17 +194,28 @@
         <line num="39" count="1" type="stmt"/>
         <line num="50" count="4" type="stmt"/>
         <line num="57" count="4" type="stmt"/>
-        <line num="74" count="1" type="cond" truecount="2" falsecount="0"/>
       </file>
     </package>
     <package name="components.Modal">
-      <metrics statements="4" coveredstatements="4" conditionals="8" coveredconditionals="6" methods="1" coveredmethods="1"/>
+      <metrics statements="4" coveredstatements="4" conditionals="8" coveredconditionals="8" methods="1" coveredmethods="1"/>
       <file name="Modal.jsx" path="C:\Users\deehr\Documents\GitHub\DEV009-burger-queen-api-client\burger-queen\src\components\Modal\Modal.jsx">
-        <metrics statements="4" coveredstatements="4" conditionals="8" coveredconditionals="6" methods="1" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="4" count="45" type="stmt"/>
-        <line num="61" count="2" type="stmt"/>
+        <metrics statements="4" coveredstatements="4" conditionals="8" coveredconditionals="8" methods="1" coveredmethods="1"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="46" type="stmt"/>
+        <line num="62" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.Navigate">
+      <metrics statements="6" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+      <file name="Navigate.jsx" path="C:\Users\deehr\Documents\GitHub\DEV009-burger-queen-api-client\burger-queen\src\components\Navigate\Navigate.jsx">
+        <metrics statements="6" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="11" type="stmt"/>
+        <line num="4" count="11" type="stmt"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="10" count="10" type="stmt"/>
       </file>
     </package>
   </project>

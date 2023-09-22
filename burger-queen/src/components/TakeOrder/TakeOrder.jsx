@@ -9,6 +9,7 @@ export default function TakeOrder({
   handleRemoveSelectedItems,
   handleAddOrder,
 }) {
+
   const [tableNumber, setTableNumber] = useState("Table");
   const [showAlert, setShowAlert] = useState(false);
   const [showAlertTable, setShowAlertTable] = useState(false);
@@ -24,7 +25,6 @@ export default function TakeOrder({
   };
 
   const handleShowAlert = () => {
-    console.log("modal abierto");
     setShowAlert(true);
   };
 
@@ -43,7 +43,7 @@ export default function TakeOrder({
   return (
     <section className={style.order}>
       <div className={style.header}>
-        <h4>Order</h4>
+        <h1>Order</h1>
         <select
           className={style.select}
           value={tableNumber}

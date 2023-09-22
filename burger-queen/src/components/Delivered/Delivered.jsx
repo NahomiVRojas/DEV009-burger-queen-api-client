@@ -3,6 +3,7 @@ import style from "../../components/Delivered/Delivered.module.css";
 import { func, object } from "prop-types";
 
 export default function Delivered({ order, onEditSuccess }) {
+
   const token = localStorage.getItem("token");
   const currentDateTime = new Date().toLocaleTimeString([], { hour12: false });
 
@@ -17,7 +18,6 @@ export default function Delivered({ order, onEditSuccess }) {
       
         return `${Math.floor(differenceInMinutes)} minutes`;
       }
-      
 
     const updatedOrderData = {
       id: order.id,
@@ -31,9 +31,6 @@ export default function Delivered({ order, onEditSuccess }) {
       .then((response) => {
         if (response.ok) {
           onEditSuccess(updatedOrderData);
-          console.log("Orden marcada como entregada");
-        } else {
-          console.error("Error al marcar la orden como entregada");
         }
         return response.json();
       })

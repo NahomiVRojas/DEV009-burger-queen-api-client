@@ -28,11 +28,8 @@ export default function EditUser({
     editUser(id, data, token)
       .then((response) => {
         if (response.ok) {
-          console.log("Usuario editado con éxito");
-        } else {
-          console.error("Error al editar el usuario");
+          return response.json();
         }
-        return response.json();
       })
       .then((newData) => {
         onClose();

@@ -13,8 +13,12 @@
   justify-content: center;
 }
 
-.title_section h2 {
+.title_section h1 {
   margin-bottom: 0px;
-  margin-left: 13px;
+  margin-left: 14px;
 }
 
+.icons {
+  width: auto;
+  height: auto;
+}

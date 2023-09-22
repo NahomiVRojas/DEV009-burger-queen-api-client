@@ -26,6 +26,7 @@
 .error_icon, .success_icon {
   color: black;
   width: 8vw;
+  height: auto;
   margin-bottom: 2vh;
 }
 

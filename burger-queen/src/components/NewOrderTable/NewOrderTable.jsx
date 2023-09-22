@@ -9,15 +9,16 @@ import { postOrder } from "../../Services/Request";
 import Alert from "../Alert/Alert";
 
 export default function NewOrderTable() {
+
   const token = localStorage.getItem("token");
   const [selectedItems, setSelectedItems] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+
   const handleClick = NavigateTo("/waiter/orders");
   const handleReturn = NavigateTo("/waiter/dashboard");
 
   const handleShowAlert = () => {
-    console.log("modal abierto");
     setShowAlert(true);
   };
 
@@ -38,6 +39,7 @@ export default function NewOrderTable() {
     const existingItem = selectedItems.find(
       (selectedItem) => selectedItem.id === item.id
     );
+
     if (existingItem) {
       const updatedItems = selectedItems.map((selectedItem) => {
         if (selectedItem.id === item.id) {
@@ -45,6 +47,7 @@ export default function NewOrderTable() {
         }
         return selectedItem;
       });
+
       setSelectedItems(updatedItems);
     } else {
       setSelectedItems([...selectedItems, { ...item, qty: 1 }]);
@@ -55,6 +58,7 @@ export default function NewOrderTable() {
     const existingItem = selectedItems.find(
       (selectedItem) => selectedItem.id === item.id
     );
+
     if (existingItem) {
       if (item.qty > 1) {
         const updatedItems = selectedItems.map((selectedItem) => {
@@ -63,7 +67,7 @@ export default function NewOrderTable() {
           }
           return selectedItem;
         });
-        console.log(updatedItems);
+        
         setSelectedItems(updatedItems);
       } else if (item.qty <= 1) {
         const updatedItems = selectedItems.filter(
@@ -75,9 +79,9 @@ export default function NewOrderTable() {
   };
 
   const currentDateTime = new Date().toLocaleTimeString([], { hour12: false });
+  const [dataEntry] = useState(currentDateTime);
 
   const [client, setClient] = useState("");
-  const [dataEntry] = useState(currentDateTime);
   const [status] = useState("Pending");
 
   function handleAddOrder(tableNumber) {
@@ -99,17 +103,15 @@ export default function NewOrderTable() {
     postOrder(data, token)
       .then((response) => {
         if (response.ok) {
-          console.log("Orden agregada con éxito", data);
           setShowSuccess(true);
         }
         return response.json();
       })
       .then((data) => {
-        console.log("New order data:", data);
         return data;
       })
       .catch((error) => {
-        console.error("Error al realizar la solicitud", error);
+        throw error;
       });
   }
 
@@ -121,6 +123,7 @@ export default function NewOrderTable() {
             src={returnButton}
             className={style.return_button}
             onClick={handleReturn}
+            alt="Return"
           />
           <input
             type="text"
@@ -147,7 +150,7 @@ export default function NewOrderTable() {
         </div>
         <Menu handleAddToSelectedItems={handleAddToSelectedItems} />
         <div className={style.see_all_orders} onClick={handleClick}>
-          <img src={iconSeeOrders} />
+          <img src={iconSeeOrders} alt="See all orders" className={style.icon_orders} />
           <span>See All Orders</span>
         </div>
       </section>

@@ -21,5 +21,6 @@
 }
 
 .images {
-    width: 150px;
+    width: 10rem;
+    height: auto;
 }

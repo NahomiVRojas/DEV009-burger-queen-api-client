@@ -28,11 +28,8 @@ export default function EditProduct({
     editProduct(id, updatedData, token)
       .then((response) => {
         if (response.ok) {
-          console.log("Producto editado con éxito");
           onClose();
           onEditSuccess(updatedData);
-        } else {
-          console.error("Error al editar el producto");
         }
       })
       .catch((error) => {
