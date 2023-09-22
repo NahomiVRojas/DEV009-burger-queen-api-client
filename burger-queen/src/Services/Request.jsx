@@ -3,6 +3,7 @@ export const auth = (email, password) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
         },
         body: JSON.stringify({
             email: email,
@@ -16,6 +17,7 @@ export const products = (token) => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Authorization': `Bearer ${token}`
         },
     })
@@ -26,6 +28,7 @@ export const users = (token) => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Authorization': `Bearer ${token}`
         },
     })
@@ -36,6 +39,7 @@ export const deleteProduct = (id, token) => {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Authorization': `Bearer ${token}`
         },
     })
@@ -46,6 +50,7 @@ export const editProduct = (id, updatedData, token) => {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(updatedData)
@@ -57,6 +62,7 @@ export const addProduct = (data, token) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
@@ -73,6 +79,7 @@ export const addUsers = (data, token) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
@@ -90,6 +97,7 @@ export const deleteUser = (id, token) => {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Authorization': `Bearer ${token}`
         },
     })
@@ -100,6 +108,7 @@ export const editUser = (id, updatedData, token) => {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(updatedData)
@@ -111,6 +120,7 @@ export const allOrders = (token) => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Authorization': `Bearer ${token}`
         },
     })
@@ -121,6 +131,7 @@ export const postOrder = (data, token) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data),
@@ -132,6 +143,7 @@ export const userOrder = (id, token) => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Authorization': `Bearer ${token}`
         }
     })
@@ -142,6 +154,7 @@ export const patchOrder = (id, updatedData, token) => {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(updatedData)
@@ -153,6 +166,7 @@ export const deleteOrder = (id, token) => {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Authorization': `Bearer ${token}`
         },
     })

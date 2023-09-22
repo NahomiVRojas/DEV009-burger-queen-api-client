@@ -8,6 +8,7 @@
   background-image: url("../../assets/background-login.webp");
   background-size: cover;
 }
+
 .section {
   position: absolute;
   top: 50%;
@@ -15,6 +16,7 @@
   transform: translate(-50%, -50%);
   margin: 0;
   width: 50vw;
+  height: auto;
   padding-bottom: 4vh;
   border-radius: 30px;
   background-color: #fff;
@@ -50,6 +52,7 @@
 @media (min-width: 934px) {
   .logo {
     width: 17vw;
+    height: auto;
   }
 
   .section {

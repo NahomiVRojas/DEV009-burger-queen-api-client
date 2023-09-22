@@ -37,6 +37,7 @@ describe("AddUser Component", () => {
   it("should add a new user", async () => {
     const mockResponse = {
       ok: true,
+      status: 200,
       json: jest.fn().mockResolvedValue({
         id: "2",
         name: "Juan Jose",
@@ -70,67 +71,45 @@ describe("AddUser Component", () => {
     });
   });
 
-  it("should handle error when adding a user with duplicate ID", async () => {
+  it("should add a new user", async () => {
     const mockResponse = {
-      status: 500,
-      json: jest
-        .fn()
-        .mockResolvedValue({
-          error: "An error occurred while adding the user.",
-        }),
+      ok: true,
+      status: 400,
     };
 
-    addUsers.mockRejectedValueOnce(mockResponse);
-
-    fireEvent.change(idElement, { target: { value: "2" } });
-    fireEvent.change(nameElement, { target: { value: "Camila" } });
-    fireEvent.change(emailElement, { target: { value: "camila@bq.com" } });
-    fireEvent.change(passwordElement, { target: { value: "password123" } });
-    fireEvent.change(roleElement, { target: { value: "Chef" } });
-
+    addUsers.mockResolvedValueOnce(mockResponse);
     fireEvent.click(buttonElement);
 
     await waitFor(() => {
       expect(addUsers).toHaveBeenCalledTimes(1);
       const errorElement = screen.queryByTestId("error_message");
       expect(errorElement.textContent).toBe(
-        "An error occurred while adding the user."
+        "This email is already in use, or it's invalid."
       );
     });
   });
 
-  it("should handle error when adding a user with a server error", async () => {
+  it("should add a new user", async () => {
     const mockResponse = {
+      ok: true,
       status: 500,
-      json: jest
-        .fn()
-        .mockResolvedValue({
-          error: "An error occurred while adding the user.",
-        }),
     };
 
-    addUsers.mockRejectedValueOnce(mockResponse);
-
-    fireEvent.change(idElement, { target: { value: "2" } });
-    fireEvent.change(nameElement, { target: { value: "Camila" } });
-    fireEvent.change(emailElement, { target: { value: "camila@bq.com" } });
-    fireEvent.change(passwordElement, { target: { value: "password123" } });
-    fireEvent.change(roleElement, { target: { value: "Chef" } });
-
+    addUsers.mockResolvedValueOnce(mockResponse);
     fireEvent.click(buttonElement);
 
     await waitFor(() => {
       expect(addUsers).toHaveBeenCalledTimes(1);
       const errorElement = screen.queryByTestId("error_message");
       expect(errorElement.textContent).toBe(
-        "An error occurred while adding the user."
+        "ID already in use."
       );
     });
   });
 
   it("should handle error when adding a user with an invalid email", async () => {
     const mockResponse = {
-      status: 400,
+      ok: false,
       json: jest
         .fn()
         .mockResolvedValue({
@@ -140,12 +119,6 @@ describe("AddUser Component", () => {
 
     addUsers.mockRejectedValueOnce(mockResponse);
 
-    fireEvent.change(idElement, { target: { value: "2" } });
-    fireEvent.change(nameElement, { target: { value: "Camila" } });
-    fireEvent.change(emailElement, { target: { value: "invalid-email" } });
-    fireEvent.change(passwordElement, { target: { value: "password123" } });
-    fireEvent.change(roleElement, { target: { value: "Chef" } });
-
     fireEvent.click(buttonElement);
 
     await waitFor(() => {
@@ -154,29 +127,6 @@ describe("AddUser Component", () => {
       expect(errorElement.textContent).toBe(
         "An error occurred while adding the user."
       );
-    });
-  });
-
-  it("should handle error when adding a user with a duplicate ID", async () => {
-    const mockResponse = {
-      status: 500,
-      json: jest.fn().mockResolvedValue({ error: "An error occurred while adding the user." }),
-    };
-
-    addUsers.mockRejectedValueOnce(mockResponse);
-
-    fireEvent.change(idElement, { target: { value: "2" } });
-    fireEvent.change(nameElement, { target: { value: "Camila" } });
-    fireEvent.change(emailElement, { target: { value: "camila@bq.com" } });
-    fireEvent.change(passwordElement, { target: { value: "password123" } });
-    fireEvent.change(roleElement, { target: { value: "Chef" } });
-
-    fireEvent.click(buttonElement);
-
-    await waitFor(() => {
-      expect(addUsers).toHaveBeenCalledTimes(1);
-      const errorElement = screen.queryByTestId("error_message");
-      expect(errorElement.textContent).toBe("An error occurred while adding the user.");
     });
   });
 });

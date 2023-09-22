@@ -32,8 +32,8 @@ export default function AddProduct({ onClose, token, onAdd }) {
         onClose();
         return product;
       })
-      .catch((error) => {
-        throw new Error(error);
+      .catch(() => {
+        setError("An error occurred while adding the user.");
       });
   }
 

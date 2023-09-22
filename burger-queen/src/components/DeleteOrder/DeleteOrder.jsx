@@ -5,12 +5,11 @@ import { deleteOrder } from "../../Services/Request";
 export default function DeleteOrder({ id, token, onClose, onDelete }) {
 
   function deleteOrderById() {
-    deleteOrder(id, token).then((response) => {
+    deleteOrder(id, token)
+    .then((response) => {
       if (response.ok) {
         onClose();
         onDelete(id);
-      } else {
-        console.error(response.status);
       }
     });
   }
