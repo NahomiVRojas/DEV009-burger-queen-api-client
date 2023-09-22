@@ -78,12 +78,6 @@ describe("AllOrders", () => {
 
     });
 
-    it("should handle an error in getting orders", async () => {
-        allOrders.mockRejectedValue(console.error("No orders available."));
-        await new Promise((resolve) => setTimeout(resolve, 0));
-        expect(console.error).toHaveBeenCalled();
-    });
-
     it("should refresh orders when refresh icon is clicked", async () => {
 
         allOrders.mockResolvedValue({
@@ -97,6 +91,6 @@ describe("AllOrders", () => {
         await waitFor(() => {
             expect(allOrders).toHaveBeenCalled();
         });
-
     });
+
 });

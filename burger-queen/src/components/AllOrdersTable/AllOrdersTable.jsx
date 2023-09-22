@@ -25,8 +25,8 @@ export default function AllOrders() {
       .then((data) => {
         setOrders(data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        console.error("An error occurred while fetching the orders.");
       });
   }
 

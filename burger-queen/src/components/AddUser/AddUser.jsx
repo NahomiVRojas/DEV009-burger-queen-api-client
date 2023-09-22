@@ -29,11 +29,10 @@ export default function AddUser({ onClose, token, onAdd }) {
         } else if (response.status === 400) {
           setError("This email is already in use, or it's invalid.");
         } else {
-          return response.json().then((newUserData) => {
-            if (newUserData.user) {
+          return response.json()
+          .then((newUserData) => {
               onAdd(newUserData.user);
-            }
-            onClose();
+              onClose();
           });
         }
       })
@@ -104,7 +103,7 @@ export default function AddUser({ onClose, token, onAdd }) {
       </div>
       {error && (
         <div className={style.error_message}>
-          <img src={exclamationIcon} className={style.icon} alt="Error" />
+          <img src={exclamationIcon} className={style.icon} />
           <span className={style.error} data-testid="error_message">
             {error}
           </span>

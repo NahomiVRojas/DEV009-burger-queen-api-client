@@ -78,4 +78,28 @@ describe("AddProduct Component", () => {
       expect(errorElement.textContent).toBe("ID already in use");
     });
   });
+
+  it("should handle error for a bad request", async () => {
+    const mockResponse = {
+      ok: false,
+      status: 400,
+      json: jest
+        .fn()
+        .mockResolvedValue({
+          error: "An error occurred while adding the user.",
+        }),
+    };
+
+    addProduct.mockRejectedValueOnce(mockResponse);
+    
+    fireEvent.click(buttonElement);
+
+    await waitFor(() => {
+      expect(addProduct).toHaveBeenCalled();
+      const errorElement = screen.queryByTestId("error_message");
+      expect(errorElement.textContent).toBe(
+        "An error occurred while adding the user."
+      );
+    });
+  });
 });
