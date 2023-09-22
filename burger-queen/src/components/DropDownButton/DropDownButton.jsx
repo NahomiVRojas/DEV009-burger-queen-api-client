@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { func } from "prop-types";
 
 export default function DropdownButton({ optionEdit, optionDelete }) {
+
   const [isOpen, setIsOpen] = useState(false);
   const dropDownRef = useRef("");
 
@@ -46,6 +47,7 @@ export default function DropdownButton({ optionEdit, optionDelete }) {
         src={iconOptions}
         className={style.options}
         onClick={toggleDropdown}
+        alt="Options menu"
       />
       {isOpen && (
         <div className={style.content}>

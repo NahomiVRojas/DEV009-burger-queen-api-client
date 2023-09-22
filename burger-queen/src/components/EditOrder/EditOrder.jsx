@@ -1,9 +1,9 @@
 import style from "../EditOrder/EditOrder.module.css";
-import iconSeeOrders from "../../assets/icon-see-orders.svg";
 import Menu from "../Menu/Menu";
 import { useEffect, useState } from "react";
 import NavigateTo from "../Navigate/Navigate";
 import returnButton from "../../assets/return-button.svg";
+import iconSeeOrders from "../../assets/icon-see-orders.svg";
 import { userOrder } from "../../Services/Request";
 import { useParams } from "react-router-dom";
 import UpdateOrder from "../UpdateOrder/UpdateOrder";
@@ -11,6 +11,7 @@ import { patchOrder } from "../../Services/Request";
 import Alert from "../Alert/Alert";
 
 export default function EditOrder() {
+
   const token = localStorage.getItem("token");
   const [selectedItems, setSelectedItems] = useState([]);
   const [orderInfo, setOrderInfo] = useState({});
@@ -43,7 +44,6 @@ export default function EditOrder() {
         return response.json();
       })
       .then((data) => {
-        console.log("Data getProducts:", data);
         setOrderInfo(data);
       })
       .catch((error) => {
@@ -52,9 +52,11 @@ export default function EditOrder() {
   }, [orderId, token]);
 
   const handleAddToSelectedItems = (item) => {
+
     const existingItem = selectedItems.find(
       (selectedItem) => selectedItem.id === item.id
     );
+
     if (existingItem) {
       const updatedItems = selectedItems.map((selectedItem) => {
         if (selectedItem.id === item.id) {
@@ -72,6 +74,7 @@ export default function EditOrder() {
     const itemIndex = selectedItems.findIndex(
       (selectedItem) => selectedItem.id === item.id
     );
+
     if (itemIndex !== -1) {
       const updatedItems = [...selectedItems];
 
@@ -96,15 +99,11 @@ export default function EditOrder() {
     patchOrder(orderId, updatedOrderData, token)
       .then((response) => {
         if (response.ok) {
-          console.log("orden editado con éxito");
           handleSuccessAlert();
-        } else {
-          console.error("Error al editar la orden");
         }
         return response.json();
       })
       .then((newData) => {
-        console.log(newData.dataEntry)
         return newData;
       })
       .catch((error) => {
@@ -120,12 +119,13 @@ export default function EditOrder() {
             src={returnButton}
             className={style.return_button}
             onClick={handleReturn}
+            alt="Return"
           />
           <span className={style.client}>{orderInfo && orderInfo.client}</span>
         </div>
         <Menu handleAddToSelectedItems={handleAddToSelectedItems} />
         <div className={style.see_all_orders} onClick={handleClick}>
-          <img src={iconSeeOrders} />
+          <img src={iconSeeOrders} className={style.icon_orders} alt="See orders" />
           <span>See All Orders</span>
         </div>
       </section>

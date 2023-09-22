@@ -37,8 +37,7 @@ export default function AddUser({ onClose, token, onAdd }) {
           });
         }
       })
-      .catch((error) => {
-        console.error("Error in handleAddNewUser:", error);
+      .catch(() => {
         setError("An error occurred while adding the user.");
       });
   }
@@ -105,7 +104,7 @@ export default function AddUser({ onClose, token, onAdd }) {
       </div>
       {error && (
         <div className={style.error_message}>
-          <img src={exclamationIcon} className={style.icon} />
+          <img src={exclamationIcon} className={style.icon} alt="Error" />
           <span className={style.error} data-testid="error_message">
             {error}
           </span>

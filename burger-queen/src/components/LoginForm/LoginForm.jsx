@@ -35,13 +35,13 @@ export default function LoginForm() {
                     navigateTo("/chef/dashboard")
                 }
             })
-            .catch((error) => {
-                console.log(error)
+            .catch(() => {
+                setError("Invalid credentials.")
             });
     }
 
     return (
-        <form className={style.section}  data-testid="form_login">
+        <form className={style.section} data-testid="form_login">
             <input
                 type="email"
                 placeholder="Email"
@@ -57,11 +57,11 @@ export default function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
             />
             <button onClick={userAuth} data-testid="submit_login">Log In</button>
-            {error && 
-            <div className={style.error_message}>
-            <img src={exclamationIcon} className={style.icon} />
-            <span className={style.error} data-testid="error_login">{error}</span>
-            </div>}
+            {error &&
+                <div className={style.error_message}>
+                    <img src={exclamationIcon} className={style.icon} alt="Error" />
+                    <span className={style.error} data-testid="error_login">{error}</span>
+                </div>}
         </form>
     )
 }

@@ -13,10 +13,32 @@ import Table from "../Table/Table";
 export default function ManageUsersTable() {
 
   const token = localStorage.getItem("token");
+  const handleClick = NavigateTo("/admin/dashboard");
+
   const [allUsers, setAllUsers] = useState([]);
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModals, setShowModals] = useState({});
+  const [userIdToDelete, setUserIdToDelete] = useState(null);
+
+  function getAllUsers(token) {
+    users(token)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      setAllUsers(data);
+      return data;
+    });
+  }
+
+  useEffect(() => {
+    getAllUsers(token)
+  }, [token]);
+
 
   const handleOpenModal = () => {
     setShowModalAdd(true);
@@ -26,72 +48,45 @@ export default function ManageUsersTable() {
     setShowModalAdd(false);
   };
 
-  const handleOpenDelete = () => {
+  const handleOpenDelete = (id) => {
+    setUserIdToDelete(id);
     setShowModalDelete(true);
   };
 
   const handleCloseDelete = () => {
+    setUserIdToDelete(null);
     setShowModalDelete(false);
   };
 
+  const handleDeleteUser = () => {
+    getAllUsers(token);
+  };
+
   const handleOpenEdit = (userId) => {
-    setShowModals((prevModals) => ({
-      ...prevModals,
-      [userId]: true,
-    }));
+    setShowModals((prevModals) => ({ ...prevModals, [userId]: true }));
   };
 
   const handleCloseEdit = (userId) => {
-    setShowModals((prevModals) => ({
-      ...prevModals,
-      [userId]: false,
-    }));
+    setShowModals((prevModals) => ({ ...prevModals, [userId]: false }));
   };
 
-  const handleAddNewUser = (newUserData) => {
-    setAllUsers((currentUsers) => [...currentUsers, newUserData]);
+  const handleUpdateUser = () => {
+    getAllUsers(token);
+  };
+
+  const handleAddNewUser = () => {
+    getAllUsers(token);
     setShowModalAdd(false);
   };
 
-  const handleUpdateUser = (newUserData) => {
-    console.log("Actualizando usuario:", newUserData);
-    setAllUsers((data) =>
-      data.map((user) => (user.id === newUserData.id ? newUserData : user))
-    );
-  };
-
-  const handleDeleteUser = (userId) => {
-    setAllUsers((currentUsers) =>
-      currentUsers.filter((user) => user.id !== userId)
-    );
-  };
-
-  useEffect(() => {
-    users(token)
-      .then((response) => {
-        console.log("Response Users:", response);
-        if (!response.ok) {
-          throw new Error("Usuarios no existen");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setAllUsers(data);
-        return data;
-      });
-  }, [token]);
-
-  const handleClick = NavigateTo("/admin/dashboard");
-  
   return (
     <>
       <div className={style.title_section}>
         <div className={style.title}>
-          <img src={returnButton} onClick={handleClick} />
-          <h2>Manage Users</h2>
+          <img src={returnButton} onClick={handleClick} className={style.icons} alt="Return" />
+          <h1>Manage Users</h1>
         </div>
-        <img src={iconAddUser} onClick={handleOpenModal}></img>
+        <img src={iconAddUser} onClick={handleOpenModal} className={style.icons} alt="Icon add user" />
         {showModalAdd && (
           <AddUser
             onClose={handleCloseModal}
@@ -123,7 +118,7 @@ export default function ManageUsersTable() {
           )}
           {showModalDelete && (
             <DeleteUser
-              id={val.id}
+              id={userIdToDelete}
               token={token}
               onClose={handleCloseDelete}
               onDelete={handleDeleteUser}

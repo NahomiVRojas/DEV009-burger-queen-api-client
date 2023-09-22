@@ -13,62 +13,14 @@ import Table from "../Table/Table";
 export default function ManageProductsTable() {
 
   const token = localStorage.getItem("token");
+  const handleClick = NavigateTo("/admin/dashboard");
   const [allProducts, setAllProducts] = useState([]);
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModals, setShowModals] = useState({});
+  const [productIdToDelete, setProductIdToDelete] = useState(null);
 
-  const handleOpenModal = () => {
-    setShowModalAdd(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModalAdd(false);
-  };
-
-  const handleOpenDelete = () => {
-    setShowModalDelete(true);
-  };
-
-  const handleCloseDelete = () => {
-    setShowModalDelete(false);
-  };
-
-  const handleOpenEdit = (id) => {
-    setShowModals((prevModals) => ({
-      ...prevModals,
-      [id]: true, // Set the modal for the specified user to true
-    }));
-  };
-
-  const handleCloseEdit = (id) => {
-    setShowModals((prevModals) => ({
-      ...prevModals,
-      [id]: false, // Set the modal for the specified user to false
-    }));
-  };
-
-  const addNewProduct = (newProductData) => {
-    setAllProducts((prevProducts) => [...prevProducts, newProductData]);
-    setShowModalAdd(false);
-  };
-
-  const updateProduct = (updatedProductData) => {
-    console.log("Actualizando producto:", updatedProductData);
-    setAllProducts((data) =>
-      data.map((product) =>
-        product.id === updatedProductData.id ? updatedProductData : product
-      )
-    );
-  };
-
-  const handleDelete = (productId) => {
-    setAllProducts((prevProducts) =>
-      prevProducts.filter((product) => product.id !== productId)
-    );
-  };
-  
-  useEffect(() => {
+  function getAllProducts(token) {
     products(token)
       .then((response) => {
         console.log("Response getProducts:", response);
@@ -85,16 +37,59 @@ export default function ManageProductsTable() {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  useEffect(() => {
+    getAllProducts(token);
   }, [token]);
-  const handleClick = NavigateTo("/admin/dashboard");
+
+  const handleOpenModal = () => {
+    setShowModalAdd(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModalAdd(false);
+  };
+
+  const handleOpenDelete = (id) => {
+    setProductIdToDelete(id);
+    setShowModalDelete(true);
+  };
+
+  const handleCloseDelete = () => {
+    setProductIdToDelete(null);
+    setShowModalDelete(false);
+  };
+
+  const handleDelete = () => {
+    getAllProducts(token);
+  };
+
+  const handleOpenEdit = (id) => {
+    setShowModals((prevModals) => ({ ...prevModals, [id]: true }));
+  };
+
+  const handleCloseEdit = (id) => {
+    setShowModals((prevModals) => ({ ...prevModals, [id]: false }));
+  };
+
+  const addNewProduct = () => {
+    setShowModalAdd(false);
+    getAllProducts(token);
+  };
+
+  const updateProduct = () => {
+    getAllProducts(token);
+  };
+
   return (
     <>
       <div className={style.title_section}>
         <div className={style.title}>
-          <img src={returnButton} onClick={handleClick} />
-          <h2>Manage Products</h2>
+          <img src={returnButton} onClick={handleClick} className={style.icons} alt="Return to dashboard" />
+          <h1>Manage Products</h1>
         </div>
-        <img src={iconAddProduct} onClick={handleOpenModal}></img>
+        <img src={iconAddProduct} onClick={handleOpenModal} className={style.icons} alt="Add new product" />
         {showModalAdd && (
           <AddProduct
             onClose={handleCloseModal}
@@ -125,7 +120,7 @@ export default function ManageProductsTable() {
           )}
           {showModalDelete && (
             <DeleteProduct
-              id={val.id}
+              id={productIdToDelete}
               token={token}
               onClose={handleCloseDelete}
               onDelete={handleDelete}

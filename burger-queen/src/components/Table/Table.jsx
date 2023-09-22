@@ -3,6 +3,7 @@ import style from "../Table/Table.module.css";
 import DropdownButton from "../DropDownButton/DropDownButton";
 
 export default function Table({ data, columns, onEdit, onDelete }) {
+  
   return (
     <div className={`table-responsive ${style.responsive}`}>
       <table className="table">

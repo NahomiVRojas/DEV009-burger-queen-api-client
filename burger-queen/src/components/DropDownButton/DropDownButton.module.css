@@ -1,5 +1,6 @@
 .options {
-    width: 30px;
+    width: 1.8rem;
+    height: auto;
 }
 
 .dropdown {
@@ -14,8 +15,8 @@
     background-color: #fff;
     border: 1px solid #C0BABD;
     border-radius: 20px;
-    width: 100px;
-    height: 100px;
+    width: 6rem;
+    height: 6rem;
     overflow: auto;
     z-index: 1;
     display: flex;

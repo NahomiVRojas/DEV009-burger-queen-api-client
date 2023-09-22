@@ -54,7 +54,7 @@ export default function AddProduct({ onClose, token, onAdd }) {
         />
         {error && (
           <div className={style.error_message}>
-            <img src={exclamationIcon} className={style.icon} />
+            <img src={exclamationIcon} className={style.icon} alt="Error" />
             <span className={style.error} data-testid="error_message">
               {error}
             </span>
