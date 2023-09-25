@@ -1,895 +1,154 @@
-# Burger Queen (API Client)
+# Burger Queen
 
-## Índice
+## Indice
 
 * [1. Preámbulo](#1-preámbulo)
-* [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones](#4-consideraciones)
-* [5. Criterios de aceptación del proyecto](#5-criterios-de-aceptación-del-proyecto)
-* [6. Despliegue](#6-despliegue)
-* [7. Pistas / tips](#7-pistas--tips)
+* [2. Características principales](#2-características-principales)
+* [3. Vista previa de la app](#3-vista-previa-de-la-app)
+* [4. Diseño y Prototipos](#4-diseño-y-prototipos)
+* [5. Tecnologias utilizadas](#5-tecnologias-utilizadas)
+* [6. Desarrolladoras](#6-desarrolladoras)
 
 ***
 
 ## 1. Preámbulo
 
-[React](https://es.react.dev/) y [Angular](https://angular.io/)
-son algunos de los _frameworks_ y _librerías_ de JavaScript más utilizados por
-lxs desarrolladorxs alrededor del mundo, y hay una razón para eso.
-En el contexto del navegador, [_mantener la interfaz sincronizada con el estado
-es difícil_](https://medium.com/dailyjs/the-deepest-reason-why-modern-javascript-frameworks-exist-933b86ebc445).
-Al elegir un _framework_ o _librería_ para nuestra interfaz, nos apoyamos en una
-serie de convenciones e implementaciones _probadas_ y _documentadas_ para
-resolver un problema común a toda interfaz web. Esto nos permite concentrarnos
-mejor (dedicar más tiempo) en las características _específicas_ de
-nuestra aplicación.
-
-Cuando elegimos una de estas tecnologías no solo importamos un pedacito de
-código para reusarlo (lo cuál es un gran valor per se), si no que adoptamos una
-**arquitectura**, una serie de **principios de diseño**, un **paradigma**, unas
-**abstracciones**, un **vocabulario**, una **comunidad**, etc.
-
-Como desarrolladora Front-end, estos kits de desarrollo pueden resultarte
-de gran ayuda para implementar rápidamente características de los proyectos en
-los que trabajes.
-
-## 2. Resumen del proyecto
-
-Un pequeño restaurante de hamburguesas, que está creciendo, necesita un
-sistema a través del cual puedan tomar pedidos usando una _tablet_, y enviarlos
-a la cocina para que se preparen ordenada y eficientemente.
-
-![burger-queen](https://user-images.githubusercontent.com/110297/42118136-996b4a52-7bc6-11e8-8a03-ada078754715.jpg)
-
-Este proyecto tiene dos áreas: interfaz (cliente) y API (servidor). Nuestra
-clienta nos ha solicitado desarrollar la interfaz que se integre con una API.
-
-Esta vez tenemos un proyecto 100% por encargo. Si bien siempre puedes (y debes)
-hacer sugerencias de mejoras y/o cambios, muchas veces trabajarás en proyectos
-en los que primero hay que asegurarse de cumplir con lo requerido.
-
-Esta es la información que tenemos de la clienta:
-
-> Somos **Burguer Queen**, una cadena de comida 24hrs.
->
-> Nuestra propuesta de servicio 24hrs ha tenido muy buena acogida y, para
-> seguir creciendo, necesitamos un sistema que nos ayude a tomar los pedidos de
-> nuestrxs clientxs.
->
-> Tenemos 2 menús: uno muy sencillo para el desayuno:
->
-> | Ítem                      |Precio $|
-> |---------------------------|------|
-> | Café americano            |    5 |
-> | Café con leche            |    7 |
-> | Sandwich de jamón y queso |   10 |
-> | Jugo de frutas natural    |    7 |
->
-> Y otro menú para el resto del día:
->
-> | Ítem                      |Precio|
-> |---------------------------|------|
-> |**Hamburguesas**           |   **$**   |
-> |Hamburguesa simple         |    10|
-> |Hamburguesa doble          |    15|
-> |**Acompañamientos**        |   **$**   |
-> |Papas fritas               |     5|
-> |Aros de cebolla            |     5|
-> |**Para tomar**             |   **$**   |
-> |Agua 500ml                 |     5|
-> |Agua 750ml                 |     7|
-> |Bebida/gaseosa 500ml       |     7|
-> |Bebida/gaseosa 750ml       |     10|
->
-> Nuestrxs clientxs son bastante indecisos, por lo que es muy común que cambien
-> el pedido varias veces antes de finalizarlo.
+[Burger Queen](https://burgerqueen-lab.netlify.app/) es una aplicación que tiene como objetivo agilizar la toma de pedidos y la gestión de órdenes en el restaurante de hamburguesas "Burger Queen". Con el crecimiento constante del restaurante, necesitamos una solución eficiente que permita a los miembros del personal tomar pedidos de manera rápida y precisa mediante el uso de tablets. Además, la aplicación facilitará la comunicación entre el personal de servicio y la cocina, garantizando que los pedidos se preparen y sirvan de manera oportuna.
 
-La interfaz debe mostrar los dos menús (desayuno y resto del día), cada uno
-con todos sus _productos_. La usuaria debe poder ir eligiendo qué _productos_
-agregar y la interfaz debe ir mostrando el _resumen del pedido_ con el
-costo total.
+## 2. Características principales
 
-![out](https://user-images.githubusercontent.com/110297/45984241-b8b51c00-c025-11e8-8fa4-a390016bee9d.gif)
+1. **Registro de Usuarios**: La aplicación permite registrar y gestionar cuentas de usuario para el personal del restaurante. Cada miembro del equipo puede iniciar sesión con sus credenciales individuales.
 
-Además la clienta nos ha dado un [link a la documentación](https://app.swaggerhub.com/apis-docs/ssinuco/BurgerQueenAPI/2.0.0)
-que especifica el comportamiento esperado de la API HTTP que deberás consumir.
-Ahí puedes encontrar todos los detalles de los _endpoints_, como por ejemplo
-qué parámetros esperan, qué deben responder, etc.
+2. **Interfaz de Usuario Intuitiva**: La interfaz de usuario de la aplicación está diseñada de manera intuitiva para facilitar la toma de pedidos. El personal puede seleccionar productos, agregar modificaciones y enviar pedidos con facilidad.
 
-El objetivo principal de es aprender a construir una _interfaz web_ usando
-el _framework_ elegido (React, Angular o Vue). Todos estos frameworks de
-Front-end tratan de solucionar el mismo problema: **cómo mantener la interfaz
-y el estado sincronizados**. Así que esta experiencia espera familiarizarte con
-el concepto de _estado de pantalla_, y como cada cambio sobre el estado se va
-a ir reflejando en la interfaz (por ejemplo, cada vez que agregamos un _producto_
-a un _pedido_, la interfaz debe actualizar la lista del pedido y el total).
+3. **Gestión de Pedidos en Tiempo Real**: Los pedidos se gestionan en tiempo real, lo que significa que el personal de servicio puede ver los pedidos en curso, su estado actual y las actualizaciones en tiempo real.
 
-## 3. Objetivos de aprendizaje
+4. **Menús Personalizables**: La aplicación permite personalizar los menús para diferentes momentos del día, como desayuno y almuerzo/cena. Esto facilita la adaptación de las ofertas según el horario.
 
+5. **Integración con Impresora de Cocina**: Cuando se envía un pedido desde la aplicación, se integra con la cocina para notificar a los cocineros sobre los detalles del pedido. Esto agiliza la preparación de la comida y mejora la eficiencia en la cocina.
 
-Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en tu proyecto. Piensa en eso al decidir tu estrategia de trabajo.
+6. **Historial de Pedidos**: La aplicación mantiene un historial de todos los pedidos realizados, lo que permite a los miembros del personal y al gerente revisar los pedidos anteriores y realizar un seguimiento de las preferencias de los clientes.
 
-### HTML
+7. **Seguimiento de Estado de Pedidos**: Los pedidos se pueden seguir desde el momento en que se realizan hasta que se sirven al cliente. Esto ayuda a mantener un control preciso sobre el estado de cada pedido.
 
-- [ ] **Uso de HTML semántico**
 
-  <details><summary>Links</summary><p>
+## 3. Vista previa de la app
 
-  * [HTML semántico](https://curriculum.laboratoria.la/es/topics/html/02-html5/02-semantic-html)
-  * [Semantics - MDN Web Docs Glossary](https://developer.mozilla.org/en-US/docs/Glossary/Semantics#Semantics_in_HTML)
-</p></details>
+### Administrador
 
-### CSS
+El rol de administrador en la aplicación Burger Queen tiene acceso completo a todas las funcionalidades. Puede gestionar usuarios, configurar menús y supervisar todo el proceso de pedidos. Esta vista muestra cómo el administrador interactúa con la aplicación para configurar los roles de mesero(a), administrador(a) y chef, así como para realizar un seguimiento de las operaciones del restaurante.
 
-- [ ] **Uso de selectores de CSS**
+![Administrador](burger-queen/img_readme/admin.gif)
 
-  <details><summary>Links</summary><p>
+### Mesera
 
-  * [Intro a CSS](https://curriculum.laboratoria.la/es/topics/css/01-css/01-intro-css)
-  * [CSS Selectors - MDN](https://developer.mozilla.org/es/docs/Web/CSS/CSS_Selectors)
-</p></details>
+La vista de la mesera en la aplicación Burger Queen está diseñada para simplificar la toma de pedidos. Los meseros pueden seleccionar mesas, elegir productos del menú, agregar modificaciones y enviar pedidos a la cocina. Este video muestra cómo una mesera toma un pedido de manera eficiente y cómo interactúa con la aplicación para garantizar un servicio rápido y preciso.
 
-- [ ] **Modelo de caja (box model): borde, margen, padding**
+![Mesera](burger-queen/img_readme/waiter.gif)
 
-  <details><summary>Links</summary><p>
+### Chef
 
-  * [Box Model & Display](https://curriculum.laboratoria.la/es/topics/css/01-css/02-boxmodel-and-display)
-  * [The box model - MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model)
-  * [Introduction to the CSS box model - MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model)
-  * [CSS display - MDN](https://developer.mozilla.org/pt-BR/docs/Web/CSS/display)
-  * [display - CSS Tricks](https://css-tricks.com/almanac/properties/d/display/)
-</p></details>
+La vista del chef está centrada en la cocina y la preparación de pedidos. Los chefs reciben notificaciones de los pedidos entrantes y pueden marcarlos como preparados una vez que están listos. Esta vista previa muestra cómo los chefs utilizan la aplicación para gestionar las órdenes de manera eficaz y asegurar que los platos se sirvan en su punto.
 
-- [ ] **Uso de flexbox en CSS**
+![Chef](burger-queen/img_readme/chef.gif)
 
-  <details><summary>Links</summary><p>
+## 4. Diseño y Prototipos
 
-  * [A Complete Guide to Flexbox - CSS Tricks](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
-  * [Flexbox Froggy](https://flexboxfroggy.com/#es)
-  * [Flexbox - MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox)
-</p></details>
+### Paleta de Colores y Fuente
 
-- [ ] **Uso de CSS Grid Layout**
+En Burger Queen, hemos seleccionado cuidadosamente una paleta de colores que refleja nuestra identidad visual y mejora la experiencia del usuario. También utilizamos una fuente específica para mantener la coherencia en el diseño de la aplicación.
 
-  <details><summary>Links</summary><p>
+- **Fuente Principal**: 'Montserrat', sans-serif
 
-  * [A Complete Guide to Grid - CSS Tricks](https://css-tricks.com/snippets/css/complete-guide-grid/)
-  * [Grids - MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids)
-</p></details>
+Paleta de colores:
 
-- [ ] **Uso de media queries**
+![paleta de colores](burger-queen/img_readme/paleta-de-colores.png)
 
-  <details><summary>Links</summary><p>
 
-  * [CSS media queries - MDN](https://developer.mozilla.org/es/docs/CSS/Media_queries)
-</p></details>
+Estos colores y la fuente se han elegido para proporcionar una apariencia atractiva y consistente en toda la aplicación Burger Queen.
 
-### JavaScript
+### Logo
 
-- [ ] **Pruebas unitarias (unit tests)**
+Nuestro distintivo logo ha sido diseñado para representar la esencia de Burger Queen. Incorpora elementos que reflejan la calidad de nuestros productos y el ambiente acogedor de nuestro restaurante. El diseño del logo ha sido una parte fundamental de nuestra identidad visual y contribuye a transmitir la imagen de Burger Queen de manera efectiva.
 
-  <details><summary>Links</summary><p>
+<img src="burger-queen/src/assets/burger-queen.webp" alt="Logo de Burger Queen" width="200" height="200">
 
-  * [Empezando con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/getting-started)
-</p></details>
+### Prototipos
 
-- [ ] **Pruebas asíncronas**
+#### Prototipo de baja fidelidad:
 
-  <details><summary>Links</summary><p>
+#### Inicio de Sesión (Login)
 
-  * [Tests de código asincrónico con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/asynchronous)
-</p></details>
+El primer prototipo de baja fidelidad representa la pantalla de inicio de sesión utilizada por los usuarios para acceder a la aplicación.
 
-- [ ] **Uso de mocks y espías**
+![Inicio de Sesión (Login)](burger-queen/img_readme/prototipo-baja-1.png)
 
-  <details><summary>Links</summary><p>
+#### Interfaz del Mesero
 
-  * [Manual Mocks con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/manual-mocks)
-</p></details>
+El segundo prototipo de baja fidelidad muestra la interfaz que utilizan los meseros para tomar pedidos y gestionar las mesas en el restaurante.
 
-- [ ] **Módulos de ECMAScript (ES Modules)**
+![Interfaz del Mesero](burger-queen/img_readme/prototipo-baja-2.png)
 
-  <details><summary>Links</summary><p>
+#### Interfaz del Chef
 
-  * [import - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/import)
-  * [export - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/export)
-</p></details>
+El tercer prototipo de baja fidelidad representa la interfaz de cocina utilizada por los chefs para visualizar y gestionar los pedidos entrantes.
 
-- [ ] **Uso de linter (ESLINT)**
+![Interfaz del Chef](burger-queen/img_readme/prototipo-baja-3.png)
 
-- [ ] **Uso de identificadores descriptivos (Nomenclatura y Semántica)**
+#### Panel de Administración
 
-### Control de Versiones (Git y GitHub)
+El cuarto prototipo de baja fidelidad muestra el panel de administración utilizado por los administradores para configurar menús, gestionar usuarios y supervisar el proceso de pedidos.
 
-- [ ] **Git: Instalación y configuración**
+Estos prototipos de baja fidelidad proporcionan una vista general de las interfaces de usuario para cada uno de los roles mencionados en la aplicación Burger Queen.
 
-- [ ] **Git: Control de versiones con git (init, clone, add, commit, status, push, pull, remote)**
+![Panel de Administración](burger-queen/img_readme/prototipo-baja-4.png)
 
-- [ ] **Git: Integración de cambios entre ramas (branch, checkout, fetch, merge, reset, rebase, tag)**
+#### Prototipo de Alta Fidelidad
 
-- [ ] **GitHub: Creación de cuenta y repos, configuración de llaves SSH**
+Hemos desarrollado un prototipo de alta fidelidad que ofrece una visión detallada de la interfaz de usuario de Burger Queen. Este prototipo representa fielmente cómo se verá y funcionará nuestra aplicación en la vida real. Aquí, puedes ver una vista previa animada de la interfaz en acción.
 
-- [ ] **GitHub: Despliegue con GitHub Pages**
+![Prototipo de Alta Fidelidad](burger-queen/img_readme/prototipo-alta.gif)
 
-  <details><summary>Links</summary><p>
+**Prototipos de Alta Fidelidad:**
 
-  * [Sitio oficial de GitHub Pages](https://pages.github.com/)
-</p></details>
+- **Mesero**: [Ver prototipo del mesero](https://www.figma.com/proto/X0dLjPOQUjmqvhXykAJQeE/Burger-Queen-API-Client?type=design&node-id=1-2&t=g0fMBWHAKW4sTa6b-0&scaling=scale-down&page-id=0%3A1&starting-point-node-id=1%3A2)
 
-- [ ] **GitHub: Colaboración en Github (branches | forks | pull requests | code review | tags)**
+- **Administrador**: [Ver prototipo del administrador](https://www.figma.com/proto/X0dLjPOQUjmqvhXykAJQeE/Burger-Queen-API-Client?type=design&node-id=92-270&t=g0fMBWHAKW4sTa6b-0&scaling=scale-down&page-id=92%3A67&starting-point-node-id=92%3A270)
 
-- [ ] **GitHub: Organización en Github (projects | issues | labels | milestones | releases)**
+- **Jefe de Cocina**: [Ver prototipo del jefe de cocina](https://www.figma.com/proto/X0dLjPOQUjmqvhXykAJQeE/Burger-Queen-API-Client?type=design&node-id=92-68&t=g0fMBWHAKW4sTa6b-0&scaling=scale-down&page-id=92%3A66&starting-point-node-id=92%3A68)
 
-### HTTP
+Estos prototipos de alta fidelidad proporcionan una vista detallada de cómo los usuarios interactuarán con la aplicación en sus roles específicos y muestran la experiencia completa de Burger Queen.
 
-- [ ] **Consulta o petición (request) y respuesta (response).**
 
-  <details><summary>Links</summary><p>
+## 5. Tecnologias utilizadas
 
-  * [Generalidades del protocolo HTTP - MDN](https://developer.mozilla.org/es/docs/Web/HTTP/Overview)
-  * [Mensajes HTTP - MDN](https://developer.mozilla.org/es/docs/Web/HTTP/Messages)
-</p></details>
+En el desarrollo de la aplicación Burger Queen, hemos empleado una serie de tecnologías y herramientas modernas para garantizar un rendimiento óptimo y una experiencia de usuario excepcional. Algunas de las principales tecnologías utilizadas incluyen:
 
-- [ ] **Cabeceras (headers)**
+- **React**: Utilizamos React, una popular biblioteca de JavaScript, para construir la interfaz de usuario de Burger Queen. React nos permite crear componentes reutilizables y construir una aplicación de una sola página (SPA) eficiente.
 
-  <details><summary>Links</summary><p>
+- **Hooks y Componentes de React**: Aprovechamos las capacidades de los hooks y los componentes de React para gestionar el estado de la aplicación y la lógica de presentación. Esto nos permite crear una interfaz de usuario dinámica y receptiva.
 
-  * [HTTP headers - MDN](https://developer.mozilla.org/es/docs/Web/HTTP/Headers)
-</p></details>
+- **JavaScript**: Como lenguaje principal de programación, utilizamos JavaScript para desarrollar la funcionalidad de la aplicación tanto en el lado del cliente como en el lado del servidor.
 
-- [ ] **Cuerpo (body)**
+- **CSS y Bootstrap**: Para el diseño y la estilización, empleamos CSS personalizado y Bootstrap, un marco de diseño de código abierto, que nos permite crear interfaces de usuario atractivas y responsivas.
 
-  <details><summary>Links</summary><p>
+- **Jest**: Para garantizar la calidad y la fiabilidad de nuestra aplicación, implementamos pruebas unitarias y de integración con Jest, un marco de pruebas de JavaScript ampliamente utilizado. Esto nos ayuda a identificar y solucionar problemas rápidamente.
 
-  * [Cuerpo de Mensajes HTTP - MDN](https://developer.mozilla.org/es/docs/Web/HTTP/Messages#cuerpo)
-</p></details>
 
-- [ ] **Verbos HTTP**
+Estas tecnologías y herramientas nos permiten ofrecer una aplicación Burger Queen sólida, eficiente y fácil de mantener.
 
-  <details><summary>Links</summary><p>
+## 6. Desarrolladoras
 
-  * [Métodos de petición HTTP - MDN](https://developer.mozilla.org/es/docs/Web/HTTP/Methods)
-</p></details>
+El desarrollo de la aplicación Burger Queen fue realizado por un equipo de talentosas desarrolladoras que contribuyeron con su experiencia y dedicación al éxito de este proyecto. A continuación, te presentamos a las personas detrás de Burger Queen:
 
-- [ ] **Códigos de status de HTTP**
+- **Andressa Rodrigues**
+  - [GitHub](https://github.com/AndressaSRodrigues)
 
-  <details><summary>Links</summary><p>
+- **Mafe Orostegui**
+  - [GitHub](https://github.com/MafeOrostegui)
 
-  * [Códigos de estado de respuesta HTTP - MDN](https://developer.mozilla.org/es/docs/Web/HTTP/Status)
-  * [The Complete Guide to Status Codes for Meaningful ReST APIs - dev.to](https://dev.to/khaosdoctor/the-complete-guide-to-status-codes-for-meaningful-rest-apis-1-5c5)
-</p></details>
+- **Nahomi Villanueva Rojas**
+  - [GitHub](https://github.com/NahomiVRojas)
 
-- [ ] **Encodings y JSON**
 
-  <details><summary>Links</summary><p>
-
-  * [Introducción a JSON - Documentación oficial](https://www.json.org/json-es.html)
-</p></details>
-
-- [ ] **CORS (Cross-Origin Resource Sharing)**
-
-  <details><summary>Links</summary><p>
-
-  * [Control de acceso HTTP (CORS) - MDN](https://developer.mozilla.org/es/docs/Web/HTTP/CORS)
-</p></details>
-
-### Angular
-
-- [ ] **Components & templates**
-
-  <details><summary>Links</summary><p>
-
-  * [Angular Components Overview - Documentación oficial (en inglés)](https://angular.io/guide/component-overview)
-  * [Introduction to components and templates - Documentación oficial (en inglés)](https://angular.io/guide/architecture-components#introduction-to-components)
-</p></details>
-
-- [ ] **Directivas estructurales (ngIf / ngFor)**
-
-  <details><summary>Links</summary><p>
-
-  * [Writing structural directives - Documentación oficial (en inglés)](https://angular.io/guide/structural-directives)
-</p></details>
-
-- [ ] **@Input | @Output**
-
-  <details><summary>Links</summary><p>
-
-  * [Component interaction - Documentación oficial (en inglés)](https://angular.io/guide/component-interaction#component-interaction)
-</p></details>
-
-- [ ] **Creación y uso de servicios**
-
-  <details><summary>Links</summary><p>
-
-  * [Providing services - Documentación oficial (en inglés)](https://angular.io/guide/architecture-services#providing-services)
-</p></details>
-
-- [ ] **Manejo de rutas**
-
-  <details><summary>Links</summary><p>
-
-  * [In-app navigation: routing to views - Documentación oficial (en inglés)](https://angular.io/guide/router)
-</p></details>
-
-- [ ] **Creación y uso de Observables.**
-
-  <details><summary>Links</summary><p>
-
-  * [Observables in Angular - Documentación oficial (en inglés)](https://angular.io/guide/observables-in-angular)
-</p></details>
-
-- [ ] **Uso de HttpClient**
-
-  <details><summary>Links</summary><p>
-
-  * [Communicating with backend services using HTTP - Documentación oficial (en inglés)](https://angular.io/guide/http)
-</p></details>
-
-- [ ] **Estilos de componentes (ngStyle / ngClass)**
-
-  <details><summary>Links</summary><p>
-
-  * [Template syntax - Documentación oficial (en inglés)](https://angular.io/guide/template-syntax#built-in-directives)
-</p></details>
-
-### React
-
-- [ ] **JSX**
-
-  <details><summary>Links</summary><p>
-
-  * [Presentando JSX - Documentación oficial](https://es.react.dev/learn/writing-markup-with-jsx)
-</p></details>
-
-- [ ] **Componentes y propiedades (props)**
-
-  <details><summary>Links</summary><p>
-
-  * [Componentes y propiedades - Documentación oficial](https://es.react.dev/learn/passing-props-to-a-component)
-</p></details>
-
-- [ ] **Manejo de eventos**
-
-  <details><summary>Links</summary><p>
-
-  * [Manejando eventos - Documentación oficial](https://es.react.dev/learn/responding-to-events)
-</p></details>
-
-- [ ] **Listas y keys**
-
-  <details><summary>Links</summary><p>
-
-  * [Listas y keys - Documentación oficial](https://es.react.dev/learn/rendering-lists)
-</p></details>
-
-- [ ] **Renderizado condicional**
-
-  <details><summary>Links</summary><p>
-
-  * [Renderizado condicional - Documentación oficial](https://es.react.dev/learn/conditional-rendering)
-</p></details>
-
-- [ ] **Elevación de estado**
-
-  <details><summary>Links</summary><p>
-
-  * [Levantando el estado - Documentación oficial](https://es.react.dev/learn/sharing-state-between-components)
-</p></details>
-
-- [ ] **Hooks**
-
-  <details><summary>Links</summary><p>
-
-  * [Presentando Hooks - Documentación oficial](https://es.react.dev/reference/react)
-</p></details>
-
-- [ ] **CSS modules**
-
-  <details><summary>Links</summary><p>
-
-  * [Adding a CSS Modules Stylesheet - Documentación de Create React App (en inglés)](https://vitejs.dev/guide/features.html#css-modules)
-</p></details>
-
-- [ ] **React Router**
-
-  <details><summary>Links</summary><p>
-
-  * [Quick Start - Documentación oficial (en inglés)](https://reactrouter.com/en/main/start/tutorial)
-</p></details>
-
-### Vue
-
-- [ ] **Instancia de Vue.js**
-
-  <details><summary>Links</summary><p>
-
-  * [La instancia Vue - Documentación oficial](https://es.vuejs.org/v2/guide/instance.html)
-</p></details>
-
-- [ ] **Datos y métodos**
-
-  <details><summary>Links</summary><p>
-
-  * [Datos y Métodos - Documentación oficial](https://es.vuejs.org/v2/guide/instance.html#Datos-y-Metodos)
-</p></details>
-
-- [ ] **Uso y creación de componentes**
-
-  <details><summary>Links</summary><p>
-
-  * [Conceptos Básicos de Componentes - Documentación oficial](https://es.vuejs.org/v2/guide/components.html)
-</p></details>
-
-- [ ] **Props**
-
-  <details><summary>Links</summary><p>
-
-  * [Pasando datos a componentes secundarios con Props - Documentación oficial](https://es.vuejs.org/v2/guide/components.html#Pasando-datos-a-componentes-secundarios-con-Props)
-</p></details>
-
-- [ ] **Directivas (v-bind | v-model)**
-
-  <details><summary>Links</summary><p>
-
-  * [v-bind - Documentación oficial](https://es.vuejs.org/v2/api/#v-bind)
-  * [Binding en Formularios - Documentación oficial](https://es.vuejs.org/v2/guide/forms.html)
-</p></details>
-
-- [ ] **Iteración (v-for)**
-
-  <details><summary>Links</summary><p>
-
-  * [Mapeando una matriz a elementos con v-for - Documentación oficial](https://es.vuejs.org/v2/guide/list.html#Mapeando-una-matriz-a-elementos-con-v-for)
-</p></details>
-
-- [ ] **Eventos (v-on)**
-
-  <details><summary>Links</summary><p>
-
-  * [Manejo de eventos - Documentación oficial](https://es.vuejs.org/v2/guide/events.html)
-</p></details>
-
-- [ ] **Propiedades Computadas y Observadores**
-
-  <details><summary>Links</summary><p>
-
-  * [Propiedades Computadas y Observadores](https://es.vuejs.org/v2/guide/computed.html)
-</p></details>
-
-- [ ] **Routing**
-
-  <details><summary>Links</summary><p>
-
-  * [Getting Started - Documentación oficial de Vue Router](https://router.vuejs.org/guide/#html)
-</p></details>
-
-- [ ] **Clases y Estilos**
-
-  <details><summary>Links</summary><p>
-
-  * [Enlace Clases y Estilos - Documentación oficial](https://es.vuejs.org/v2/guide/class-and-style.html)
-</p></details>
-
-### typescript
-
-- [ ] **Chequeo estático de tipos**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/basic-types.html#static-type-checking)
-</p></details>
-
-- [ ] **Rigurosidad**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/basic-types.html#strictness)
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/tsconfig#Type_Checking_6248)
-</p></details>
-
-- [ ] **Tipos primitivos**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean)
-</p></details>
-
-- [ ] **Arreglos**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays)
-</p></details>
-
-- [ ] **Tipo `any`**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any)
-</p></details>
-
-- [ ] **Funciones**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#functions)
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
-</p></details>
-
-- [ ] **Propiedades opcionales**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#optional-properties)
-</p></details>
-
-- [ ] **Tipos Union**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)
-</p></details>
-
-- [ ] **Alias de tipos**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)
-</p></details>
-
-- [ ] **Interfaces**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces)
-</p></details>
-
-- [ ] **Type assertions**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions)
-</p></details>
-
-- [ ] **Tipos literales**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types)
-</p></details>
-
-- [ ] **basic-types/null-and-undefined**
-
-- [ ] **Enums**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#enums)
-</p></details>
-
-- [ ] **Narrowing**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
-</p></details>
-
-- [ ] **classes/members/fields**
-
-- [ ] **classes/members/constructor**
-
-- [ ] **classes/members/methods**
-
-- [ ] **classes/members/getter-setters**
-
-- [ ] **classes/class-heritage/implements**
-
-- [ ] **classes/class-heritage/extends**
-
-- [ ] **classes/member-visibility/public**
-
-- [ ] **classes/member-visibility/protected**
-
-- [ ] **classes/member-visibility/private**
-
-- [ ] **Miembros de clase estáticos**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/classes.html#static-members)
-</p></details>
-
-- [ ] **this**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/classes.html#this-at-runtime-in-classes)
-</p></details>
-
-- [ ] **Clases abstractas**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/2/classes.html#abstract-classes-and-members)
-</p></details>
-
-- [ ] **Decoradores**
-
-  <details><summary>Links</summary><p>
-
-  * [Documentación oficial de Typescript](https://www.typescriptlang.org/docs/handbook/decorators.html)
-</p></details>
-
-### Centrado en el usuario
-
-- [ ] **Diseñar y desarrollar un producto o servicio poniendo a las usuarias en el centro**
-
-### Diseño de producto
-
-- [ ] **Crear prototipos de alta fidelidad que incluyan interacciones**
-
-- [ ] **Seguir los principios básicos de diseño visual**
-
-### Investigación
-
-- [ ] **Planear y ejecutar testeos de usabilidad de prototipos en distintos niveles de fidelidad**
-
-  <details><summary>Links</summary><p>
-
-  * [Intro a testeos usabilidad](https://coda.io/@bootcamp-laboratoria/contenido-ux/test-de-usabilidad-15)
-  * [Pruebas con Usuarios 1 — ¿Qué, cuándo y para qué testeamos?](https://eugeniacasabona.medium.com/pruebas-con-usuarios-1-qu%C3%A9-cu%C3%A1ndo-y-para-qu%C3%A9-testeamos-7c3a89b4b5e7)
-</p></details>
-
-## 4. Consideraciones
-
-Este proyecto se debe "resolver" en duplas y para trabajar con el backend
-te sugerimos elegir un método entre las siguientes opciones:
-
-1. Usando una mock API. Puedes crear tu propia mock API con las herramientas
-  [json-server](https://www.npmjs.com/package/json-server) y
-  [json-server-auth](https://www.npmjs.com/package/json-server-auth)
-  o puedes hacer fork y clonar
-  [este repo de una mock API](https://github.com/Laboratoria/burger-queen-api-mock)
-  que hemos desarrollado. Esta mock API debería comportarse de la manera definida
-  [en la documentación.](https://app.swaggerhub.com/apis-docs/ssinuco/BurgerQueenAPI/2.0.0)
-
-2. Consumiendo una API desplegada. Puedes usar una que desarrollarán tus
-  compañeras en su proyecto Burger Queen API, o pueden desplegar tu mock API.
-  Aquí hay [un ejemplo como desplegar tu mock con Vercel.](https://medium.com/@phillipnzaujunior/unleashing-the-power-of-mock-apis-deploying-your-fake-rest-api-to-vercel-d1cbd95b4452)
-
-Puedes empezar usando una mock API y en cualquier momento del proyecto
-pasarte a la API desplegada. Esta situación suele ocurrir en Desarrollo Web
-cuando se necesita avanzar con la implementación del frontend mientras las
-personas encargadas del backend aún están en proceso de diseño o desarrollo
-de la API.
-
-El rango de tiempo estimado para completar el proyecto es de 3 a 5 Sprints.
-
-Trabaja en una historia hasta terminarla antes de pasar a la siguiente. Trabaja
-hasta la historia que puedas en el tiempo especificado.
-
-La lógica del proyecto debe estar implementada completamente en JavaScript
-(ES6+), HTML y CSS y empaquetada de manera automatizada.
-
-Uno de los mayores objetivos de este proyecto es aprender a usar una librería o
-framework popular para desarrollar una web app.
-Debes elegir entre [React](https://es.react.dev/) o [Angular](https://angular.io/).
-
-Ten en cuenta que si eliges Angular, tienes la obligación de usar [TypeScript](https://www.typescriptlang.org/).
-_Typescript_ es un lenguaje de programación fuertemente tipado basado en
-javascript.
-
-Si eliges React, la decisión de usar Typescript es opcional (pero te lo
-recomendamos!). Aquí puedes encontrar más información en relación a cómo iniciar
-tu proyecto con [Typescript y React](https://itnext.io/create-react-v18-typescript-project-with-vite-d0d602e4a60e).
-
-La aplicación debe ser un _Single Page App_. Los pedidos los tomaremos desde una
-_tablet_, pero **no queremos una app nativa**, sino una web app que sea
-**mobile-first**.
-
-Necesitamos pensar bien en el aspecto UX de de quienes van a tomar los pedidos,
- el tamaño y aspecto de los botones, la visibilidad del estado actual del
- pedido, etc.
-
-La aplicación desplegada debe tener 80% o más el las puntuaciones de
-Performance, Progressive Web App, Accessibility y Best Practices de Lighthouse.
-
-La aplicación debe hacer uso de `npm-scripts` y contar con scripts `start`,
-`test`, `build` y `deploy`, que se encarguen de arrancar, correr las pruebas,
-empaquetar y desplegar la aplicación respectivamente.
-
-Los tests unitarios deben cubrir un mínimo del 90% de _statements_, _functions_,
-_lines_ y _branches_.
-
-Por otro lado, deberás definir la estructura de carpetas y archivos que consideres
-necesaria. Puedes guiarte de las convenciones del _framework_ elegido. Por ende,
-los _tests_ y el _setup_ necesario para ejecutarlos, serán hechos por ti.
-
-## 5. Criterios de aceptación del proyecto
-
-### Definición del producto
-
-El [_Product Owner_](https://www.youtube.com/watch?v=r2hU7MVIzxs&t=202s)
-nos presenta este _backlog_ que es el resultado de su trabajo con el clientx
-hasta hoy.
-
-***
-
-#### [Historia de usuario 1] Mesero/a debe poder ingresar al sistema, si el admin ya le ha asignado credenciales
-
-Yo como meserx quiero poder ingresar al sistema de pedidos.
-
-##### Criterios de aceptación
-
-Lo que debe ocurrir para que se satisfagan las necesidades del usuario.
-
-* Acceder a una pantalla de login.
-* Ingresar email y contraseña.
-* Recibir mensajes de error comprensibles, dependiendo de cuál es el error
-  con la información ingresada.
-* Ingresar al sistema de pedidos si las crendenciales son correctas.
-
-##### Definición de terminado
-
-Lo acordado que debe ocurrir para decir que la historia está terminada.
-
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-
-***
-
-#### [Historia de usuario 2] Mesero/a debe poder tomar pedido de cliente/a
-
-Yo como meserx quiero tomar el pedido de unx clientx para no depender de mi mala
-memoria, para saber cuánto cobrar, y enviarlo a la cocina para evitar errores y
-que se puedan ir preparando en orden.
-
-##### Criterios de aceptación
-
-Lo que debe ocurrir para que se satisfagan las necesidades del usuario
-
-* Anotar nombre de clientx.
-* Agregar productos al pedido.
-* Eliminar productos.
-* Ver resumen y el total de la compra.
-* Enviar pedido a cocina (guardar en alguna base de datos).
-* Se ve y funciona bien en una _tablet_
-
-##### Definición de terminado
-
-Lo acordado que debe ocurrir para decir que la historia está terminada.
-
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-
-***
-
-#### [Historia de usuario 3] Jefe de cocina debe ver los pedidos
-
-Yo como jefx de cocina quiero ver los pedidos de lxs clientxs en orden y
-marcar cuáles están listos para saber qué se debe cocinar y avisar a lxs meserxs
-que un pedido está listo para servirlo a un clientx.
-
-##### Criterios de aceptación
-
-* Ver los pedidos ordenados según se van haciendo.
-* Marcar los pedidos que se han preparado y están listos para servirse.
-* Ver el tiempo que tomó prepara el pedido desde que llegó hasta que se
-  marcó como completado.
-
-##### Definición de terminado
-
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-
-***
-
-#### [Historia de usuario 4] Meserx debe ver pedidos listos para servir
-
-Yo como meserx quiero ver los pedidos que están preparados para entregarlos
-rápidamente a lxs clientxs que las hicieron.
-
-##### Criterios de aceptación
-
-* Ver listado de pedido listos para servir.
-* Marcar pedidos que han sido entregados.
-
-##### Definición de terminado
-
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-* Los datos se deben mantener íntegros, incluso después de que un pedido ha
-  terminado. Todo esto para poder tener estadísticas en el futuro.
-
-***
-
-#### [Historia de usuario 5] Administrador(a) de tienda debe administrar a sus trabajadorxs
-
-Yo como administrador(a) de tienda quiero gestionar a los usuarios de
-la plataforma para mantener actualizado la informacion de mis trabajadorxs.
-
-##### Criterios de aceptación
-
-* Ver listado de trabajadorxs.
-* Agregar trabajadorxs.
-* Eliminar trabajadoxs.
-* Actualizar datos de trabajadorxs.
-
-##### Definición de terminado
-
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-
-***
-
-#### [Historia de usuario 6] Administrador(a) de tienda debe administrar a sus productos
-
-Yo como administrador(a) de tienda quiero gestionar los productos
-para mantener actualizado el menú.
-
-##### Criterios de aceptación
-
-* Ver listado de productos.
-* Agregar productos.
-* Eliminar productos.
-* Actualizar datos de productos.
-
-##### Definición de terminado
-
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-
-***
-
-## 6. Despliegue
-
-Puedes elegir el proveedor (o proveedores) que prefieras junto
-con el mecanismo de despligue y estrategia de alojamiento.
-Recuerda que si mockeaste la API, también tienes que desplegarla.
-Te recomendamos explorar las siguientes opciones:
-
-* [Vercel](https://vercel.com/) es una plataforma de _despliegue_ que
-nos permite desplegar nuestra aplicación web estática (HTML, CSS y
-JavaScript) y también nos permite desplegar aplicaciones web que se
-ejecutan en el servidor (Node.js).
-* [Netlify](https://www.netlify.com/) al igual que Vercel, es una
-plataforma de _despliegue_ que nos permite desplegar nuestra aplicación
-web estática (HTML, CSS y JavaScript) y también nos permite desplegar
-aplicaciones web que se ejecutan en el servidor (Node.js).
-
-## 7. Pistas / Tips
-
-Súmate al canal de Slack
-[#project-bq-api-client](https://claseslaboratoria.slack.com/archives/C04A0GS1WJX)
-para conversar y pedir ayuda del proyecto.
-
-### Frameworks / libraries
-
-* [React](https://react.dev/)
-* [Angular](https://angular.io/)
-
-### Herramientas
-
-* [npm-scripts](https://docs.npmjs.com/misc/scripts)
-* [Babel](https://babeljs.io/)
-* [webpack](https://webpack.js.org/)
-* [json-server](https://www.npmjs.com/package/json-server)
-
-### PWA
-
-* [Tu primera Progressive Web App - Google developers](https://developers.google.com/web/fundamentals/codelabs/your-first-pwapp/?hl=es)
-* [Progressive Web Apps - codigofacilito.com](https://codigofacilito.com/articulos/progressive-apps)
-* [Usando Service Workers - MDN](https://developer.mozilla.org/es/docs/Web/API/Service_Worker_API/Using_Service_Workers)
+Cada una de estas desarrolladoras desempeñó un papel fundamental en el desarrollo, diseño y pruebas de Burger Queen. Juntas, crearon una aplicación excepcional que ofrece una solución eficiente para la gestión de pedidos en el restaurante.
