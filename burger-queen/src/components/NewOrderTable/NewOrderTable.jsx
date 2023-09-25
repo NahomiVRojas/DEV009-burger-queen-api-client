@@ -107,9 +107,6 @@ export default function NewOrderTable() {
         }
         return response.json();
       })
-      .then((data) => {
-        return data;
-      })
       .catch((error) => {
         throw error;
       });
