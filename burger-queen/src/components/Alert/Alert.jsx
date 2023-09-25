@@ -9,7 +9,7 @@ export default function Alert({ type, message, option, onClose }) {
 
   return (
     <>
-      <div className={`modal ${style.alert}`} tabIndex="-1">
+      <div className={`modal ${style.alert}`} tabIndex="-1" data-testid="alert">
         <div
           className={`modal-dialog modal-dialog-centered ${style.alert_body}`}
         >

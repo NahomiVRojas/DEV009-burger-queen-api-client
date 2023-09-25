@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { number, string, func } from "prop-types";
+import { useState } from "react";
 import Modal from "../Modal/Modal";
 import style from "../EditProduct/EditProduct.module.css";
 import { editProduct } from "../../Services/Request";
-
 export default function EditProduct({
   id,
   name,
@@ -36,7 +35,6 @@ export default function EditProduct({
         console.error("Error al realizar la solicitud de edición", error);
       });
   }
-
   return (
     <>
       <Modal
@@ -47,7 +45,13 @@ export default function EditProduct({
       >
         <div>
           <label>ID</label>
-          <input className={style.inputs} value={id} type="number" readOnly />
+          <input
+            className={style.inputs}
+            value={id}
+            type="number"
+            data-testid="id_edit_product"
+            readOnly
+          />
         </div>
         <div>
           <label>Product</label>
@@ -55,6 +59,7 @@ export default function EditProduct({
             className={style.inputs}
             value={editedName}
             type="text"
+            data-testid="name_edit_product"
             onChange={(e) => setEditedName(e.target.value)}
           />
         </div>
@@ -62,6 +67,7 @@ export default function EditProduct({
           <label>Menu</label>
           <select
             value={editedType}
+            data-testid="menu_edit_product"
             onChange={(e) => setEditedType(e.target.value)}
           >
             <option>--</option>
@@ -75,6 +81,7 @@ export default function EditProduct({
             className={style.inputs}
             value={editedPrice}
             type="text"
+            data-testid="price_edit_product"
             onChange={(e) => setEditedPrice(e.target.value)}
           />
         </div>
@@ -82,7 +89,6 @@ export default function EditProduct({
     </>
   );
 }
-
 EditProduct.propTypes = {
   id: string.isRequired,
   type: string.isRequired,

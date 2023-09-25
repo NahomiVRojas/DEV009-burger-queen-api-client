@@ -47,6 +47,7 @@ export default function TakeOrder({
         <select
           className={style.select}
           value={tableNumber}
+          data-testid="table_order"
           onChange={(e) => setTableNumber(e.target.value)}
         >
           {options}
@@ -54,24 +55,26 @@ export default function TakeOrder({
       </div>
       <div className={style.items}>
         {selectedItems.length === 0 ? (
-          <div className={style.emptyBasket}>No items selected</div>
+          <div className={style.emptyBasket} data-testid="no_items_order">No items selected</div>
         ) : (
           selectedItems.map((item, index) => (
             <div key={index} className={style.item}>
-              <div>
+              <div data-testid={`order_${item.name}`}>
                 {item.name}
                 <br />${item.price}
               </div>
               <div className={style.container}>
                 <button
                   className={style.add_item}
+                  data-testid={`add_item_${item}`}
                   onClick={() => handleAddToSelectedItems(item)}
                 >
                   +
                 </button>
-                <span className={style.qty}>{item.qty}</span>
+                <span className={style.qty} data-testid={`qty_item_${item.qty}`}>{item.qty}</span>
                 <button
                   className={style.reduce_item}
+                  data-testid={`remove_item_${item}`}
                   onClick={() => handleRemoveSelectedItems(item)}
                 >
                   -
@@ -84,10 +87,11 @@ export default function TakeOrder({
       <div className={style.buttons}>
         <div className={style.price}>
           <span>Total</span>
-          <span className={style.total}>${calculateTotal()}</span>
+          <span className={style.total} data-testid="total_order">${calculateTotal()}</span>
         </div>
         <button
           className={style.button_send}
+          data-testid="send_order"
           onClick={() => {
             if (selectedItems.length === 0) {
               handleShowAlert();

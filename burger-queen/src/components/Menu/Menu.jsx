@@ -32,6 +32,7 @@ export default function Menu({ handleAddToSelectedItems }) {
     <>
       <div>
         <button
+          data-testid="btn_breakfast"
           className={
             menuType === "Breakfast"
               ? `${style.button} ${style.active}`
@@ -66,8 +67,12 @@ export default function Menu({ handleAddToSelectedItems }) {
                   : product.type === "Lunch/Dinner"
               )
               .map((val, key) => (
-                <tr key={key} className={style.items} onClick={() => handleAddToSelectedItems(val)}>
-                  <td>{val.name}</td>
+                <tr
+                  key={key}
+                  className={style.items}
+                  onClick={() => handleAddToSelectedItems(val)}
+                >
+                  <td data-testid={`menu_${val.name}`}>{val.name}</td>
                   <td>{val.price}</td>
                 </tr>
               ))}
