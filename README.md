@@ -71,7 +71,7 @@ Estos colores y la fuente se han elegido para proporcionar una apariencia atract
 
 Nuestro distintivo logo ha sido diseñado para representar la esencia de Burger Queen. Incorpora elementos que reflejan la calidad de nuestros productos y el ambiente acogedor de nuestro restaurante. El diseño del logo ha sido una parte fundamental de nuestra identidad visual y contribuye a transmitir la imagen de Burger Queen de manera efectiva.
 
-<img src="burger-queen/src/assets/burger-queen.webp" alt="Logo de Burger Queen" width="200" height="200">
+<img src="burger-queen/src/assets/burger-queen.webp" alt="Logo de Burger Queen" width="auto" height="200">
 
 ### Prototipos
 
