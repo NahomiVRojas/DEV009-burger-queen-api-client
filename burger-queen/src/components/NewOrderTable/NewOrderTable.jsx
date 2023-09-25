@@ -128,6 +128,7 @@ export default function NewOrderTable() {
           <input
             type="text"
             placeholder="Client Name"
+            data-testid="client_order"
             className={style.client}
             onChange={(e) => setClient(e.target.value)}
           />
