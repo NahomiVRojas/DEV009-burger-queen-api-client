@@ -1,5 +1,9 @@
 .date {
-    text-align: center;
-    color: var(--color-light-pink);
-    margin-bottom: 50px;
-  }
+  text-align: center;
+  color: var(--color-light-pink);
+  margin-bottom: 50px;
+}
+
+.date h1 {
+  font-size: 2rem;
+}

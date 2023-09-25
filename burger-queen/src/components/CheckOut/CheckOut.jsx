@@ -17,15 +17,11 @@ export default function CheckOut({ onClose, id }) {
         patchOrder(id, updatedOrderData, token)
             .then((response) => {
                 if (response.ok) {
-                    console.log("orden cerrada");
                     navigateToOrders();
-                } else {
-                    console.error("Error al cerrar la orden");
                 }
                 return response.json();
             })
             .then((newData) => {
-                console.log(newData.status)
                 onClose()
                 return newData;
             })

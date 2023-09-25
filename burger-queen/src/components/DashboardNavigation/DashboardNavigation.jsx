@@ -1,8 +1,8 @@
 import style from './DashboardNavigation.module.css';
 import { useNavigate } from "react-router-dom";
-import users from '../../assets/hands.png';
-import burger from '../../assets/icon-burger.png';
-import list from '../../assets/list.png';
+import users from '../../assets/hands.webp';
+import burger from '../../assets/icon-burger.webp';
+import list from '../../assets/list.webp';
 
 export default function DashboardNavigation() {
 

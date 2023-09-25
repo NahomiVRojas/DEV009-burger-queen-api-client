@@ -3,14 +3,13 @@ import Modal from "../Modal/Modal";
 import { deleteOrder } from "../../Services/Request";
 
 export default function DeleteOrder({ id, token, onClose, onDelete }) {
+
   function deleteOrderById() {
-    deleteOrder(id, token).then((response) => {
+    deleteOrder(id, token)
+    .then((response) => {
       if (response.ok) {
-        console.log("Deleted");
         onClose();
         onDelete(id);
-      } else {
-        console.error(response.status);
       }
     });
   }
@@ -24,7 +23,7 @@ export default function DeleteOrder({ id, token, onClose, onDelete }) {
         nameAction="Yes, delete it."
       >
         <div>
-          <p>Do you want to delete this order?</p>
+          <span>Do you want to delete this order?</span>
         </div>
       </Modal>
     </>

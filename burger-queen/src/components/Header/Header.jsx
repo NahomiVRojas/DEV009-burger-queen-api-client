@@ -1,5 +1,5 @@
 import style from "../Header/Header.module.css"
-import logo from "../../assets/burger-queen.png";
+import logo from "../../assets/burger-queen.webp";
 import iconUser from "../../assets/icon-user.svg";
 import iconSignOut from "../../assets/sign-out.svg";
 import { useNavigate } from "react-router-dom";

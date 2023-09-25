@@ -8,8 +8,9 @@ export default function Modal({
   action,
   nameAction,
 }) {
+
   return (
-    <div className={`modal ${style.modal}`} tabIndex="-1">
+    <div className={`modal ${style.modal}`} tabIndex="-1" data-testid="modal">
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">
@@ -46,6 +47,7 @@ export default function Modal({
             <button
               type="button"
               className={`btn btn-primary ${style.btn_add}`}
+              data-testid="btn_modal"
               onClick={action}
             >
               {nameAction}

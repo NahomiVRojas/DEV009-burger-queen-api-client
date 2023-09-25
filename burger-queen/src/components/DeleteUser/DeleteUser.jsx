@@ -3,10 +3,11 @@ import { func, string } from "prop-types";
 import Modal from "../Modal/Modal";
 
 export default function DeleteUser({ id, token, onClose, onDelete }) {
+
   function deleteUserById() {
-    deleteUser(id, token).then((response) => {
+    deleteUser(id, token)
+    .then((response) => {
       if (response.ok) {
-        console.log("Deleted");
         onClose();
         onDelete(id);
       } else {
@@ -14,6 +15,7 @@ export default function DeleteUser({ id, token, onClose, onDelete }) {
       }
     });
   }
+
   return (
     <>
       <Modal
@@ -23,7 +25,7 @@ export default function DeleteUser({ id, token, onClose, onDelete }) {
         nameAction="Yes, delete it."
       >
         <div>
-          <p>Do you want to delete this user?</p>
+          <span>Do you want to delete this user?</span>
         </div>
       </Modal>
     </>

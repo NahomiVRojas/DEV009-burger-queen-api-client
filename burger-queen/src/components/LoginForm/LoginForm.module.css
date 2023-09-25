@@ -34,5 +34,6 @@ button {
 }
 
 .icon {
-    width: 17px;
+    width: 1.1rem;
+    height: auto;
 }

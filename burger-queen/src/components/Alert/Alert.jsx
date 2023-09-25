@@ -25,8 +25,8 @@ export default function Alert({ type, message, option, onClose }) {
             </div>
             <div className={`modal-body ${alertStyle}`}>
               {alertStyle === style.success ?
-              <img src={successIcon} className={style.success_icon} /> :
-              <img src={errorIcon} className={style.error_icon} />
+              <img src={successIcon} className={style.success_icon} alt="Success icon" /> :
+              <img src={errorIcon} className={style.error_icon} alt="Error icon" />
               }
               <br />
               <span>{message}</span>
@@ -50,7 +50,6 @@ export default function Alert({ type, message, option, onClose }) {
 
 Alert.propTypes = {
   type: string.isRequired,
-  title: string.isRequired,
   message: string.isRequired,
   option: string.isRequired,
   onClose: func.isRequired,

@@ -13,55 +13,69 @@ export default function AllOrders() {
   const handleClick = NavigateTo("/admin/dashboard");
   const [orders, setOrders] = useState([]);
   const [showModalDelete, setShowModalDelete] = useState(false);
+  const [orderIdToDelete, setOrderIdToDelete] = useState(null);
 
   function getAllOrders(token) {
     allOrders(token)
       .then((response) => {
-        console.log("Response allOrders:", response);
-        if (!response.ok) {
-          throw new Error("No orders available.");
+        if (response.ok) {
+          return response.json();
         }
-        return response.json();
       })
       .then((data) => {
-        console.log("Data getProducts:", data);
         setOrders(data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        console.error("An error occurred while fetching the orders.");
       });
   }
 
   useEffect(() => {
-    getAllOrders(token)
+    getAllOrders(token);
   }, [token]);
 
-  const handleOpenDelete = () => {
+  const handleOpenDelete = (id) => {
+    setOrderIdToDelete(id);
     setShowModalDelete(true);
   };
 
   const handleCloseDelete = () => {
+    setOrderIdToDelete(null);
     setShowModalDelete(false);
   };
 
-  const handleDelete = (id) => {
-    setOrders((prevOrders) => prevOrders.filter((order) => order.id !== id));
-    handleCloseDelete(); 
+  const handleDelete = () => {
+    if (orderIdToDelete) {
+      const updatedOrders = orders.filter(
+        (order) => order.id !== orderIdToDelete
+      );
+      setOrders(updatedOrders);
+      handleCloseDelete();
+    }
   };
 
   return (
     <>
       <div className={style.title_section}>
         <div className={style.title}>
-          <img src={returnButton} onClick={handleClick} alt="Return" />
-          <h2>All Orders</h2>
+          <img src={returnButton} onClick={handleClick} alt="Return" className={style.icon_return} />
+          <h1>All Orders</h1>
         </div>
-        {role === "Waiter/Waitress" ? (
         <div className={style.options}>
-          <Link to="/waiter/new" className={style.new_order}>New Order</Link>
-          <img src={iconRefresh} alt="Refresh" className= {style.icon_refresh} onClick={() => getAllOrders(token)} />
-          </div>
+          {role === "Waiter/Waitress" ? (
+
+            <Link to="/waiter/new" className={style.new_order}>
+              New Order
+            </Link>
           ) : null}
+          <img
+            src={iconRefresh}
+            alt="Refresh"
+            data-testid="refresh_icon"
+            className={style.icon_refresh}
+            onClick={() => getAllOrders(token)}
+          />
+        </div>
       </div>
       <div className={`table-responsive ${style.responsive}`}>
         <table className="table">
@@ -77,10 +91,10 @@ export default function AllOrders() {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order, index) => (
-              <tr key={index}>
-                <td>{order.table}</td>
-                <td>{order.client}</td>
+            {orders.map((order) => (
+              <tr key={order.id}>
+                <td data-testid={`table_cell_${order.id}`}>{order.table}</td>
+                <td data-testid={`client_cell_${order.id}`}>{order.client}</td>
                 <td>
                   <ul>
                     {order.products.map((product, productIndex) => (
@@ -90,29 +104,38 @@ export default function AllOrders() {
                     ))}
                   </ul>
                 </td>
-                <td>{order.dataEntry}</td>
-                <td>{order.status}</td>
-                <td>{order.dateProcessed || "--"}</td>
+                <td data-testid={`data_entry_cell_${order.id}`}>
+                  {order.dataEntry}
+                </td>
+                <td data-testid={`status_cell_${order.id}`}>{order.status}</td>
+                <td data-testid={`dateProcessed_cell_${order.id}`}>
+                  {order.dateProcessed || "--"}
+                </td>
                 <td>
                   {order.status !== "Closed" ? (
                     <Link
                       to={`/waiter/editOrder/${order.id}`}
+                      data-testid={`update_link-${order.id}`}
                       className={style.button}
                     >
                       Update
                     </Link>
                   ) : null}
                   {role === "Admin" || role === "admin" ? (
-                    <button  onClick={() => handleOpenDelete(order.id)} className={style.delete}>
+                    <button
+                      onClick={() => handleOpenDelete(order.id)}
+                      data-testid="delete_button"
+                      className={style.delete}
+                    >
                       Delete
                     </button>
                   ) : null}
                   {showModalDelete && (
                     <DeleteOrder
-                      id={order.id}
+                      id={orderIdToDelete}
                       token={token}
                       onClose={handleCloseDelete}
-                      onDelete={() => handleDelete(order.id)}
+                      onDelete={handleDelete}
                     />
                   )}
                 </td>

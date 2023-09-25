@@ -41,6 +41,12 @@
 }
 
 .return_button {
-  width: 30px;
+  width: 2.2rem;
+  height: auto;
   margin-right: 5px;
+}
+
+.icon_orders {
+  width: auto;
+  height: auto;
 }

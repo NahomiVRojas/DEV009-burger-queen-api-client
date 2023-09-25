@@ -11,7 +11,7 @@ export default function AddUser({ onClose, token, onAdd }) {
   const [addEmail, setAddEmail] = useState("");
   const [addPassword, setAddPassword] = useState("");
   const [addRole, setAddRole] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
 
   const data = {
     email: addEmail,
@@ -24,23 +24,20 @@ export default function AddUser({ onClose, token, onAdd }) {
   function handleAddNewUser() {
     addUsers(data, token)
       .then((response) => {
-        if (response.ok) {
-          console.log("Usuario agregado con éxito", data);
-        } else if (response.status === 500) {
-          return setError("ID already in use.");
+        if (response.status === 500) {
+          setError("ID already in use.");
         } else if (response.status === 400) {
-          return setError("This email is already in use, or it's invalid.");
+          setError("This email is already in use, or it's invalid.");
+        } else {
+          return response.json()
+          .then((newUserData) => {
+              onAdd(newUserData.user);
+              onClose();
+          });
         }
-        return response.json();
       })
-      .then((newUserData) => {
-        console.log("New user data:", newUserData.user);
-        onAdd(newUserData.user);
-        onClose();
-        return newUserData.user;
-      })
-      .catch((error) => {
-        console.error("Error al realizar la solicitud de edición", error);
+      .catch(() => {
+        setError("An error occurred while adding the user.");
       });
   }
 
@@ -57,6 +54,7 @@ export default function AddUser({ onClose, token, onAdd }) {
           <input
             type="text"
             value={addId}
+            data-testid="id_user"
             onChange={(e) => setAddId(e.target.value)}
           />
         </div>
@@ -65,6 +63,7 @@ export default function AddUser({ onClose, token, onAdd }) {
           <input
             type="text"
             value={addName}
+            data-testid="name_user"
             onChange={(e) => setAddName(e.target.value)}
           />
         </div>
@@ -75,6 +74,7 @@ export default function AddUser({ onClose, token, onAdd }) {
           <input
             type="email"
             value={addEmail}
+            data-testid="email_user"
             onChange={(e) => setAddEmail(e.target.value)}
           />
         </div>
@@ -83,24 +83,32 @@ export default function AddUser({ onClose, token, onAdd }) {
           <input
             type="text"
             value={addPassword}
+            data-testid="password_user"
             onChange={(e) => setAddPassword(e.target.value)}
           />
         </div>
       </div>
       <div>
         <label>Role</label>
-        <select value={addRole} onChange={(e) => setAddRole(e.target.value)}>
+        <select
+          value={addRole}
+          data-testid="role_user"
+          onChange={(e) => setAddRole(e.target.value)}
+        >
           <option>--</option>
           <option value="Admin">Admin</option>
           <option value="Chef">Chef</option>
           <option value="Waiter/Waitress">Waiter/Waitress</option>
         </select>
       </div>
-      {error && 
-          <div className={style.error_message}>
+      {error && (
+        <div className={style.error_message}>
           <img src={exclamationIcon} className={style.icon} />
-          <span className={style.error}>{error}</span>
-          </div>}
+          <span className={style.error} data-testid="error_message">
+            {error}
+          </span>
+        </div>
+      )}
     </Modal>
   );
 }

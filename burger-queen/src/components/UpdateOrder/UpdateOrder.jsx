@@ -11,6 +11,7 @@ export default function UpdateOrder({
     handleEditOrder,
     orderInfo,
 }) {
+
     const [tableNumber, setTableNumber] = useState("Table");
     const [showModal, setShowModal] = useState(false);
 
@@ -62,7 +63,7 @@ export default function UpdateOrder({
     return (
         <section className={style.order}>
             <div className={style.header}>
-                <h4>Order</h4>
+                <h1>Order</h1>
                 <select
                     className={style.select}
                     value={tableNumber}

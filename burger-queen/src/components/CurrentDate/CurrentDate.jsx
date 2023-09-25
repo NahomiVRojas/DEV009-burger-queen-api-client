@@ -20,8 +20,8 @@ export default function CurrentDate() {
 
     return (
         <div className={styles.date}>  
-            <h2>{dayOfWeek}</h2>
-            <p>{formattedDate}</p>
+            <h1>{dayOfWeek}</h1>
+            <span>{formattedDate}</span>
         </div>
     );
 }
