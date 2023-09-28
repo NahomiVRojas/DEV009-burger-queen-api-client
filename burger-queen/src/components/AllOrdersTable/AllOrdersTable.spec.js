@@ -44,10 +44,10 @@ describe("AllOrders", () => {
     it("should display orders table", async () => {
         await waitFor(() => {
             const orderCells = screen.getAllByTestId(/^table_cell_/);
-            expect(orderCells.length).toBeGreaterThan(0);
+            expect(orderCells.length).toBe(1);
         });
         const deleteButtons = screen.getAllByTestId("delete_button");
-        expect(deleteButtons.length).toBeGreaterThan(0);
+        expect(deleteButtons.length).toBe(1);
     });
 
     it("should delete an order when the delete button is clicked", async () => {
